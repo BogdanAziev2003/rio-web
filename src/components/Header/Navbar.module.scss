@@ -1,0 +1,28 @@
+.nav {
+  padding-left: 20px;
+
+  &__inner {
+    overflow-x: auto;
+  }
+
+  &__list {
+    width: max-content;
+    margin-bottom: 5px;
+  }
+
+  &__el {
+    display: inline-block;
+    padding: 6px 25px;
+    border-radius: 44px;
+    background: white;
+    color: #000;
+    font-size: 16px;
+    font-weight: 400;
+    margin-right: 5px; // Добавил сам
+  }
+
+  &__el_active {
+    background: #fe5e00;
+    color: #fff;
+  }
+}

@@ -1,0 +1,19 @@
+.main {
+  margin-top: 25px;
+  padding: 0 20px;
+
+  &__title {
+    color: #502d19;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  &__list {
+    margin-top: 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-between;
+    gap: 10px;
+    justify-content: stretch;
+  }
+}
