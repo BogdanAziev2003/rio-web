@@ -245,8 +245,8 @@ const CartPage = () => {
       </div>
 
       {/* Комментарий */}
-      <div class={styles.comment}>
-        <div class="comment__text">
+      <div className={styles.comment}>
+        <div className="comment__text">
           <p>Введите коментарий к заказу</p>
         </div>
         <textarea name="" placeholder="Ваш коментарий"></textarea>

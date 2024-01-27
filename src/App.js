@@ -25,7 +25,6 @@ function App() {
     dispatch(getItems());
   }, [dispatch]);
   const { items } = useSelector((state) => state.items);
-  console.log(items);
 
   return (
     <BrowserRouter>

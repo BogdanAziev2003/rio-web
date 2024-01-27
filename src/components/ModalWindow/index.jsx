@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Modal } from '@mui/material';
 import { IoMdCloseCircle } from 'react-icons/io';
 
@@ -8,7 +8,17 @@ import ModalItemChoice from './ModalItemChoice';
 import ModalItemSize from './ModalItemSize';
 import ModalItemModifier from './ModalItemModifier';
 
-const ModalWindow = ({ open, setOpen, name }) => {
+const ModalWindow = ({
+  open,
+  setOpen,
+  name,
+  count,
+  addItemInCart,
+  removeItemInCart,
+}) => {
+  useEffect(() => {
+    if (!count) setOpen(false);
+  }, [count, setOpen]);
   const handleClose = () => {
     setOpen(false);
   };
@@ -31,6 +41,7 @@ const ModalWindow = ({ open, setOpen, name }) => {
             <div className={styles.modal__amount}>
               {/* - */}
               <svg
+                onClick={() => removeItemInCart()}
                 width="16"
                 height="4"
                 viewBox="0 0 16 4"
@@ -44,10 +55,11 @@ const ModalWindow = ({ open, setOpen, name }) => {
               </svg>
 
               <div>
-                <p>3</p>
+                <p>{count}</p>
               </div>
               {/* + */}
               <svg
+                onClick={() => addItemInCart()}
                 width="16"
                 height="16"
                 viewBox="0 0 16 16"

@@ -20,7 +20,22 @@ export const getItems = createAsyncThunk('items/getItems', async () => {
 const itemsSlice = createSlice({
   name: 'items',
   initialState,
-  reducers: {},
+  reducers: {
+    addItem(state, action) {
+      state.itemsInCart.push(action.payload);
+      state.totalPrice += action.payload.sizes[0].price;
+    },
+    removeItem(state, action) {
+      const idToDelete = state.itemsInCart.findIndex(
+        (item) => item.id === action.payload.id
+      );
+
+      if (idToDelete !== -1) {
+        state.itemsInCart.splice(idToDelete, 1);
+      }
+      state.totalPrice -= action.payload.sizes[0].price;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getItems.pending, (state) => {
       state.isLoading = true;
@@ -34,5 +49,7 @@ const itemsSlice = createSlice({
     });
   },
 });
+
+export const { addItem, removeItem } = itemsSlice.actions;
 
 export default itemsSlice.reducer;

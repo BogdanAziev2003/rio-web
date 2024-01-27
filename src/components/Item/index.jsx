@@ -1,13 +1,37 @@
 import React, { useState } from 'react';
+import ModalWindow from 'components/ModalWindow';
+import styles from './Item.module.scss';
 
 import itemImage from '../../image/burger.jpg';
-import styles from './Item.module.scss';
-import ModalWindow from 'components/ModalWindow';
+import { useDispatch, useSelector } from 'react-redux';
+import { addItem, removeItem } from '../../redux/itemsSlice';
+import ButtonInCart from './Components/ButtonInCart';
 
-const Item = ({ name }) => {
-  const price = 200;
+const Item = ({ ...item }) => {
+  const dispatch = useDispatch();
+  const price = item.sizes[0].price;
+  const { itemsInCart } = useSelector((state) => state.items);
+  const inCart = itemsInCart.find((itemInCart) => itemInCart.id === item.id);
+
+  // count Item
+  const count = itemsInCart.reduce((count, cartItem) => {
+    if (cartItem.id === item.id) {
+      count++;
+    }
+    return count;
+  }, 0);
+
   // Modal Window Set Up
   const [open, setOpen] = useState(false);
+
+  const addItemInCart = () => {
+    dispatch(addItem(item));
+    setOpen(true);
+  };
+  const removeItemInCart = () => {
+    dispatch(removeItem(item));
+    setOpen(true);
+  };
 
   return (
     <div className={styles.item}>
@@ -17,71 +41,38 @@ const Item = ({ name }) => {
       <div className={styles.item__wrapper}>
         <div className={styles.item__info}>
           <div className={styles.item__title}>
-            <p>{name}</p>
+            <p>{item.name}</p>
           </div>
           <div className={styles.item__price}>
             <p>{price} ₽</p>
           </div>
         </div>
-
-        <div className={styles.item__button} onClick={() => setOpen(true)}>
-          <p>Добавить</p>
-        </div>
+        {inCart ? (
+          <ButtonInCart
+            addItemInCart={addItemInCart}
+            removeItemInCart={removeItemInCart}
+            count={count}
+          />
+        ) : (
+          <div className={styles.item__button} onClick={addItemInCart}>
+            <p>Добавить</p>
+          </div>
+        )}
       </div>
 
       {open && (
-        <ModalWindow open={open} setOpen={setOpen} name={name} price={price} />
+        <ModalWindow
+          open={open}
+          setOpen={setOpen}
+          name={item.name}
+          price={price}
+          count={count}
+          addItemInCart={addItemInCart}
+          removeItemInCart={removeItemInCart}
+        />
       )}
     </div>
   );
 };
 
 export default Item;
-
-// <div className={styles.item}>
-//           <div className={styles.item__image}>
-//             <img src={itemImage} alt="" />
-//           </div>
-//           <div className={styles.item__wrapper}>
-//             <div className={styles.item__info}>
-//               <div className={styles.item__title}>
-//                 <p>Бургер с говядиной</p>
-//               </div>
-//               <div className={styles.item__price}>
-//                 <p>200 ₽</p>
-//               </div>
-//             </div>
-
-//             <div
-//               className={`${styles.item__button} ${styles.item__button_count}`}
-//             >
-//               <svg
-//                 width="17"
-//                 height="4"
-//                 viewBox="0 0 17 4"
-//                 fill="none"
-//                 xmlns="http://www.w3.org/2000/svg"
-//               >
-//                 <path
-//                   d="M2.35046 0H6.64581H14.6471C15.6693 0 16.5 0.896644 16.5 2C16.5 3.10336 15.6693 4 14.6471 4H10.3492H6.64581H2.35046C1.32823 4 0.5 3.10336 0.5 2C0.5 0.896644 1.32823 0 2.35046 0Z"
-//                   fill="#FE5E00"
-//                 />
-//               </svg>
-//               <div className={styles.item__count}>
-//                 <p>3</p>
-//               </div>
-//               <svg
-//                 width="17"
-//                 height="16"
-//                 viewBox="0 0 17 16"
-//                 fill="none"
-//                 xmlns="http://www.w3.org/2000/svg"
-//               >
-//                 <path
-//                   d="M14.6471 6.1483H10.3492V1.85295C10.3492 0.830716 9.52099 0 8.49876 0C7.47653 0 6.64581 0.830716 6.64581 1.85295V6.1483H2.35046C1.32823 6.1483 0.5 6.97901 0.5 8.00124C0.5 9.02347 1.32823 9.85419 2.35046 9.85419H6.64581V14.1471C6.64581 15.1693 7.47653 16 8.49876 16C9.52099 16 10.3492 15.1693 10.3492 14.1471V9.85419H14.6471C15.6693 9.85419 16.5 9.02347 16.5 8.00124C16.5 6.97901 15.6693 6.1483 14.6471 6.1483Z"
-//                   fill="#FE5E00"
-//                 />
-//               </svg>
-//             </div>
-//           </div>
-//         </div>
