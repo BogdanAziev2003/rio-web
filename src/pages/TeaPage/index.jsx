@@ -8,7 +8,7 @@ const TeaPage = ({ items }) => {
     <div className={styles.main}>
       <div className={styles.main__list}>
         {items.map((item, id) => (
-          <Item key={id} title={item.name} price={100} />
+          <Item key={id} {...item} />
         ))}
       </div>
     </div>

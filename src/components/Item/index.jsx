@@ -4,7 +4,8 @@ import itemImage from '../../image/burger.jpg';
 import styles from './Item.module.scss';
 import ModalWindow from 'components/ModalWindow';
 
-const Item = ({ title, price }) => {
+const Item = ({ name }) => {
+  const price = 200;
   // Modal Window Set Up
   const [open, setOpen] = useState(false);
 
@@ -16,7 +17,7 @@ const Item = ({ title, price }) => {
       <div className={styles.item__wrapper}>
         <div className={styles.item__info}>
           <div className={styles.item__title}>
-            <p>{title}</p>
+            <p>{name}</p>
           </div>
           <div className={styles.item__price}>
             <p>{price} ₽</p>
@@ -29,12 +30,7 @@ const Item = ({ title, price }) => {
       </div>
 
       {open && (
-        <ModalWindow
-          open={open}
-          setOpen={setOpen}
-          title={title}
-          price={price}
-        />
+        <ModalWindow open={open} setOpen={setOpen} name={name} price={price} />
       )}
     </div>
   );

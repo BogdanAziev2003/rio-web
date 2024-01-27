@@ -8,7 +8,7 @@ import ModalItemChoice from './ModalItemChoice';
 import ModalItemSize from './ModalItemSize';
 import ModalItemModifier from './ModalItemModifier';
 
-const ModalWindow = ({ open, setOpen, title, price }) => {
+const ModalWindow = ({ open, setOpen, name }) => {
   const handleClose = () => {
     setOpen(false);
   };
@@ -26,7 +26,7 @@ const ModalWindow = ({ open, setOpen, title, price }) => {
           </div>
           <div className={styles.modal__info}>
             <div className={styles.modal__name}>
-              <p>{title}</p>
+              <p>{name}</p>
             </div>
             <div className={styles.modal__amount}>
               {/* - */}
