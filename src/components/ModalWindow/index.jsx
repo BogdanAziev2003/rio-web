@@ -75,7 +75,7 @@ const ModalWindow = ({
           </div>
 
           {/* Кол-во элементов и активный элемент */}
-          <ModalItemChoice />
+          <ModalItemChoice count={count} />
 
           <ModalItemSize />
 
