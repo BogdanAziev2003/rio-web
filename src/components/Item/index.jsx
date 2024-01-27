@@ -69,6 +69,7 @@ const Item = ({ ...item }) => {
           count={count}
           addItemInCart={addItemInCart}
           removeItemInCart={removeItemInCart}
+          sizes={item.sizes}
         />
       )}
     </div>

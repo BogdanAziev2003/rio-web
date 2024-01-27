@@ -15,6 +15,7 @@ const ModalWindow = ({
   count,
   addItemInCart,
   removeItemInCart,
+  sizes,
 }) => {
   useEffect(() => {
     if (!count) setOpen(false);
@@ -77,7 +78,7 @@ const ModalWindow = ({
           {/* Кол-во элементов и активный элемент */}
           <ModalItemChoice count={count} />
 
-          <ModalItemSize />
+          <ModalItemSize sizes={sizes} />
 
           <ModalItemModifier />
 
