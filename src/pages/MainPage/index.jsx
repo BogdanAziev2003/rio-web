@@ -3,15 +3,16 @@ import React from 'react';
 import styles from './MainPage.module.scss';
 import Item from 'components/Item';
 
-const MainPage = () => {
+const MainPage = ({ items }) => {
   return (
     <div className={styles.main}>
       <div className={styles.main__title}>
         <p>Бургеры</p>
       </div>
       <div className={styles.main__list}>
-        <Item title="Бургер с говядиной" price="200" />
-        <Item title="Чизбургер" price="250" />
+        {items.map((item, id) => (
+          <Item key={id} title={item.title} price={item.price} />
+        ))}
       </div>
     </div>
   );

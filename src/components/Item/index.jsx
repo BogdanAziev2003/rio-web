@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import itemImage from '../../image/burger.jpg';
 import styles from './Item.module.scss';
+import ModalWindow from 'components/ModalWindow';
 
 const Item = ({ title, price }) => {
+  // Modal Window Set Up
+  const [open, setOpen] = useState(false);
+
   return (
     <div className={styles.item}>
       <div className={styles.item__image}>
@@ -19,10 +23,19 @@ const Item = ({ title, price }) => {
           </div>
         </div>
 
-        <div className={styles.item__button}>
+        <div className={styles.item__button} onClick={() => setOpen(true)}>
           <p>Добавить</p>
         </div>
       </div>
+
+      {open && (
+        <ModalWindow
+          open={open}
+          setOpen={setOpen}
+          title={title}
+          price={price}
+        />
+      )}
     </div>
   );
 };

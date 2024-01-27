@@ -1,7 +1,13 @@
 import React from 'react';
 
+import styles from './Footer.module.scss';
+
 const Footer = () => {
-  return <div>Footer</div>;
+  return (
+    <div className={styles.footer__button}>
+      <p>0 руб</p>
+    </div>
+  );
 };
 
 export default Footer;
