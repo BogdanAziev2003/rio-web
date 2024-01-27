@@ -1,40 +1,38 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from '../utils/axios';
 
 const initialState = {
-  items: [
-    {
-      id: 1,
-      title: 'Бургер с говядиной',
-      price: '200',
-      categories: 0,
-    },
-    {
-      id: 2,
-      title: 'Чизбургер',
-      price: '250',
-      categories: 0,
-    },
-    {
-      id: 3,
-      title: 'Гамбургер',
-      price: '210',
-      categories: 0,
-    },
-    {
-      id: 4,
-      title: 'Пицца курицей',
-      price: 300,
-      categories: 1,
-    },
-  ],
+  items: [],
   itemsInCart: [],
   totalPrice: 0,
+  isLoading: false,
 };
+
+export const getItems = createAsyncThunk('items/getItems', async () => {
+  try {
+    const { data } = await axios.get('/get-menu');
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 const itemsSlice = createSlice({
   name: 'items',
   initialState,
   reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(getItems.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getItems.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.items = action.payload;
+    });
+    builder.addCase(getItems.rejected, (state) => {
+      state.isLoading = false;
+    });
+  },
 });
 
 export default itemsSlice.reducer;

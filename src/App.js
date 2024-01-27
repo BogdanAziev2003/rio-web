@@ -1,17 +1,31 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Layout from 'components/Layout';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
-// Pages
-import MainPage from 'pages/MainPage';
-import PizzaPage from 'pages/PizzaPage';
-import BurgerPage from 'pages/BurgerPage';
-import HotDogPage from 'pages/HotDogPage';
-import SnackPage from 'pages/SnackPage';
+import { getItems } from './redux/itemsSlice';
+
+import Layout from 'components/Layout';
 import CartPage from 'pages/Cart';
-import { useSelector } from 'react-redux';
+
+import MainPage from 'pages/MainPage';
+import BurgerPage from 'pages/BurgerPage';
+import ShaurmaPage from 'pages/ShaurmaPage';
+import TaukPage from 'pages/TaukPage';
+import HotdogPage from 'pages/HotdogPage';
+import SandwichPage from 'pages/SandwichPage';
+import FirmenPage from 'pages/FirmenPage';
+import SnackPage from 'pages/SnackPage';
+import SaucePage from 'pages/SaucePage';
+import TeaPage from 'pages/TeaPage';
+import CoffePage from 'pages/CoffePage';
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getItems());
+  }, [dispatch]);
   const { items } = useSelector((state) => state.items);
+  console.log(items);
 
   return (
     <BrowserRouter>
@@ -21,22 +35,67 @@ function App() {
           <Route
             path="/burgers"
             element={
-              <BurgerPage
-                items={items.filter((item) => item.categories === 0)}
+              <BurgerPage items={items.filter((item) => item.category === 0)} />
+            }
+          />
+          <Route
+            path="/shaurma"
+            element={
+              <ShaurmaPage
+                items={items.filter((item) => item.category === 1)}
               />
             }
           />
           <Route
-            path="/pizzas"
+            path="/tauk"
             element={
-              <PizzaPage
-                items={items.filter((item) => item.categories === 1)}
+              <TaukPage items={items.filter((item) => item.category === 2)} />
+            }
+          />
+          <Route
+            path="/hot-dogs"
+            element={
+              <HotdogPage items={items.filter((item) => item.category === 3)} />
+            }
+          />
+          <Route
+            path="/sandwich"
+            element={
+              <SandwichPage
+                items={items.filter((item) => item.category === 4)}
               />
             }
           />
-          <Route path="/hot-dogs" element={<HotDogPage />} />
-          <Route path="/snacks" element={<SnackPage />} />
-          <Route path="/snacks" element={<SnackPage />} />
+          <Route
+            path="/firmen"
+            element={
+              <FirmenPage items={items.filter((item) => item.category === 5)} />
+            }
+          />
+          <Route
+            path="/snack"
+            element={
+              <SnackPage items={items.filter((item) => item.category === 6)} />
+            }
+          />
+          <Route
+            path="/sauce"
+            element={
+              <SaucePage items={items.filter((item) => item.category === 7)} />
+            }
+          />
+          <Route
+            path="/coffee"
+            element={
+              <CoffePage items={items.filter((item) => item.category === 9)} />
+            }
+          />
+          <Route
+            path="/tea"
+            element={
+              <TeaPage items={items.filter((item) => item.category === 10)} />
+            }
+          />
           <Route path="/cart" element={<CartPage />} />
         </Route>
       </Routes>

@@ -8,7 +8,7 @@ const BurgerPage = ({ items }) => {
     <div className={styles.main}>
       <div className={styles.main__list}>
         {items.map((item, id) => (
-          <Item key={id} title={item.title} price={item.price} />
+          <Item key={id} title={item.name} price={100} />
         ))}
       </div>
     </div>
