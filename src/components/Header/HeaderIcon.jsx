@@ -2,10 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import styles from './Header.module.scss';
+import { useSelector } from 'react-redux';
 
 const HeaderIcon = ({ pathname }) => {
+  const { itemsInCart } = useSelector((state) => state.items);
+
   return (
-    <div className={styles.header__cart_icon}>
+    <div className={styles.header__cart__icon}>
+      <div className={styles.header__cart__icon__count}>
+        {itemsInCart.length}
+      </div>
       {pathname !== '/cart' ? (
         <Link to="/cart">
           <svg

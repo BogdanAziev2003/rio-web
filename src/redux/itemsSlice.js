@@ -27,6 +27,8 @@ const initialState = {
       categories: 1,
     },
   ],
+  itemsInCart: [],
+  totalPrice: 0,
 };
 
 const itemsSlice = createSlice({

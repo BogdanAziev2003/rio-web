@@ -3,16 +3,16 @@ import styles from './ModalWindow.module.scss';
 
 const ModalItemModifier = () => {
   return (
-    <div class={styles.modal__modifier}>
-      <div class={styles.modal__modifier__text}>
+    <div className={styles.modal__modifier}>
+      <div className={styles.modal__modifier__text}>
         <p>Добавить дополнительно</p>
       </div>
-      <div class={styles.modifier__list}>
-        <div class={styles.modifier}>
-          <div class={styles.modifier__title}>
+      <div className={styles.modifier__list}>
+        <div className={styles.modifier}>
+          <div className={styles.modifier__title}>
             <p>Лук</p>
           </div>
-          <div class="modifier__button">
+          <div className="modifier__button">
             <svg
               width="25"
               height="25"
@@ -39,19 +39,19 @@ const ModalItemModifier = () => {
                   y2="23.3333"
                   gradientUnits="userSpaceOnUse"
                 >
-                  <stop stop-color="#FE5E00" />
-                  <stop offset="1" stop-color="#FC9255" />
+                  <stop stopColor="#FE5E00" />
+                  <stop offset="1" stopColor="#FC9255" />
                 </linearGradient>
               </defs>
             </svg>
           </div>
         </div>
-        <div class={styles.modifier}>
-          <div class={styles.modifier__title}>
+        <div className={styles.modifier}>
+          <div className={styles.modifier__title}>
             <p>Сыр</p>
           </div>
 
-          <div class="modifier__button">
+          <div className="modifier__button">
             <svg
               width="25"
               height="25"
@@ -78,8 +78,8 @@ const ModalItemModifier = () => {
                   y2="23.3333"
                   gradientUnits="userSpaceOnUse"
                 >
-                  <stop stop-color="#FE5E00" />
-                  <stop offset="1" stop-color="#FC9255" />
+                  <stop stopColor="#FE5E00" />
+                  <stop offset="1" stopColor="#FC9255" />
                 </linearGradient>
               </defs>
             </svg>

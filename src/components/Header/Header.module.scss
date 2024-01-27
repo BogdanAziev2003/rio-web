@@ -11,7 +11,15 @@
     align-items: center;
   }
 
-  &__cart_icon {
+  &__cart__icon {
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__count {
+      color: #fe5e00;
+      font-size: 14px;
+    }
   }
 }
