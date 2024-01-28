@@ -13,13 +13,14 @@ const ModalItemSize = ({ sizes, activeItemId, item, itemList }) => {
   };
 
   for (let i = 1; i <= sizes.length; i++) {
+    console.log(activeItem);
     currentSizes.push(
       <div
         onClick={() => handleChooseSize(i - 1)}
         className={`${
           activeItem &&
-          activeItem.sizes &&
-          activeItem.sizes[i - 1] &&
+          activeItem.price === activeItem.sizes[i - 1].price &&
+          activeItem &&
           styles.size__active
         } ${styles.size}`}
         key={i}
