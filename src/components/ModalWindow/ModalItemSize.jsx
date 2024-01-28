@@ -35,7 +35,9 @@ const ModalItemSize = ({ sizes, activeItemId, itemList }) => {
     );
   }
 
-  return <div className={styles.modal__size}>{currentSizes}</div>;
+  return (
+    <div className={styles.modal__size}>{sizes.length > 1 && currentSizes}</div>
+  );
 };
 
 export default ModalItemSize;

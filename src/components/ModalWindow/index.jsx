@@ -4,7 +4,6 @@ import { IoMdCloseCircle } from 'react-icons/io';
 
 import itemImage from '../../image/burger.jpg';
 import styles from './ModalWindow.module.scss';
-import ModalItemChoice from './ModalItemChoice';
 import ModalItemSize from './ModalItemSize';
 import ModalItemModifier from './ModalItemModifier';
 
@@ -78,13 +77,6 @@ const ModalWindow = ({
               </svg>
             </div>
           </div>
-          {/* Кол-во элементов и активный элемент */}
-          <ModalItemChoice
-            count={count}
-            activeItem={activeItem}
-            setActiveItem={setActiveItem}
-            itemList={itemList}
-          />
 
           <ModalItemSize
             sizes={sizes}
@@ -100,7 +92,7 @@ const ModalWindow = ({
           )}
 
           <div className={styles.modal__button} onClick={() => handleClose()}>
-            <p>Готово</p>
+            <p>Добавить</p>
           </div>
         </div>
       </Box>

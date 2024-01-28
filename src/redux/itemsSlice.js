@@ -21,6 +21,10 @@ const itemsSlice = createSlice({
   name: 'items',
   initialState,
   reducers: {
+    clearCart(state) {
+      state.itemsInCart = [];
+      state.totalPrice = 0;
+    },
     addItem(state, action) {
       state.itemsInCart.push(action.payload);
       state.totalPrice += action.payload.price;
@@ -29,7 +33,6 @@ const itemsSlice = createSlice({
       const index = state.itemsInCart.findIndex(
         (item) => item.idInCart === action.payload
       );
-
       if (index !== -1) {
         const deleteItem = state.itemsInCart.splice(index, 1)[0];
         state.totalPrice -= deleteItem.price;
@@ -48,10 +51,12 @@ const itemsSlice = createSlice({
       const updateItemPrice = activeItem.sizes[id].price;
 
       const updatedItemsInCart = state.itemsInCart.map((item) => {
+        console.log(item);
         if (item.idInCart === activeItem.idInCart) {
           return {
             ...item,
             price: updateItemPrice + modPrice,
+            activeSize: item.sizes.find((siz) => siz.id === id)?.title,
           };
         }
         return item;
@@ -130,7 +135,13 @@ const itemsSlice = createSlice({
   },
 });
 
-export const { addItem, removeItem, chooseSize, addModifier, removeModifier } =
-  itemsSlice.actions;
+export const {
+  addItem,
+  removeItem,
+  chooseSize,
+  addModifier,
+  removeModifier,
+  clearCart,
+} = itemsSlice.actions;
 
 export default itemsSlice.reducer;
