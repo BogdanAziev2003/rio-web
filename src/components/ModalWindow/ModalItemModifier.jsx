@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styles from './ModalWindow.module.scss';
 import { useDispatch } from 'react-redux';
-import { addModifier } from '../../redux/itemsSlice';
+import { addModifier, removeModifier } from '../../redux/itemsSlice';
 
 const ModalItemModifier = ({ activeItemCartId, itemList }) => {
   const dispatch = useDispatch();
@@ -12,6 +12,10 @@ const ModalItemModifier = ({ activeItemCartId, itemList }) => {
 
   const handleAddModifier = (name, modPrice) => {
     dispatch(addModifier({ activeItem, name, modPrice }));
+  };
+
+  const handleRemoveModifier = (name, modPrice) => {
+    dispatch(removeModifier({ activeItem, name, modPrice }));
   };
 
   return (
@@ -26,14 +30,16 @@ const ModalItemModifier = ({ activeItemCartId, itemList }) => {
               <div className={styles.modifier__title}>
                 <p>{mod.name}</p>
               </div>
-              <div
-                onClick={() => handleAddModifier(mod.name, mod.price)}
-                className="modifier__button"
-              >
+              <div className="modifier__button">
                 {mod.selected ? (
-                  <div> +{mod.price} ₽</div>
+                  <div
+                    onClick={() => handleRemoveModifier(mod.name, mod.price)}
+                  >
+                    +{mod.price} ₽ -
+                  </div>
                 ) : (
                   <svg
+                    onClick={() => handleAddModifier(mod.name, mod.price)}
                     width="25"
                     height="25"
                     viewBox="0 0 25 25"

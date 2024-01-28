@@ -90,6 +90,31 @@ const itemsSlice = createSlice({
         totalPrice: state.totalPrice + modPrice,
       };
     },
+    removeModifier(state, action) {
+      const { activeItem, name, modPrice } = action.payload;
+
+      const updatedModifiers = activeItem.modifiers.map((mod) =>
+        mod.name === name ? { ...mod, selected: undefined } : mod
+      );
+
+      const updatedItem = {
+        ...activeItem,
+        modifiers: updatedModifiers,
+        price: activeItem.price - modPrice,
+      };
+
+      const updatedItemsInCart = state.itemsInCart.map((item) =>
+        item.idInCart === activeItem.idInCart ? updatedItem : item
+      );
+
+      const updatedTotalPrice = state.totalPrice - modPrice;
+
+      return {
+        ...state,
+        itemsInCart: updatedItemsInCart,
+        totalPrice: updatedTotalPrice,
+      };
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getItems.pending, (state) => {
@@ -105,7 +130,7 @@ const itemsSlice = createSlice({
   },
 });
 
-export const { addItem, removeItem, chooseSize, addModifier } =
+export const { addItem, removeItem, chooseSize, addModifier, removeModifier } =
   itemsSlice.actions;
 
 export default itemsSlice.reducer;

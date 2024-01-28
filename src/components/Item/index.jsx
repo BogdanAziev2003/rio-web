@@ -56,6 +56,10 @@ const Item = ({ ...item }) => {
     setOpen(true);
   };
 
+  useEffect(() => {
+    console.log(itemsInCart);
+  }, [itemsInCart]);
+
   return (
     <div className={styles.item}>
       <div className={styles.item__image}>
