@@ -4,7 +4,7 @@ import styles from './Navbar.module.scss';
 import { Link } from 'react-router-dom';
 
 const Navbar = ({ pathname }) => {
-  const [active, setActive] = useState('Все');
+  const [active, setActive] = useState(`${pathname}`);
 
   useEffect(() => {
     pathname === '/' && setActive('Все');
@@ -29,130 +29,130 @@ const Navbar = ({ pathname }) => {
           </div>
           <div
             className={
-              active === 'Бургеры'
+              active === '/burgers'
                 ? `${styles.nav__el} ${styles.nav__el_active}`
                 : styles.nav__el
             }
           >
             <p>
-              <Link to="/burgers" onClick={() => setActive('Бургеры')}>
+              <Link to="/burgers" onClick={() => setActive('/burgers')}>
                 Бургеры
               </Link>
             </p>
           </div>
           <div
             className={
-              active === 'Шаурма'
+              active === '/shaurma'
                 ? `${styles.nav__el} ${styles.nav__el_active}`
                 : styles.nav__el
             }
           >
             <p>
-              <Link to="/shaurma" onClick={() => setActive('Шаурма')}>
+              <Link to="/shaurma" onClick={() => setActive('/shaurma')}>
                 Шаурма
               </Link>
             </p>
           </div>
           <div
             className={
-              active === 'Тауки'
+              active === '/tauk'
                 ? `${styles.nav__el} ${styles.nav__el_active}`
                 : styles.nav__el
             }
           >
             <p>
-              <Link to="/tauk" onClick={() => setActive('Тауки')}>
+              <Link to="/tauk" onClick={() => setActive('/tauk')}>
                 Тауки
               </Link>
             </p>
           </div>
           <div
             className={
-              active === 'Хот-Доги'
+              active === '/hot-dogs'
                 ? `${styles.nav__el} ${styles.nav__el_active}`
                 : styles.nav__el
             }
           >
             <p>
-              <Link to="/hot-dogs" onClick={() => setActive('Хот-Доги')}>
+              <Link to="/hot-dogs" onClick={() => setActive('/hot-dogs')}>
                 Хот-Доги
               </Link>
             </p>
           </div>
           <div
             className={
-              active === 'Сэндвичи'
+              active === '/sandwich'
                 ? `${styles.nav__el} ${styles.nav__el_active}`
                 : styles.nav__el
             }
           >
             <p>
-              <Link to="/sandwich" onClick={() => setActive('Сэндвичи')}>
+              <Link to="/sandwich" onClick={() => setActive('/sandwich')}>
                 Сэндвичи
               </Link>
             </p>
           </div>
           <div
             className={
-              active === 'Фирменые'
+              active === '/firmen'
                 ? `${styles.nav__el} ${styles.nav__el_active}`
                 : styles.nav__el
             }
           >
             <p>
-              <Link to="/firmen" onClick={() => setActive('Фирменые')}>
+              <Link to="/firmen" onClick={() => setActive('/firmen')}>
                 Фирменые
               </Link>
             </p>
           </div>
           <div
             className={
-              active === 'Снэки'
+              active === '/snack'
                 ? `${styles.nav__el} ${styles.nav__el_active}`
                 : styles.nav__el
             }
           >
             <p>
-              <Link to="/snack" onClick={() => setActive('Снэки')}>
+              <Link to="/snack" onClick={() => setActive('/snack')}>
                 Снэки
               </Link>
             </p>
           </div>
           <div
             className={
-              active === 'Соусы'
+              active === '/sauce'
                 ? `${styles.nav__el} ${styles.nav__el_active}`
                 : styles.nav__el
             }
           >
             <p>
-              <Link to="/sauce" onClick={() => setActive('Соусы')}>
+              <Link to="/sauce" onClick={() => setActive('/sauce')}>
                 Соусы
               </Link>
             </p>
           </div>
           <div
             className={
-              active === 'Кофе'
+              active === '/coffee'
                 ? `${styles.nav__el} ${styles.nav__el_active}`
                 : styles.nav__el
             }
           >
             <p>
-              <Link to="/coffee" onClick={() => setActive('Кофе')}>
+              <Link to="/coffee" onClick={() => setActive('/coffee')}>
                 Кофе
               </Link>
             </p>
           </div>
           <div
             className={
-              active === 'Чаи'
+              active === 'tea'
                 ? `${styles.nav__el} ${styles.nav__el_active}`
                 : styles.nav__el
             }
           >
             <p>
-              <Link to="/tea" onClick={() => setActive('Чаи')}>
+              <Link to="/tea" onClick={() => setActive('tea')}>
                 Чаи
               </Link>
             </p>

@@ -36,22 +36,59 @@ const itemsSlice = createSlice({
       }
     },
     chooseSize(state, action) {
-      const activeItem = action.payload.activeItem;
-      const id = action.payload.id;
+      const { activeItem, id } = action.payload;
+
+      const modPrice = activeItem.modifiers.reduce((total, mod) => {
+        if (mod.selected) {
+          total += mod.price;
+        }
+        return total;
+      }, 0);
 
       const updateItemPrice = activeItem.sizes[id].price;
 
-      state.itemsInCart = state.itemsInCart.map((item) => {
+      const updatedItemsInCart = state.itemsInCart.map((item) => {
         if (item.idInCart === activeItem.idInCart) {
-          state.totalPrice -= activeItem.price;
-          state.totalPrice += updateItemPrice;
           return {
-            ...activeItem,
-            price: updateItemPrice,
+            ...item,
+            price: updateItemPrice + modPrice,
           };
         }
         return item;
       });
+
+      const totalPriceDifference =
+        updateItemPrice + modPrice - activeItem.price;
+
+      return {
+        ...state,
+        itemsInCart: updatedItemsInCart,
+        totalPrice: state.totalPrice + totalPriceDifference,
+      };
+    },
+
+    addModifier(state, action) {
+      const { activeItem, name, modPrice } = action.payload;
+
+      const updatedModifiers = activeItem.modifiers.map((mod) =>
+        mod.name === name ? { ...mod, selected: true } : mod
+      );
+
+      const updatedItem = {
+        ...activeItem,
+        modifiers: updatedModifiers,
+        price: activeItem.price + modPrice,
+      };
+
+      const updatedItemsInCart = state.itemsInCart.map((item) =>
+        item.idInCart === activeItem.idInCart ? updatedItem : item
+      );
+
+      return {
+        ...state,
+        itemsInCart: updatedItemsInCart,
+        totalPrice: state.totalPrice + modPrice,
+      };
     },
   },
   extraReducers: (builder) => {
@@ -68,6 +105,7 @@ const itemsSlice = createSlice({
   },
 });
 
-export const { addItem, removeItem, chooseSize } = itemsSlice.actions;
+export const { addItem, removeItem, chooseSize, addModifier } =
+  itemsSlice.actions;
 
 export default itemsSlice.reducer;

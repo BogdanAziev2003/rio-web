@@ -19,7 +19,6 @@ const Item = ({ ...item }) => {
   const itemList = itemsInCart.filter(
     (itemInCart) => itemInCart.id === item.id
   );
-
   // count Item
   const count = itemsInCart.reduce((count, cartItem) => {
     if (cartItem.id === item.id) {

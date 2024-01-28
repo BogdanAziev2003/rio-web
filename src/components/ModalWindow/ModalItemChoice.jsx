@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './ModalWindow.module.scss';
 
-const ModalChoice = ({ count, item, activeItem, setActiveItem, itemList }) => {
+const ModalChoice = ({ count, activeItem, setActiveItem, itemList }) => {
   const activeIndex = itemList.findIndex(
     (value) => value.idInCart === activeItem
   );

@@ -78,26 +78,28 @@ const ModalWindow = ({
               </svg>
             </div>
           </div>
-
           {/* Кол-во элементов и активный элемент */}
           <ModalItemChoice
             count={count}
             activeItem={activeItem}
-            item={item}
             setActiveItem={setActiveItem}
             itemList={itemList}
           />
 
           <ModalItemSize
             sizes={sizes}
-            item={item}
             activeItemId={activeItem}
             itemList={itemList}
           />
 
-          <ModalItemModifier />
+          {item.modifiers.length > 1 && (
+            <ModalItemModifier
+              activeItemCartId={activeItem}
+              itemList={itemList}
+            />
+          )}
 
-          <div className={styles.modal__button}>
+          <div className={styles.modal__button} onClick={() => handleClose()}>
             <p>Готово</p>
           </div>
         </div>
