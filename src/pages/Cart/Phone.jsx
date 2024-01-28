@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './Cart.module.scss';
 import IMask from 'imask';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setPhone } from '../../redux/phoneSlice';
 
 const Phone = () => {

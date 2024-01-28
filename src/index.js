@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
@@ -10,6 +10,7 @@ import items from './redux/itemsSlice';
 import phone from './redux/phoneSlice';
 import paymethod from './redux/paymentMethod';
 import delmethod from './redux/deliveryMethod';
+import comment from './redux/comment';
 
 const store = configureStore({
   reducer: {
@@ -17,6 +18,7 @@ const store = configureStore({
     phone,
     paymethod,
     delmethod,
+    comment,
   },
 });
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Cart.module.scss';
+import { useSelector } from 'react-redux';
 
 import image from '../../image/burger.jpg';
 import Phone from './Phone';
@@ -7,7 +8,6 @@ import PaymentMethod from './PaymentMethod';
 import DeliveryMethod from './DeliveryMethod';
 import Addres from './Delivery/Address';
 import Comment from './Comment';
-import { useSelector } from 'react-redux';
 
 const CartPage = () => {
   const { totalPrice } = useSelector((state) => state.items);

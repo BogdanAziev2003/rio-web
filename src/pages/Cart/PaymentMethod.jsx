@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from './Cart.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPayMethod } from '../../redux/paymentMethod';
