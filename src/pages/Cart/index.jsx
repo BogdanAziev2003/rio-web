@@ -7,8 +7,10 @@ import PaymentMethod from './PaymentMethod';
 import DeliveryMethod from './DeliveryMethod';
 import Addres from './Delivery/Address';
 import Comment from './Comment';
+import { useSelector } from 'react-redux';
 
 const CartPage = () => {
+  const { totalPrice } = useSelector((state) => state.items);
   return (
     <div className={styles.wrapper}>
       {/* Кнопка отчистить корзину */}
@@ -113,7 +115,7 @@ const CartPage = () => {
       <div className={styles.bill}>
         <div className={styles.bill__text}>
           <p>
-            Корзина: <span>1800</span> ₽
+            Корзина: <span>{totalPrice}</span> ₽
           </p>
         </div>
       </div>

@@ -12,10 +12,6 @@ const PaymentMethod = () => {
 
   const { payMethod } = useSelector((state) => state.paymethod);
 
-  useEffect(() => {
-    console.log(payMethod);
-  }, [payMethod]);
-
   return (
     <div className={styles.method}>
       <div className={styles.method__text}>
