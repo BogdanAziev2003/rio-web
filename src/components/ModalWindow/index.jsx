@@ -16,6 +16,10 @@ const ModalWindow = ({
   addItemInCart,
   removeItemInCart,
   sizes,
+  activeItem,
+  setActiveItem,
+  item,
+  itemList,
 }) => {
   useEffect(() => {
     if (!count) setOpen(false);
@@ -76,7 +80,13 @@ const ModalWindow = ({
           </div>
 
           {/* Кол-во элементов и активный элемент */}
-          <ModalItemChoice count={count} />
+          <ModalItemChoice
+            count={count}
+            activeItem={activeItem}
+            item={item}
+            setActiveItem={setActiveItem}
+            itemList={itemList}
+          />
 
           <ModalItemSize sizes={sizes} />
 

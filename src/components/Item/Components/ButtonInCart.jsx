@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from '../Item.module.scss';
 
-const ButtonInCart = ({ count, addItemInCart, removeItemInCart }) => {
+const ButtonInCart = ({ count, addItemInCart, removeItemInCart, item }) => {
   return (
     <div className={`${styles.item__button} ${styles.item__button_count}`}>
       <svg
-        onClick={() => removeItemInCart()}
+        onClick={() => removeItemInCart(item)}
         width="17"
         height="4"
         viewBox="0 0 17 4"

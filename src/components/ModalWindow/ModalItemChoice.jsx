@@ -1,12 +1,23 @@
 import React from 'react';
 import styles from './ModalWindow.module.scss';
 
-const ModalChoice = ({ count }) => {
+const ModalChoice = ({ count, item, activeItem, setActiveItem, itemList }) => {
+  console.log('activeItem = ', activeItem);
+  const activeIndex = itemList.findIndex(
+    (value) => value.idInCart === activeItem
+  );
+
   const choices = [];
 
   for (let i = 1; i <= count; i++) {
     choices.push(
-      <div className={styles.choice} key={i}>
+      <div
+        className={`${i - 1 === activeIndex && styles.choice__active} ${
+          styles.choice
+        }`}
+        onClick={() => setActiveItem(itemList[i - 1].idInCart)}
+        key={i}
+      >
         <div>
           <p>{i}</p>
         </div>
@@ -19,12 +30,3 @@ const ModalChoice = ({ count }) => {
 };
 
 export default ModalChoice;
-
-// {
-//   /* <div className={`${styles.choice} ${styles.choice__active}`}>
-//         <div>
-//           <p>1</p>
-//         </div>
-//         <div className={styles.choice__line}></div>
-//       </div> */
-// }

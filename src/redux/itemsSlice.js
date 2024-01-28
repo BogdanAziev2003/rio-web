@@ -25,15 +25,25 @@ const itemsSlice = createSlice({
       state.itemsInCart.push(action.payload);
       state.totalPrice += action.payload.sizes[0].price;
     },
+    // removeItem(state, action) {
+    //   const index = state.itemsInCart.findIndex(
+    //     (item) => item.idInCart === action.payload
+    //   );
+
+    //   if (index !== -1) {
+    //     const deleteItem = state.itemsInCart.splice(index, 1);
+    //     state.totalPrice -= deleteItem.sizes[0].price;
+    //   }
+    // },
     removeItem(state, action) {
-      const idToDelete = state.itemsInCart.findIndex(
-        (item) => item.id === action.payload.id
+      const index = state.itemsInCart.findIndex(
+        (item) => item.idInCart === action.payload
       );
 
-      if (idToDelete !== -1) {
-        state.itemsInCart.splice(idToDelete, 1);
+      if (index !== -1) {
+        const deleteItem = state.itemsInCart.splice(index, 1)[0];
+        state.totalPrice -= deleteItem.sizes[0].price;
       }
-      state.totalPrice -= action.payload.sizes[0].price;
     },
   },
   extraReducers: (builder) => {

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ModalWindow from 'components/ModalWindow';
-import styles from './Item.module.scss';
+import { v4 as uuidv4 } from 'uuid';
 
+import styles from './Item.module.scss';
 import itemImage from '../../image/burger.jpg';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem, removeItem } from '../../redux/itemsSlice';
@@ -12,6 +13,12 @@ const Item = ({ ...item }) => {
   const price = item.sizes[0].price;
   const { itemsInCart } = useSelector((state) => state.items);
   const inCart = itemsInCart.find((itemInCart) => itemInCart.id === item.id);
+
+  // activeItemLogic
+  const [activeItem, setActiveItem] = useState('');
+  const itemList = itemsInCart.filter(
+    (itemInCart) => itemInCart.id === item.id
+  );
 
   // count Item
   const count = itemsInCart.reduce((count, cartItem) => {
@@ -25,11 +32,28 @@ const Item = ({ ...item }) => {
   const [open, setOpen] = useState(false);
 
   const addItemInCart = () => {
-    dispatch(addItem(item));
+    const newItem = {
+      idInCart: uuidv4(),
+      ...item,
+    };
+    setActiveItem(newItem.idInCart);
+    dispatch(addItem(newItem));
     setOpen(true);
   };
   const removeItemInCart = () => {
-    dispatch(removeItem(item));
+    dispatch(removeItem(activeItem));
+    const updatedCartItems = itemsInCart.filter(
+      (item) => item.idInCart !== activeItem
+    );
+
+    const newActiveItem = updatedCartItems
+      .reverse()
+      .find((itemInCart) => item.id === itemInCart.id);
+    try {
+      setActiveItem(newActiveItem.idInCart);
+    } catch (err) {
+      setActiveItem('');
+    }
     setOpen(true);
   };
 
@@ -70,6 +94,10 @@ const Item = ({ ...item }) => {
           addItemInCart={addItemInCart}
           removeItemInCart={removeItemInCart}
           sizes={item.sizes}
+          activeItem={activeItem}
+          item={item}
+          setActiveItem={setActiveItem}
+          itemList={itemList}
         />
       )}
     </div>
