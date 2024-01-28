@@ -24,7 +24,14 @@ function App() {
   useEffect(() => {
     dispatch(getItems());
   }, [dispatch]);
-  const { items } = useSelector((state) => state.items);
+  let { items } = useSelector((state) => state.items);
+
+  items = items.map((item) => {
+    return {
+      ...item,
+      price: item.sizes[0].price,
+    };
+  });
 
   return (
     <BrowserRouter>

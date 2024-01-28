@@ -88,7 +88,12 @@ const ModalWindow = ({
             itemList={itemList}
           />
 
-          <ModalItemSize sizes={sizes} />
+          <ModalItemSize
+            sizes={sizes}
+            item={item}
+            activeItemId={activeItem}
+            itemList={itemList}
+          />
 
           <ModalItemModifier />
 

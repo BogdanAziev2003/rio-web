@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './ModalWindow.module.scss';
 
 const ModalChoice = ({ count, item, activeItem, setActiveItem, itemList }) => {
-  console.log('activeItem = ', activeItem);
   const activeIndex = itemList.findIndex(
     (value) => value.idInCart === activeItem
   );
