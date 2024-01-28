@@ -56,9 +56,9 @@ const Item = ({ ...item }) => {
     setOpen(true);
   };
 
-  useEffect(() => {
-    console.log(itemsInCart);
-  }, [itemsInCart]);
+  // useEffect(() => {
+  //   console.log(itemsInCart);
+  // }, [itemsInCart]);
 
   return (
     <div className={styles.item}>

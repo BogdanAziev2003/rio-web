@@ -2,6 +2,11 @@ import React from 'react';
 import styles from './Cart.module.scss';
 
 import image from '../../image/burger.jpg';
+import Phone from './Phone';
+import PaymentMethod from './PaymentMethod';
+import DeliveryMethod from './DeliveryMethod';
+import Addres from './Delivery/Address';
+import Comment from './Comment';
 
 const CartPage = () => {
   return (
@@ -118,139 +123,19 @@ const CartPage = () => {
       </div>
 
       {/* Номер телефона */}
-      <div className={styles.order}>
-        <div className={styles.order__inner}>
-          <div className={styles.phone}>
-            <div className={styles.phone__text}>
-              <p>Введите номер телефона</p>
-            </div>
-            <div className={styles.phone__input}>
-              <input
-                type="text"
-                name=""
-                id=""
-                className={styles.input}
-                placeholder="+7 (988) 833 33 33"
-              />
-
-              <div className={styles.phone__icon}>
-                <svg
-                  width="15"
-                  height="15"
-                  viewBox="0 0 15 15"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M7.20734 7.79524C9.70052 10.2877 10.2661 7.4042 11.8535 8.99051C13.3839 10.5205 14.2635 10.827 12.3245 12.7655C12.0816 12.9606 10.5385 15.3089 5.11538 9.88729C-0.308424 4.465 2.03849 2.92028 2.23373 2.67747C4.17742 0.733654 4.47866 1.61836 6.00906 3.14833C7.59648 4.73531 4.71416 5.30276 7.20734 7.79524Z"
-                    fill="#FE5E01"
-                  />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Phone />
 
       {/* Способ Оплаты */}
-      <div className={styles.method}>
-        <div className={styles.method__text}>
-          <p>Способ оплаты</p>
-        </div>
-
-        <div className={styles.method__list}>
-          <div className={styles.method__el}>
-            <div
-              className={`${styles.method__button} ${styles.method__button__pressed}`}
-            >
-              <svg
-                width="10"
-                height="8"
-                viewBox="0 0 10 8"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M3.81295 7.24815C3.58895 7.24815 3.36495 7.16315 3.19395 6.99215L0.820953 4.61915C0.478953 4.27715 0.478953 3.72315 0.820953 3.38215C1.16295 3.04015 1.71595 3.03915 2.05795 3.38115L3.81295 5.13615L7.94095 1.00815C8.28295 0.666148 8.83595 0.666148 9.17795 1.00815C9.51995 1.35015 9.51995 1.90415 9.17795 2.24615L4.43195 6.99215C4.26095 7.16315 4.03695 7.24815 3.81295 7.24815Z"
-                  fill="white"
-                />
-              </svg>
-            </div>
-            <div>
-              <p>Наличными</p>
-            </div>
-          </div>
-          <div className={styles.method__el}>
-            <div className={styles.method__button}></div>
-            <div>
-              <p>Переводом</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <PaymentMethod />
 
       {/* Способ получения */}
-      <div className={styles.method}>
-        <div className={styles.method__text}>
-          <p>Способ получения</p>
-        </div>
-
-        <div className={styles.method__list}>
-          <div className={styles.method__el}>
-            <div
-              className={`${styles.method__button} ${styles.method__button__pressed}`}
-            >
-              <svg
-                width="10"
-                height="8"
-                viewBox="0 0 10 8"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M3.81295 7.24815C3.58895 7.24815 3.36495 7.16315 3.19395 6.99215L0.820953 4.61915C0.478953 4.27715 0.478953 3.72315 0.820953 3.38215C1.16295 3.04015 1.71595 3.03915 2.05795 3.38115L3.81295 5.13615L7.94095 1.00815C8.28295 0.666148 8.83595 0.666148 9.17795 1.00815C9.51995 1.35015 9.51995 1.90415 9.17795 2.24615L4.43195 6.99215C4.26095 7.16315 4.03695 7.24815 3.81295 7.24815Z"
-                  fill="white"
-                />
-              </svg>
-            </div>
-            <div>
-              <p>Самовывоз</p>
-            </div>
-          </div>
-          <div className={styles.method__el}>
-            <div className={styles.method__button}></div>
-            <div>
-              <p>Доставка</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <DeliveryMethod />
 
       {/* Адресс  */}
-      <div className={styles.adress}>
-        <div className={styles.adress__text}>
-          <p>Выберите город и улицу</p>
-        </div>
-
-        <div className={styles.adress__list}>
-          <div className={styles.adress__input}>
-            <input type="text" className={styles.input} placeholder="Город" />
-          </div>
-          <div className={styles.adress__input}>
-            <input type="text" className={styles.input} placeholder="Улица" />
-          </div>
-        </div>
-      </div>
+      <Addres />
 
       {/* Комментарий */}
-      <div className={styles.comment}>
-        <div className="comment__text">
-          <p>Введите коментарий к заказу</p>
-        </div>
-        <textarea name="" placeholder="Ваш коментарий"></textarea>
-      </div>
+      <Comment />
     </div>
   );
 };

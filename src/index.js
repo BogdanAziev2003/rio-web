@@ -5,10 +5,14 @@ import './index.css';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import items from './redux/itemsSlice';
+import phone from './redux/phoneSlice';
+import paymethod from './redux/paymentMethod';
 
 const store = configureStore({
   reducer: {
     items,
+    phone,
+    paymethod,
   },
 });
 
