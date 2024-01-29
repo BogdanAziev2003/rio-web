@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import styles from './Cart.module.scss';
 import image from '../../image/burger.jpg';
@@ -9,10 +10,14 @@ const ItemsInCart = () => {
   const dispatch = useDispatch();
 
   const handleAddItem = (item) => {
-    dispatch(addItem(item));
+    const newItem = {
+      idInCart: uuidv4(),
+      ...item,
+    };
+    dispatch(addItem(newItem));
   };
   const handleRemoveItem = (item) => {
-    dispatch(removeItem(item.idInCart));
+    dispatch(removeItem(item));
   };
 
   const { itemsInCart } = useSelector((state) => {
@@ -20,8 +25,9 @@ const ItemsInCart = () => {
       const existingItem = acc.find(
         (i) =>
           i.id === item.id &&
-          i.sizes.activeSize === item.sizes.activeSize &&
-          JSON.stringify(i) === JSON.stringify(item.modifiers)
+          i.price === item.price &&
+          JSON.stringify(i.modifiers) === JSON.stringify(item.modifiers) &&
+          JSON.stringify(i.sizes) === JSON.stringify(item.sizes)
       );
       if (existingItem) {
         existingItem.count += 1;
@@ -33,6 +39,12 @@ const ItemsInCart = () => {
 
     return { itemsInCart: itemsCount };
   });
+
+  const itemmms = useSelector((state) => state.items.itemsInCart);
+
+  useEffect(() => {
+    console.log(itemmms);
+  }, [itemmms]);
 
   return (
     <>

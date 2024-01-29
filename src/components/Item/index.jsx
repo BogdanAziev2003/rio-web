@@ -17,7 +17,6 @@ const Item = ({ ...item }) => {
   const [activeItemForCart, setActiveItemForCart] = useState(item);
 
   // activeItemLogic
-  const [activeItem, setActiveItem] = useState('');
   const itemList = itemsInCart.filter(
     (itemInCart) => itemInCart.id === item.id
   );
@@ -42,10 +41,6 @@ const Item = ({ ...item }) => {
   const removeItemInCart = (item) => {
     dispatch(removeItem(item));
   };
-
-  useEffect(() => {
-    console.log(itemsInCart);
-  }, [itemsInCart]);
 
   return (
     <div className={styles.item}>
