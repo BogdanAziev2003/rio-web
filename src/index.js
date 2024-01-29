@@ -9,7 +9,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import items from './redux/itemsSlice';
 import phone from './redux/phoneSlice';
 import paymethod from './redux/paymentMethod';
-import delmethod from './redux/deliveryMethod';
+import delmethod from './redux/deliverySlice';
 import comment from './redux/comment';
 
 const store = configureStore({

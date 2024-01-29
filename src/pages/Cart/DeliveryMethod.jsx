@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Cart.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { setDeliveryMethod } from '../../redux/deliveryMethod';
+import { setDeliveryMethod } from '../../redux/deliverySlice';
 
 const DeliveryMethod = () => {
   const dispatch = useDispatch();

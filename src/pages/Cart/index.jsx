@@ -12,6 +12,7 @@ import ItemsInCart from './ItemsInCart';
 
 const CartPage = () => {
   const { totalPrice } = useSelector((state) => state.items);
+  const { delMethod } = useSelector((state) => state.delmethod);
   return (
     <div className={styles.wrapper}>
       <ClearCart />
@@ -41,7 +42,7 @@ const CartPage = () => {
       <DeliveryMethod />
 
       {/* Адресс  */}
-      <Addres />
+      {delMethod === 'delivery' && <Addres delMethod={delMethod} />}
 
       {/* Комментарий */}
       <Comment />
