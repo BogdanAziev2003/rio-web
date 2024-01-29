@@ -14,6 +14,9 @@ const Item = ({ ...item }) => {
   const { itemsInCart } = useSelector((state) => state.items);
   const inCart = itemsInCart.find((itemInCart) => itemInCart.id === item.id);
 
+  const [countForCart, setCountForCart] = useState(1);
+  const [activeItemForCart, setActiveItemForCart] = useState(item);
+
   // activeItemLogic
   const [activeItem, setActiveItem] = useState('');
   const itemList = itemsInCart.filter(
@@ -29,22 +32,25 @@ const Item = ({ ...item }) => {
 
   // Modal Window Set Up
   const [open, setOpen] = useState(false);
+  const handleModalOpen = () => {
+    setOpen(true);
+  };
 
   const addItemInCart = () => {
-    const newItem = {
-      idInCart: uuidv4(),
-      ...item,
-    };
-    setActiveItem(newItem.idInCart);
-    dispatch(addItem(newItem));
-    setOpen(true);
+    for (let i = 0; i < countForCart; i++) {
+      const newItem = {
+        idInCart: uuidv4(),
+        ...activeItemForCart,
+      };
+      setActiveItem(newItem.idInCart);
+      dispatch(addItem(newItem));
+    }
   };
   const removeItemInCart = () => {
     dispatch(removeItem(activeItem));
     const updatedCartItems = itemsInCart.filter(
       (item) => item.idInCart !== activeItem
     );
-
     const newActiveItem = updatedCartItems
       .reverse()
       .find((itemInCart) => item.id === itemInCart.id);
@@ -53,12 +59,11 @@ const Item = ({ ...item }) => {
     } catch (err) {
       setActiveItem('');
     }
-    setOpen(true);
   };
 
-  // useEffect(() => {
-  //   console.log(itemsInCart);
-  // }, [itemsInCart]);
+  useEffect(() => {
+    console.log(itemsInCart);
+  }, [itemsInCart]);
 
   return (
     <div className={styles.item}>
@@ -78,10 +83,11 @@ const Item = ({ ...item }) => {
           <ButtonInCart
             addItemInCart={addItemInCart}
             removeItemInCart={removeItemInCart}
-            count={count}
+            itemList={itemList}
+            setOpen={setOpen}
           />
         ) : (
-          <div className={styles.item__button} onClick={addItemInCart}>
+          <div className={styles.item__button} onClick={handleModalOpen}>
             <p>Добавить</p>
           </div>
         )}
@@ -93,14 +99,16 @@ const Item = ({ ...item }) => {
           setOpen={setOpen}
           name={item.name}
           price={price}
-          count={count}
           addItemInCart={addItemInCart}
-          removeItemInCart={removeItemInCart}
           sizes={item.sizes}
           activeItem={activeItem}
           item={item}
           setActiveItem={setActiveItem}
           itemList={itemList}
+          countForCart={countForCart}
+          setCountForCart={setCountForCart}
+          activeItemForCart={activeItemForCart}
+          setActiveItemForCart={setActiveItemForCart}
         />
       )}
     </div>

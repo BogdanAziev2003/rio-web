@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from './ModalWindow.module.scss';
 import { useDispatch } from 'react-redux';
 import { addModifier, removeModifier } from '../../redux/itemsSlice';

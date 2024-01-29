@@ -26,8 +26,9 @@ const itemsSlice = createSlice({
       state.totalPrice = 0;
     },
     addItem(state, action) {
-      state.itemsInCart.push(action.payload);
-      state.totalPrice += action.payload.price;
+      const items = action.payload;
+      state.itemsInCart.push(items);
+      state.totalPrice += items.price;
     },
     removeItem(state, action) {
       const index = state.itemsInCart.findIndex(

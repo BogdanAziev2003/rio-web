@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../Item.module.scss';
 
-const ButtonInCart = ({ count, addItemInCart, removeItemInCart, item }) => {
+const ButtonInCart = ({ itemList, removeItemInCart, item, setOpen }) => {
   return (
     <div className={`${styles.item__button} ${styles.item__button_count}`}>
       <svg
@@ -18,10 +18,10 @@ const ButtonInCart = ({ count, addItemInCart, removeItemInCart, item }) => {
         ></path>
       </svg>
       <div className={styles.item__count}>
-        <p>{count}</p>
+        <p>{itemList.length}</p>
       </div>
       <svg
-        onClick={() => addItemInCart()}
+        onClick={() => setOpen(true)}
         width="17"
         height="16"
         viewBox="0 0 17 16"

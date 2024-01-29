@@ -11,21 +11,26 @@ const ModalWindow = ({
   open,
   setOpen,
   name,
-  count,
   addItemInCart,
-  removeItemInCart,
   sizes,
   activeItem,
-  setActiveItem,
   item,
   itemList,
+  countForCart,
+  setCountForCart,
+  activeItemForCart,
+  setActiveItemForCart,
 }) => {
-  useEffect(() => {
-    if (!count) setOpen(false);
-  }, [count, setOpen]);
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleModalAddItems = () => {
+    setOpen(false);
+    addItemInCart();
+    setCountForCart(1);
+  };
+
   return (
     <Modal open={open} onClose={handleClose}>
       <Box>
@@ -45,7 +50,11 @@ const ModalWindow = ({
             <div className={styles.modal__amount}>
               {/* - */}
               <svg
-                onClick={() => removeItemInCart()}
+                onClick={() => {
+                  if (countForCart !== 1) {
+                    setCountForCart((prevCount) => prevCount - 1);
+                  }
+                }}
                 width="16"
                 height="4"
                 viewBox="0 0 16 4"
@@ -59,11 +68,11 @@ const ModalWindow = ({
               </svg>
 
               <div>
-                <p>{count}</p>
+                <p>{countForCart}</p>
               </div>
               {/* + */}
               <svg
-                onClick={() => addItemInCart()}
+                onClick={() => setCountForCart((prevCount) => prevCount + 1)}
                 width="16"
                 height="16"
                 viewBox="0 0 16 16"
@@ -79,6 +88,8 @@ const ModalWindow = ({
           </div>
 
           <ModalItemSize
+            activeItemForCart={activeItemForCart}
+            setActiveItemForCart={setActiveItemForCart}
             sizes={sizes}
             activeItemId={activeItem}
             itemList={itemList}
@@ -88,11 +99,12 @@ const ModalWindow = ({
             <ModalItemModifier
               activeItemCartId={activeItem}
               itemList={itemList}
+              item={item}
             />
           )}
 
-          <div className={styles.modal__button} onClick={() => handleClose()}>
-            <p>Добавить</p>
+          <div className={styles.modal__button} onClick={handleModalAddItems}>
+            <p>Добавить в корзину</p>
           </div>
         </div>
       </Box>

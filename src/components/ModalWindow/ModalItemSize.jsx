@@ -1,31 +1,37 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from './ModalWindow.module.scss';
-import { useDispatch } from 'react-redux';
-import { chooseSize } from '../../redux/itemsSlice';
 
-const ModalItemSize = ({ sizes, activeItemId, itemList }) => {
-  const dispatch = useDispatch();
+const ModalItemSize = ({
+  sizes,
+  activeItemId,
+  itemList,
+  activeItemForCart,
+  setActiveItemForCart,
+}) => {
   const currentSizes = [];
-  const activeItem = itemList.find((item) => item.idInCart === activeItemId);
 
-  const modPrice = activeItem?.modifiers.reduce((total, mod) => {
+  const handleChooseSize = (idx) => {
+    setActiveItemForCart({
+      ...activeItemForCart,
+      price: activeItemForCart.sizes[idx].price + modPrice,
+    });
+  };
+
+  const modPrice = activeItemForCart?.modifiers.reduce((total, mod) => {
     if (mod.selected) {
       total += mod.price;
     }
     return total;
   }, 0);
 
-  const handleChooseSize = (id) => {
-    dispatch(chooseSize({ activeItem, id }));
-  };
-
   for (let i = 1; i <= sizes.length; i++) {
     currentSizes.push(
       <div
         onClick={() => handleChooseSize(i - 1)}
         className={`${
-          activeItem &&
-          activeItem.price === activeItem.sizes[i - 1].price + modPrice &&
+          activeItemForCart &&
+          activeItemForCart.price ===
+            activeItemForCart.sizes[i - 1].price + modPrice &&
           styles.size__active
         } ${styles.size}`}
         key={i}
@@ -35,9 +41,7 @@ const ModalItemSize = ({ sizes, activeItemId, itemList }) => {
     );
   }
 
-  return (
-    <div className={styles.modal__size}>{sizes.length > 1 && currentSizes}</div>
-  );
+  return <div className={styles.modal__size}>{currentSizes}</div>;
 };
 
 export default ModalItemSize;

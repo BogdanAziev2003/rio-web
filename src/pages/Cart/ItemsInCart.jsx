@@ -21,7 +21,7 @@ const ItemsInCart = () => {
         (i) =>
           i.id === item.id &&
           i.sizes.activeSize === item.sizes.activeSize &&
-          JSON.stringify(i.modifiers) === JSON.stringify(item.modifiers)
+          JSON.stringify(i) === JSON.stringify(item.modifiers)
       );
       if (existingItem) {
         existingItem.count += 1;
