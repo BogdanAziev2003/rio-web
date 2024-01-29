@@ -25,7 +25,17 @@ const Item = ({ ...item }) => {
   const [open, setOpen] = useState(false);
   const handleModalOpen = () => {
     setActiveItemForCart(item);
-    setOpen(true);
+    console.log(item);
+    if (
+      activeItemForCart.modifiers.length === 1 &&
+      activeItemForCart.sizes.length === 1
+    ) {
+      setOpen(false);
+      addItemInCart();
+      return;
+    } else {
+      setOpen(true);
+    }
   };
 
   const addItemInCart = () => {
@@ -42,6 +52,10 @@ const Item = ({ ...item }) => {
     dispatch(removeItem(item));
   };
 
+  useEffect(() => {
+    console.log(itemsInCart);
+  }, [itemsInCart]);
+
   return (
     <div className={styles.item}>
       <div className={styles.item__image}>
@@ -53,7 +67,10 @@ const Item = ({ ...item }) => {
             <p>{item.name}</p>
           </div>
           <div className={styles.item__price}>
-            <p>{item.price} ₽</p>
+            <p>
+              {item.sizes.length > 1 && <span>от </span>}
+              {item.price} ₽
+            </p>
           </div>
         </div>
         {inCart ? (

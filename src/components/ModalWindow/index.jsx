@@ -18,6 +18,7 @@ const ModalWindow = ({
   setActiveItemForCart,
 }) => {
   const handleClose = () => {
+    setCountForCart(1);
     setOpen(false);
   };
 
@@ -41,14 +42,17 @@ const ModalWindow = ({
           </div>
           <div className={styles.modal__info}>
             <div className={styles.modal__name}>
-              <p>{activeItemForCart.name}</p>
+              <p>
+                {activeItemForCart.name}
+                <span> {activeItemForCart.price} ₽</span>
+              </p>
             </div>
             <div className={styles.modal__amount}>
               <svg
                 onClick={() => {
-                  if (countForCart !== 1) {
+                  if (countForCart !== 1)
                     setCountForCart((prevCount) => prevCount - 1);
-                  }
+                  else handleClose();
                 }}
                 width="16"
                 height="4"

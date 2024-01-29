@@ -27,9 +27,15 @@ function App() {
   let { items } = useSelector((state) => state.items);
 
   items = items.map((item) => {
+    let minPrice = item.sizes[0].price;
+    for (let i = 1; i < item.sizes.length; i++) {
+      if (item.sizes[i].price < minPrice) {
+        minPrice = item.sizes[i].price;
+      }
+    }
     return {
       ...item,
-      price: item.sizes[0].price,
+      price: minPrice,
     };
   });
 

@@ -43,6 +43,12 @@
     color: #372013;
     font-weight: 400;
     font-size: 18px;
+
+    span {
+      margin-left: 2px;
+      font-weight: 500;
+      color: #fe5e00;
+    }
   }
 
   &__amount {
