@@ -11,13 +11,13 @@ import MainPage from 'pages/MainPage';
 import BurgerPage from 'pages/BurgerPage';
 import ShaurmaPage from 'pages/ShaurmaPage';
 import TaukPage from 'pages/TaukPage';
-import HotdogPage from 'pages/HotdogPage';
 import SandwichPage from 'pages/SandwichPage';
 import FirmenPage from 'pages/FirmenPage';
 import SnackPage from 'pages/SnackPage';
 import SaucePage from 'pages/SaucePage';
 import TeaPage from 'pages/TeaPage';
 import CoffePage from 'pages/CoffePage';
+import HotdogPage from 'pages/HotDogPage';
 
 function App() {
   const dispatch = useDispatch();
