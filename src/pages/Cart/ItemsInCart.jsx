@@ -34,8 +34,6 @@ const ItemsInCart = () => {
     return { itemsInCart: itemsCount };
   });
 
-  console.log(itemsInCart);
-
   return (
     <>
       {itemsInCart?.map((item, idx) => (

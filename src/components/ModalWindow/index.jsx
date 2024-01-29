@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Box, Modal } from '@mui/material';
 import { IoMdCloseCircle } from 'react-icons/io';
 
@@ -10,12 +10,8 @@ import ModalItemModifier from './ModalItemModifier';
 const ModalWindow = ({
   open,
   setOpen,
-  name,
   addItemInCart,
-  sizes,
-  activeItem,
   item,
-  itemList,
   countForCart,
   setCountForCart,
   activeItemForCart,
@@ -45,10 +41,9 @@ const ModalWindow = ({
           </div>
           <div className={styles.modal__info}>
             <div className={styles.modal__name}>
-              <p>{name}</p>
+              <p>{activeItemForCart.name}</p>
             </div>
             <div className={styles.modal__amount}>
-              {/* - */}
               <svg
                 onClick={() => {
                   if (countForCart !== 1) {
@@ -70,7 +65,6 @@ const ModalWindow = ({
               <div>
                 <p>{countForCart}</p>
               </div>
-              {/* + */}
               <svg
                 onClick={() => setCountForCart((prevCount) => prevCount + 1)}
                 width="16"
@@ -90,16 +84,12 @@ const ModalWindow = ({
           <ModalItemSize
             activeItemForCart={activeItemForCart}
             setActiveItemForCart={setActiveItemForCart}
-            sizes={sizes}
-            activeItemId={activeItem}
-            itemList={itemList}
           />
 
           {item.modifiers.length > 1 && (
             <ModalItemModifier
-              activeItemCartId={activeItem}
-              itemList={itemList}
-              item={item}
+              activeItemForCart={activeItemForCart}
+              setActiveItemForCart={setActiveItemForCart}
             />
           )}
 

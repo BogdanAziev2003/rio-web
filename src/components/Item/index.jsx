@@ -10,7 +10,6 @@ import ButtonInCart from './Components/ButtonInCart';
 
 const Item = ({ ...item }) => {
   const dispatch = useDispatch();
-  const price = item.sizes[0].price;
   const { itemsInCart } = useSelector((state) => state.items);
   const inCart = itemsInCart.find((itemInCart) => itemInCart.id === item.id);
 
@@ -22,17 +21,11 @@ const Item = ({ ...item }) => {
   const itemList = itemsInCart.filter(
     (itemInCart) => itemInCart.id === item.id
   );
-  // count Item
-  const count = itemsInCart.reduce((count, cartItem) => {
-    if (cartItem.id === item.id) {
-      count++;
-    }
-    return count;
-  }, 0);
 
   // Modal Window Set Up
   const [open, setOpen] = useState(false);
   const handleModalOpen = () => {
+    setActiveItemForCart(item);
     setOpen(true);
   };
 
@@ -42,23 +35,12 @@ const Item = ({ ...item }) => {
         idInCart: uuidv4(),
         ...activeItemForCart,
       };
-      setActiveItem(newItem.idInCart);
       dispatch(addItem(newItem));
     }
   };
-  const removeItemInCart = () => {
-    dispatch(removeItem(activeItem));
-    const updatedCartItems = itemsInCart.filter(
-      (item) => item.idInCart !== activeItem
-    );
-    const newActiveItem = updatedCartItems
-      .reverse()
-      .find((itemInCart) => item.id === itemInCart.id);
-    try {
-      setActiveItem(newActiveItem.idInCart);
-    } catch (err) {
-      setActiveItem('');
-    }
+
+  const removeItemInCart = (item) => {
+    dispatch(removeItem(item));
   };
 
   useEffect(() => {
@@ -76,7 +58,7 @@ const Item = ({ ...item }) => {
             <p>{item.name}</p>
           </div>
           <div className={styles.item__price}>
-            <p>{price} ₽</p>
+            <p>{item.price} ₽</p>
           </div>
         </div>
         {inCart ? (
@@ -85,6 +67,7 @@ const Item = ({ ...item }) => {
             removeItemInCart={removeItemInCart}
             itemList={itemList}
             setOpen={setOpen}
+            item={item}
           />
         ) : (
           <div className={styles.item__button} onClick={handleModalOpen}>
@@ -97,14 +80,8 @@ const Item = ({ ...item }) => {
         <ModalWindow
           open={open}
           setOpen={setOpen}
-          name={item.name}
-          price={price}
           addItemInCart={addItemInCart}
-          sizes={item.sizes}
-          activeItem={activeItem}
           item={item}
-          setActiveItem={setActiveItem}
-          itemList={itemList}
           countForCart={countForCart}
           setCountForCart={setCountForCart}
           activeItemForCart={activeItemForCart}

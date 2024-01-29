@@ -1,13 +1,8 @@
 import React from 'react';
 import styles from './ModalWindow.module.scss';
 
-const ModalItemSize = ({
-  sizes,
-  activeItemId,
-  itemList,
-  activeItemForCart,
-  setActiveItemForCart,
-}) => {
+const ModalItemSize = ({ activeItemForCart, setActiveItemForCart }) => {
+  const sizes = activeItemForCart.sizes;
   const currentSizes = [];
 
   const handleChooseSize = (idx) => {
@@ -18,7 +13,7 @@ const ModalItemSize = ({
   };
 
   const modPrice = activeItemForCart?.modifiers.reduce((total, mod) => {
-    if (mod.selected) {
+    if (mod?.selected) {
       total += mod.price;
     }
     return total;

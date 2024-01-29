@@ -31,95 +31,16 @@ const itemsSlice = createSlice({
       state.totalPrice += items.price;
     },
     removeItem(state, action) {
-      const index = state.itemsInCart.findIndex(
-        (item) => item.idInCart === action.payload
-      );
+      const item = action.payload;
+      const index = state.itemsInCart
+        .reverse()
+        .findIndex((i) => i.id === item.id);
+
       if (index !== -1) {
         const deleteItem = state.itemsInCart.splice(index, 1)[0];
+        state.itemsInCart = state.itemsInCart.reverse();
         state.totalPrice -= deleteItem.price;
       }
-    },
-    chooseSize(state, action) {
-      const { activeItem, id } = action.payload;
-
-      const modPrice = activeItem.modifiers.reduce((total, mod) => {
-        if (mod.selected) {
-          total += mod.price;
-        }
-        return total;
-      }, 0);
-
-      const updateItemPrice = activeItem.sizes[id].price;
-
-      const updatedItemsInCart = state.itemsInCart.map((item) => {
-        console.log(item);
-        if (item.idInCart === activeItem.idInCart) {
-          return {
-            ...item,
-            price: updateItemPrice + modPrice,
-            activeSize: item.sizes.find((siz) => siz.id === id)?.title,
-          };
-        }
-        return item;
-      });
-
-      const totalPriceDifference =
-        updateItemPrice + modPrice - activeItem.price;
-
-      return {
-        ...state,
-        itemsInCart: updatedItemsInCart,
-        totalPrice: state.totalPrice + totalPriceDifference,
-      };
-    },
-
-    addModifier(state, action) {
-      const { activeItem, name, modPrice } = action.payload;
-
-      const updatedModifiers = activeItem.modifiers.map((mod) =>
-        mod.name === name ? { ...mod, selected: true } : mod
-      );
-
-      const updatedItem = {
-        ...activeItem,
-        modifiers: updatedModifiers,
-        price: activeItem.price + modPrice,
-      };
-
-      const updatedItemsInCart = state.itemsInCart.map((item) =>
-        item.idInCart === activeItem.idInCart ? updatedItem : item
-      );
-
-      return {
-        ...state,
-        itemsInCart: updatedItemsInCart,
-        totalPrice: state.totalPrice + modPrice,
-      };
-    },
-    removeModifier(state, action) {
-      const { activeItem, name, modPrice } = action.payload;
-
-      const updatedModifiers = activeItem.modifiers.map((mod) =>
-        mod.name === name ? { ...mod, selected: undefined } : mod
-      );
-
-      const updatedItem = {
-        ...activeItem,
-        modifiers: updatedModifiers,
-        price: activeItem.price - modPrice,
-      };
-
-      const updatedItemsInCart = state.itemsInCart.map((item) =>
-        item.idInCart === activeItem.idInCart ? updatedItem : item
-      );
-
-      const updatedTotalPrice = state.totalPrice - modPrice;
-
-      return {
-        ...state,
-        itemsInCart: updatedItemsInCart,
-        totalPrice: updatedTotalPrice,
-      };
     },
   },
   extraReducers: (builder) => {
