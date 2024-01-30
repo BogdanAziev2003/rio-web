@@ -15,7 +15,6 @@ export function useTelegram() {
   tg.MainButton.color = '#fe5e00';
 
   Telegram.WebApp.onEvent('mainButtonClicked', mainButtonClick);
-  Telegram.WebApp.offEvent('mainButtonClicked', mainButtonClick);
 
   const totalPriceButton = () => {
     if (window.location.pathname !== '/cart' && totalPrice !== 0) {
