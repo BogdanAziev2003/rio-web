@@ -9,11 +9,13 @@ export function useTelegram() {
   tg.MainButton.textColor = '#fff';
   tg.MainButton.color = '#fe5e00';
 
-  const mainButtonClick = () => {
-    if (tg.MainButton.text === `Мой заказ: ${totalPrice} ₽`) redirect('/cart');
-  };
+  //   const mainButtonClick = () => {
+  //     if (tg.MainButton.text === `Мой заказ: ${totalPrice} ₽`) redirect('/cart');
+  //   };
 
-  Telegram.WebApp.onEvent('mainButtonClicked', mainButtonClick);
+  Telegram.WebApp.onEvent('mainButtonClicked', () => {
+    redirect('/cart');
+  });
 
   const totalPriceButton = () => {
     if (window.location.pathname !== '/cart' && totalPrice !== 0) {
