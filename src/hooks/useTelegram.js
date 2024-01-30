@@ -7,7 +7,7 @@ export function useTelegram() {
   tg.MainButton.textColor = '#fff';
   tg.MainButton.color = '#fe5e00';
   tg.setHeaderColor('#f9f9f9');
-  tg.setBackgroundColor('#f00');
+  tg.setBackgroundColor('#f9f9f9');
 
   const totalPriceButton = () => {
     if (window.location.pathname !== '/cart' && totalPrice !== 0) {
