@@ -16,9 +16,9 @@ export function useTelegram() {
   Telegram.WebApp.onEvent('mainButtonClicked', mainButtonClick);
 
   const totalPriceButton = () => {
-    if (window.location.pathname !== '/cart' && totalPrice !== 0) {
+    if (window.location.pathname !== '/tea' && totalPrice !== 0) {
       tg.MainButton.show();
-      tg.MainButton.setText(`Мой заказ: ${totalPrice} ₽`);
+      tg.MainButton.setText(`чаи`);
     }
     if (window.location.pathname === '/cart' && totalPrice !== 0) {
       tg.MainButton.setText('`Заказать: ${totalPrice} ₽`');
