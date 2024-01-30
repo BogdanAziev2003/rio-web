@@ -29,8 +29,13 @@ const ModalWindow = ({
   };
 
   return (
-    <Modal open={open} onClose={handleClose}>
-      <Box sx={{ borderColor: '#f00' }}>
+    <Modal
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
+      <Box>
         <div className={styles.modal}>
           <IoMdCloseCircle
             className={styles.modal__close__btn}
