@@ -13,31 +13,13 @@ export function useTelegram() {
       window.location.href = '/cart';
   });
 
-  // BackButton setings
-  if (window.location.pathname === '/') {
-    tg.BackButton.hide();
-  }
-  if (window.location.pathname === '/') {
-    tg.BackButton.hide();
-  } else if (window.location.pathname === '/cart') {
-    tg.BackButton.show();
-    Telegram.WebApp.onEvent('backButtonClicked', () => {
-      window.location.href = '/';
-    });
-  } else {
-    tg.BackButton.show();
-    Telegram.WebApp.onEvent('backButtonClicked', () => {
-      window.history.back();
-    });
-  }
-
   const totalPriceButton = () => {
     if (window.location.pathname !== '/cart' && totalPrice !== 0) {
       tg.MainButton.show();
-      tg.MainButton.text = `Мой заказ: ${totalPrice} ₽`;
+      tg.MainButton.setText(`Мой заказ: ${totalPrice} ₽`);
     }
     if (window.location.pathname === '/cart' && totalPrice !== 0) {
-      tg.MainButton.text = `Заказать: ${totalPrice} ₽`;
+      tg.MainButton.setText('`Заказать: ${totalPrice} ₽`');
     } else if (totalPrice === 0) {
       tg.MainButton.hide();
     }
