@@ -3,15 +3,18 @@ import { useSelector } from 'react-redux';
 export function useTelegram() {
   const { totalPrice } = useSelector((state) => state.items);
 
+  const mainButtonClick = () => {
+    if (tg.MainButton.text === `Мой заказ: ${totalPrice} ₽`)
+      window.location.href = '/cart';
+  };
+
   const tg = window.Telegram.WebApp;
   tg.expand();
   tg.MainButton.textColor = '#fff';
   tg.MainButton.color = '#fe5e00';
 
-  Telegram.WebApp.onEvent('mainButtonClicked', () => {
-    if (tg.MainButton.text === `Мой заказ: ${totalPrice} ₽`)
-      window.location.href = '/cart';
-  });
+  Telegram.WebApp.onEvent('mainButtonClicked', mainButtonClick);
+  Telegram.WebApp.offEvent('mainButtonClicked', mainButtonClick);
 
   const totalPriceButton = () => {
     if (window.location.pathname !== '/cart' && totalPrice !== 0) {
