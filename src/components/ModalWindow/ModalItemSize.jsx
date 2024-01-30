@@ -15,7 +15,6 @@ const ModalItemSize = ({ activeItemForCart, setActiveItemForCart }) => {
         sizes: updatedSizes,
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleChooseSize = (idx) => {
