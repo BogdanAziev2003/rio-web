@@ -1,11 +1,12 @@
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 export function useTelegram() {
   const { totalPrice } = useSelector((state) => state.items);
 
   const mainButtonClick = () => {
     if (tg.MainButton.text === `Мой заказ: ${totalPrice} ₽`)
-      window.location.href = '/cart';
+      <Link to="/cart"></Link>;
   };
 
   const tg = window.Telegram.WebApp;
