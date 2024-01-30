@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../Cart.module.scss';
+import DelPrice from './DelPrice';
 
 const Addres = () => {
+  const [address, setAddress] = useState('');
+
   var options = {
     fields: [
       { id: 'js-Field1', levels: ['Region', 'District'] },
@@ -17,13 +20,13 @@ const Addres = () => {
 
   const getCoordinats = async () => {
     let inputs = document.querySelectorAll('.input-wrapper input');
-    let address = '';
+    let funcAddress = '';
     inputs.forEach((input) => {
-      address += input.value + ' ';
+      funcAddress += input.value + ' ';
     });
-    address = encodeURI(address.trim());
+    funcAddress = encodeURI(funcAddress.trim());
 
-    await fetch(url + address)
+    await fetch(url + funcAddress)
       .then((res) => {
         let json = res.json();
         return json;
@@ -32,6 +35,13 @@ const Addres = () => {
         console.log(data);
         console.log(data.addresses[0].geo_data.mid.lat);
         console.log(data.addresses[0].geo_data.mid.lon);
+        setAddress(
+          data.addresses[0].cover[0].in +
+            ', ' +
+            data.addresses[0].cover[1].in +
+            ', ' +
+            data.addresses[0].cover[3].in
+        );
       });
   };
 
@@ -64,9 +74,12 @@ const Addres = () => {
             onChange={() => {}}
           />
         </div>
+
         <button onClick={getCoordinats} className="get-coordinates">
           Получить координаты
         </button>
+
+        {address && <DelPrice />}
       </div>
     </div>
   );
