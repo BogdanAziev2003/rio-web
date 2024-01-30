@@ -35,12 +35,14 @@ const ModalItemModifier = ({ activeItemForCart, setActiveItemForCart }) => {
         {activeItemForCart?.modifiers.map((mod, idx) => (
           <div key={idx} className={styles.modifier}>
             <div className={styles.modifier__title}>
-              <p>{mod.name}</p>
+              <p>
+                {mod.name} {mod.price} ₽
+              </p>
             </div>
             <div className="modifier__button">
               {mod.selected ? (
                 <div onClick={() => handleRemoveModifier(mod.name, mod.price)}>
-                  +{mod.price} ₽ -
+                  -
                 </div>
               ) : (
                 <svg

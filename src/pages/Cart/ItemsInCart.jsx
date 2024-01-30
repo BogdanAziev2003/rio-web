@@ -55,7 +55,10 @@ const ItemsInCart = () => {
                 </div>
                 <div className={styles.item__description}>
                   <p>
-                    {item?.sizes[0].title}
+                    {item?.sizes.map(
+                      (size, idx) =>
+                        size.selected && <span key={idx}>{size.title}</span>
+                    )}
                     {item.modifiers.map((mod, idx) => (
                       <span key={idx} className={styles.description__mod}>
                         {mod?.selected && idx === 0 && (

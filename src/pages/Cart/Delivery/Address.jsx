@@ -3,9 +3,15 @@ import styles from '../Cart.module.scss';
 import DelPrice from './DelPrice';
 
 const Addres = () => {
-  const [address, setAddress] = useState('');
+  const [userAddress, setUserAddress] = useState('');
+  const [userCoordinates, setUserCoordinates] = useState({});
 
-  var options = {
+  const url =
+    'http://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address';
+  const token = '13d34ee3058d1955e3370bccac7c074a44c49019';
+  let query = '';
+
+  const optionsAuto = {
     fields: [
       { id: 'js-Field1', levels: ['Region', 'District'] },
       { id: 'js-Field2', levels: ['City', 'Place'] },
@@ -13,36 +19,37 @@ const Addres = () => {
     ],
   };
 
-  let url =
-    'https://ahunter.ru/site/cleanse/address?user=BogdanAzievnPfqPINLnk9jt6yTgS1ls4&output=json&query=';
-
-  window.AhunterSuggest.Address.Discrete(options);
+  window.AhunterSuggest.Address.Discrete(optionsAuto);
 
   const getCoordinats = async () => {
     let inputs = document.querySelectorAll('.input-wrapper input');
-    let funcAddress = '';
+    let address = '';
     inputs.forEach((input) => {
-      funcAddress += input.value + ' ';
+      address += input.value + ' ';
     });
-    funcAddress = encodeURI(funcAddress.trim());
-
-    await fetch(url + funcAddress)
-      .then((res) => {
-        let json = res.json();
-        return json;
-      })
-      .then((data) => {
-        console.log(data);
-        console.log(data.addresses[0].geo_data.mid.lat);
-        console.log(data.addresses[0].geo_data.mid.lon);
-        setAddress(
-          data.addresses[0].cover[0].in +
-            ', ' +
-            data.addresses[0].cover[1].in +
-            ', ' +
-            data.addresses[0].cover[3].in
+    query = address;
+    var options = {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: 'Token ' + token,
+      },
+      body: JSON.stringify({ query: query }),
+    };
+    fetch(url, options)
+      .then((response) => response.json())
+      .then((result) => {
+        setUserAddress(
+          `${result.suggestions[0].data.city}, ${result.suggestions[0].data.street}, ${result.suggestions[0].data.house}`
         );
-      });
+        setUserCoordinates({
+          latitude: result.suggestions[0].data.geo_lat,
+          longitude: result.suggestions[0].data.geo_lon,
+        });
+      })
+      .catch((error) => console.log('error', error));
   };
 
   return (
@@ -56,7 +63,7 @@ const Addres = () => {
             <input
               className={styles.input}
               id="js-Field2"
-              placeholder="Город    "
+              placeholder="Город"
             />
           </div>
           <div className={styles.adress__input}>
@@ -79,7 +86,7 @@ const Addres = () => {
           Получить координаты
         </button>
 
-        {address && <DelPrice />}
+        {userAddress && <DelPrice userCoordinates={userCoordinates} />}
       </div>
     </div>
   );

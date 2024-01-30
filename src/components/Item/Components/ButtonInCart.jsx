@@ -1,7 +1,12 @@
 import React from 'react';
 import styles from '../Item.module.scss';
 
-const ButtonInCart = ({ itemList, removeItemInCart, item, addItemInCart }) => {
+const ButtonInCart = ({
+  itemList,
+  removeItemInCart,
+  item,
+  handleModalOpen,
+}) => {
   return (
     <div className={`${styles.item__button} ${styles.item__button_count}`}>
       <svg
@@ -21,7 +26,7 @@ const ButtonInCart = ({ itemList, removeItemInCart, item, addItemInCart }) => {
         <p>{itemList.length}</p>
       </div>
       <svg
-        onClick={addItemInCart}
+        onClick={handleModalOpen}
         width="17"
         height="16"
         viewBox="0 0 17 16"

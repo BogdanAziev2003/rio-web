@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ModalWindow from 'components/ModalWindow';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -25,7 +25,6 @@ const Item = ({ ...item }) => {
   const [open, setOpen] = useState(false);
   const handleModalOpen = () => {
     setActiveItemForCart(item);
-    console.log(item);
     if (
       activeItemForCart.modifiers.length === 1 &&
       activeItemForCart.sizes.length === 1
@@ -33,12 +32,23 @@ const Item = ({ ...item }) => {
       setOpen(false);
       addItemInCart();
       return;
-    } else {
-      setOpen(true);
     }
+    setOpen(true);
   };
 
   const addItemInCart = () => {
+    if (
+      activeItemForCart.modifiers.length === 1 &&
+      activeItemForCart.sizes.length === 1
+    ) {
+      setOpen(false);
+      const newItem = {
+        idInCart: uuidv4(),
+        ...activeItemForCart,
+      };
+      dispatch(addItem(newItem));
+      return;
+    }
     for (let i = 0; i < countForCart; i++) {
       const newItem = {
         idInCart: uuidv4(),
@@ -51,10 +61,6 @@ const Item = ({ ...item }) => {
   const removeItemInCart = (item) => {
     dispatch(removeItem(item));
   };
-
-  useEffect(() => {
-    console.log(itemsInCart);
-  }, [itemsInCart]);
 
   return (
     <div className={styles.item}>
@@ -75,7 +81,7 @@ const Item = ({ ...item }) => {
         </div>
         {inCart ? (
           <ButtonInCart
-            addItemInCart={addItemInCart}
+            handleModalOpen={handleModalOpen}
             removeItemInCart={removeItemInCart}
             itemList={itemList}
             setOpen={setOpen}
