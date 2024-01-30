@@ -16,7 +16,7 @@ export function useTelegram() {
   Telegram.WebApp.onEvent('mainButtonClicked', mainButtonClick);
 
   const totalPriceButton = () => {
-    if (window.location.pathname !== '/tea' && totalPrice !== 0) {
+    if (window.location.pathname === '/tea' && totalPrice !== 0) {
       tg.MainButton.show();
       tg.MainButton.setText(`чаи`);
     }
