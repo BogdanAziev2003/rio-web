@@ -27,6 +27,9 @@ function App() {
   useEffect(() => {
     tg.ready();
     tg.expand();
+    tg.viewportChanged = {
+      isStateStable: true,
+    };
   }, []);
   useEffect(() => {
     totalPriceButton();
