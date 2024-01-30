@@ -26,6 +26,7 @@ function App() {
   const { totalPriceButton, tg } = useTelegram();
   useEffect(() => {
     tg.ready();
+    tg.expand();
   }, []);
   useEffect(() => {
     totalPriceButton();

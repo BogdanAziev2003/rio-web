@@ -4,7 +4,6 @@ export function useTelegram() {
   const { totalPrice } = useSelector((state) => state.items);
 
   const tg = window.Telegram.WebApp;
-  tg.expand();
   tg.MainButton.textColor = '#fff';
   tg.MainButton.color = '#fe5e00';
 
@@ -14,7 +13,7 @@ export function useTelegram() {
       tg.MainButton.setText(`Мой заказ: ${totalPrice} ₽`);
     }
     if (window.location.pathname === '/cart' && totalPrice !== 0) {
-      tg.MainButton.setText('`Заказать: ${totalPrice} ₽`');
+      tg.MainButton.setText(`Заказать: ${totalPrice} ₽`);
     } else if (totalPrice === 0) {
       tg.MainButton.hide();
     }
