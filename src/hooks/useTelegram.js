@@ -9,10 +9,6 @@ export function useTelegram() {
   tg.MainButton.textColor = '#fff';
   tg.MainButton.color = '#fe5e00';
 
-  //   const mainButtonClick = () => {
-  //     if (tg.MainButton.text === `Мой заказ: ${totalPrice} ₽`) redirect('/cart');
-  //   };
-
   Telegram.WebApp.onEvent('mainButtonClicked', () => {
     redirect('/cart');
   });

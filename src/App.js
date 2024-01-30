@@ -21,8 +21,8 @@ import HotdogPage from 'pages/HotDogPage';
 import { useTelegram } from 'hooks/useTelegram';
 
 function App() {
-  // useTelegram setings //
   const { totalPrice } = useSelector((state) => state.items);
+  // useTelegram setings //
   const { totalPriceButton, tg } = useTelegram();
   useEffect(() => {
     tg.ready();
@@ -30,6 +30,12 @@ function App() {
   useEffect(() => {
     totalPriceButton();
   }, [totalPrice, window.location.pathname]);
+
+  useEffect(() => {
+    Telegram.WebApp.onEvent('mainButtonClicked', () => {
+      ('/cart');
+    });
+  });
 
   const dispatch = useDispatch();
   useEffect(() => {
