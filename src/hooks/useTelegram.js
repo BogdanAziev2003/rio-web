@@ -5,7 +5,7 @@ export function useTelegram() {
 
   const mainButtonClick = () => {
     if (tg.MainButton.text === `Мой заказ: ${totalPrice} ₽`)
-      window.location.href = 'cart';
+      window.location.href = '/tea';
   };
 
   const tg = window.Telegram.WebApp;
