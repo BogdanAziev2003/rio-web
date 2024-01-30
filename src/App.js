@@ -21,12 +21,14 @@ import HotdogPage from 'pages/HotDogPage';
 import { useTelegram } from 'hooks/useTelegram';
 
 function App() {
+  useEffect(() => {
+    window.Telegram.WebApp.expand();
+  }, []);
   const { totalPrice } = useSelector((state) => state.items);
   // useTelegram setings //
   const { totalPriceButton, tg } = useTelegram();
   useEffect(() => {
     tg.ready();
-    tg.expand();
   }, []);
   useEffect(() => {
     totalPriceButton();
