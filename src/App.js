@@ -18,8 +18,19 @@ import SaucePage from 'pages/SaucePage';
 import TeaPage from 'pages/TeaPage';
 import CoffePage from 'pages/CoffePage';
 import HotdogPage from 'pages/HotDogPage';
+import { useTelegram } from 'hooks/useTelegram';
 
 function App() {
+  // useTelegram setings //
+  const { totalPrice } = useSelector((state) => state.items);
+  const { totalPriceButton, tg } = useTelegram();
+  useEffect(() => {
+    tg.ready();
+  }, []);
+  useEffect(() => {
+    totalPriceButton();
+  }, [totalPrice, window.location.pathname]);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getItems());
