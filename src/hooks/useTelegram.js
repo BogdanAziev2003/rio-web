@@ -1,17 +1,18 @@
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 export function useTelegram() {
+  const navigate = useNavigate();
   const { totalPrice } = useSelector((state) => state.items);
-
-  const mainButtonClick = () => {
-    if (tg.MainButton.text === `Мой заказ: ${totalPrice} ₽`)
-      window.location.href = '/tea';
-  };
 
   const tg = window.Telegram.WebApp;
   tg.expand();
   tg.MainButton.textColor = '#fff';
   tg.MainButton.color = '#fe5e00';
+
+  const mainButtonClick = () => {
+    if (tg.MainButton.text === `Мой заказ: ${totalPrice} ₽`) navigate('/cart');
+  };
 
   Telegram.WebApp.onEvent('mainButtonClicked', mainButtonClick);
 
