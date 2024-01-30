@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { redirect } from 'react-router-dom';
 
 export function useTelegram() {
   const { totalPrice } = useSelector((state) => state.items);
@@ -9,8 +10,7 @@ export function useTelegram() {
   tg.MainButton.color = '#fe5e00';
 
   const mainButtonClick = () => {
-    if (tg.MainButton.text === `Мой заказ: ${totalPrice} ₽`)
-      window.location.href = '/tea';
+    if (tg.MainButton.text === `Мой заказ: ${totalPrice} ₽`) redirect('/cart');
   };
 
   Telegram.WebApp.onEvent('mainButtonClicked', mainButtonClick);
