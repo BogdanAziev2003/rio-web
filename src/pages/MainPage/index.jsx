@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { Skeleton } from 'components/Layout/Skeleton';
 import styles from './MainPage.module.scss';
+import stylesForSkeleton from '../../components/Item/Item.module.scss';
 import Item from 'components/Item';
 
 const MainPage = ({ items }) => {
@@ -16,26 +19,42 @@ const MainPage = ({ items }) => {
     { id: 9, title: 'Чаи' },
   ];
 
+  // Skeleton logic
+  const { isLoading } = useSelector((state) => state.items);
+  const skeletons = [...new Array(6)].map((_, index) => (
+    <Skeleton className={stylesForSkeleton.skeleton} key={index} />
+  ));
+
+  useEffect(() => {
+    console.log(isLoading);
+  }, [isLoading]);
+
   return (
     <div className={styles.main}>
-      {categories.map((category) => (
-        <div key={category.id} className={styles.main__category}>
-          <div
-            className={`${styles.main__title} ${
-              category.id !== 0 && styles.marg_bot
-            } `}
-          >
-            <p>{category.title}</p>
-          </div>
-          <div className={styles.main__list}>
-            {items
-              .filter((item) => item.category === category.id)
-              .map((item, id) => (
-                <Item key={id} {...item} />
-              ))}
-          </div>
-        </div>
-      ))}
+      {isLoading ? (
+        skeletons
+      ) : (
+        <>
+          {categories.map((category) => (
+            <div key={category.id} className={styles.main__category}>
+              <div
+                className={`${styles.main__title} ${
+                  category.id !== 0 && styles.marg_bot
+                } `}
+              >
+                <p>{category.title}</p>
+              </div>
+              <div className={styles.main__list}>
+                {items
+                  .filter((item) => item.category === category.id)
+                  .map((item, id) => (
+                    <Item key={id} {...item} />
+                  ))}
+              </div>
+            </div>
+          ))}
+        </>
+      )}
     </div>
   );
 };

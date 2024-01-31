@@ -12,7 +12,7 @@ import { useTelegram } from 'hooks/useTelegram';
 import CategoryPage from 'pages/CartgoryPage';
 
 function App() {
-  const { totalPrice } = useSelector((state) => state.items);
+  const { totalPrice, isLoading } = useSelector((state) => state.items);
   // useTelegram setings //
   const { totalPriceButton, tg } = useTelegram();
   useEffect(() => {
@@ -33,10 +33,10 @@ function App() {
   });
 
   const dispatch = useDispatch();
+  let { items } = useSelector((state) => state.items);
   useEffect(() => {
     dispatch(getItems());
   }, [dispatch]);
-  let { items } = useSelector((state) => state.items);
 
   items = items.map((item) => {
     let minPrice = item.sizes[0].price;
