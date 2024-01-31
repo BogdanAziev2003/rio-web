@@ -18,7 +18,7 @@ export function useTelegram() {
 
   useEffect(() => {
     totalPriceButton();
-  }, [pathName]);
+  }, [pathName, totalPrice]);
 
   const totalPriceButton = () => {
     if (pathName !== '/cart' && totalPrice !== 0) {
