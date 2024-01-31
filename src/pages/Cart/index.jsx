@@ -59,24 +59,15 @@ const CartPage = () => {
           price: item.price,
           count: item.count,
         };
-        if (item.modifiers) {
-          newItem.modifiers = item.modifiers
-            .filter((modifier) => modifier.selected)
-            .map((modifier) => ({
-              name: modifier.name,
-            }));
-        } else {
-          newItem.modifiers = false;
-        }
+
         if (item.sizes.length) {
           newItem.sizes = item.sizes
             .filter((size) => size.selected)
             .map((size) => ({
               title: size.title,
             }));
-        } else {
-          newItem.sizes = false;
         }
+
         return newItem;
       }),
     };
