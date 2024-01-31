@@ -51,7 +51,7 @@ const CartPage = () => {
       comment,
       itemsInCart: itemsInCart.map((item) => {
         const newItem = { title: item.title, price: item.price };
-        if (item.modifiers.length > 1) {
+        if (item.modifiers.length) {
           newItem.modifiers = item.modifiers
             .filter((modifier) => modifier.selected)
             .map((modifier) => ({
@@ -59,9 +59,9 @@ const CartPage = () => {
               price: modifier.price,
             }));
         } else {
-          newItem.modifiers = [];
+          newItem.modifiers = false;
         }
-        if (item.sizes.length > 1) {
+        if (item.sizes.length) {
           newItem.sizes = item.sizes
             .filter((size) => size.selected)
             .map((size) => ({
@@ -69,7 +69,7 @@ const CartPage = () => {
               price: size.price,
             }));
         } else {
-          newItem.modifiers = [];
+          newItem.sizes = false;
         }
         return newItem;
       }),
