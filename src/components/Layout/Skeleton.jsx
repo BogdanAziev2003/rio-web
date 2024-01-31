@@ -7,8 +7,8 @@ export const Skeleton = (props) => (
     width={170}
     height={300}
     viewBox="0 0 180 300"
-    backgroundColor="#f9cdb4"
-    foregroundColor="#fe5e00"
+    backgroundColor="#f5f5f5"
+    foregroundColor="#e0e0e0"
     {...props}
   >
     <rect x="0" y="0" rx="28" ry="28" width="170" height="164" />
