@@ -23,10 +23,10 @@ export function useTelegram() {
   const totalPriceButton = () => {
     if (pathName !== '/cart' && totalPrice !== 0) {
       tg.MainButton.show();
-      tg.MainButton.setText(`Мой заказ: ${pathName} ₽`);
+      tg.MainButton.setText(`Мой заказ: ${totalPrice} ₽`);
     }
     if (pathName === '/cart' && totalPrice !== 0) {
-      tg.MainButton.setText(`Заказать: ${pathName} ₽`);
+      tg.MainButton.setText(`Заказать: ${totalPrice} ₽`);
     } else if (totalPrice === 0) {
       tg.MainButton.hide();
     }
