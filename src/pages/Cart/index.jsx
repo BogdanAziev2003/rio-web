@@ -54,7 +54,11 @@ const CartPage = () => {
       payMethod,
       comment,
       itemsInCart: itemsInCart.map((item) => {
-        const newItem = { name: item.name, price: item.price, count };
+        const newItem = {
+          name: item.name,
+          price: item.price,
+          count: item.count,
+        };
         if (item.modifiers.length) {
           newItem.modifiers = item.modifiers
             .filter((modifier) => modifier.selected)
