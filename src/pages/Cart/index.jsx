@@ -65,8 +65,10 @@ const CartPage = () => {
             .map((modifier) => ({
               name: modifier.name,
             }));
+        } else if (item.modifiers.length === 1 && item.modifiers[0]) {
+          newItem = item.modifiers[0].name;
         } else {
-          newItem.modifier = item.modifiers[0].name;
+          delete item.modifiers;
         }
         if (item.sizes.length) {
           newItem.sizes = item.sizes
