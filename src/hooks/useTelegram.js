@@ -6,9 +6,9 @@ export function useTelegram() {
   const tg = window.Telegram.WebApp;
   tg.MainButton.textColor = '#fff';
   tg.MainButton.color = '#fe5e00';
-  tg.setHeaderColor('#f9f9f9');
-  tg.setBackgroundColor('#f9f9f9');
-  tg.enableClosingConfirmation();
+  // tg.setHeaderColor('#f9f9f9');
+  // tg.setBackgroundColor('#f9f9f9');
+  // tg.enableClosingConfirmation();
 
   const totalPriceButton = () => {
     if (window.location.pathname !== '/cart' && totalPrice !== 0) {

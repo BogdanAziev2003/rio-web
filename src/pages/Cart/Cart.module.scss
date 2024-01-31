@@ -204,6 +204,12 @@
     margin-top: 8px;
   }
 
+  &__button {
+    button {
+      background-color: red;
+    }
+  }
+
   &__input {
     flex: 1;
 

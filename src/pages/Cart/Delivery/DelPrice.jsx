@@ -8,12 +8,17 @@ const DelPrice = ({
   userCoordinates,
   deliveryPrice,
   setDeliveryPrice,
+  delPrice,
 }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(setDelPrice(deliveryPrice));
   }, [deliveryPrice]);
+
+  useEffect(() => {
+    dispatch(setAddress(userAddress));
+  }, [userAddress]);
 
   const areas = [
     {
@@ -111,11 +116,10 @@ const DelPrice = ({
       } else {
         setDeliveryPrice(150);
       }
-      dispatch(setAddress(userAddress));
     }
   }, [userAddress, userCoordinates]);
 
-  return <div>{deliveryPrice} ₽ </div>;
+  return <div>{delPrice !== 0 && <>{delPrice} ₽</>}</div>;
 };
 
 export default DelPrice;
