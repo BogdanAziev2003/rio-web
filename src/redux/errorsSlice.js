@@ -7,4 +7,20 @@ const errorsSlice = createSlice({
     phoneIsFalse: true,
     addressIsFalse: true,
   },
+  reducers: {
+    setItemsError(state, { payload }) {
+      state.itemsIsFalse = payload;
+    },
+    setPhoneError(state, { payload }) {
+      state.phoneIsFalse = payload;
+    },
+    setAddressError(state, { payload }) {
+      state.phoneIsFalse = payload;
+    },
+  },
 });
+
+export const { setItemsError, setPhoneError, setAddressError } =
+  errorsSlice.actions;
+
+export default errorsSlice.reducer;
