@@ -13,6 +13,7 @@ const Navbar = ({ pathname }) => {
     { path: '/firmen', title: 'Фирменые' },
     { path: '/snack', title: 'Снэки' },
     { path: '/sauce', title: 'Соусы' },
+    { path: '/modifiers', title: 'Добавки' },
     { path: '/coffee', title: 'Кофе' },
     { path: '/tea', title: 'Чаи' },
   ];

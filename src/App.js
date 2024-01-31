@@ -8,17 +8,8 @@ import Layout from 'components/Layout';
 import CartPage from 'pages/Cart';
 
 import MainPage from 'pages/MainPage';
-import BurgerPage from 'pages/BurgerPage';
-import ShaurmaPage from 'pages/ShaurmaPage';
-import TaukPage from 'pages/TaukPage';
-import SandwichPage from 'pages/SandwichPage';
-import FirmenPage from 'pages/FirmenPage';
-import SnackPage from 'pages/SnackPage';
-import SaucePage from 'pages/SaucePage';
-import TeaPage from 'pages/TeaPage';
-import CoffePage from 'pages/CoffePage';
-import HotdogPage from 'pages/HotDogPage';
 import { useTelegram } from 'hooks/useTelegram';
+import CategoryPage from 'pages/CartgoryPage';
 
 function App() {
   const { totalPrice } = useSelector((state) => state.items);
@@ -60,75 +51,36 @@ function App() {
     };
   });
 
+  const categoryesData = [
+    { path: '/burgers', category: 0 },
+    { path: '/shaurma', category: 1 },
+    { path: '/tauk', category: 2 },
+    { path: '/hot-dogs', category: 3 },
+    { path: '/sandwich', category: 4 },
+    { path: '/firmen', category: 5 },
+    { path: '/snack', category: 6 },
+    { path: '/sauce', category: 7 },
+    { path: '/modifiers', category: 8 },
+    { path: '/coffee', category: 9 },
+    { path: '/tea', category: 10 },
+  ];
+
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<MainPage items={items} />} />
-          <Route
-            path="/burgers"
-            element={
-              <BurgerPage items={items.filter((item) => item.category === 0)} />
-            }
-          />
-          <Route
-            path="/shaurma"
-            element={
-              <ShaurmaPage
-                items={items.filter((item) => item.category === 1)}
-              />
-            }
-          />
-          <Route
-            path="/tauk"
-            element={
-              <TaukPage items={items.filter((item) => item.category === 2)} />
-            }
-          />
-          <Route
-            path="/hot-dogs"
-            element={
-              <HotdogPage items={items.filter((item) => item.category === 3)} />
-            }
-          />
-          <Route
-            path="/sandwich"
-            element={
-              <SandwichPage
-                items={items.filter((item) => item.category === 4)}
-              />
-            }
-          />
-          <Route
-            path="/firmen"
-            element={
-              <FirmenPage items={items.filter((item) => item.category === 5)} />
-            }
-          />
-          <Route
-            path="/snack"
-            element={
-              <SnackPage items={items.filter((item) => item.category === 6)} />
-            }
-          />
-          <Route
-            path="/sauce"
-            element={
-              <SaucePage items={items.filter((item) => item.category === 7)} />
-            }
-          />
-          <Route
-            path="/coffee"
-            element={
-              <CoffePage items={items.filter((item) => item.category === 9)} />
-            }
-          />
-          <Route
-            path="/tea"
-            element={
-              <TeaPage items={items.filter((item) => item.category === 10)} />
-            }
-          />
+          {categoryesData.map((cat) => (
+            <Route
+              key={cat.category}
+              path={cat.path}
+              element={
+                <CategoryPage
+                  items={items.filter((item) => item.category == cat.category)}
+                />
+              }
+            />
+          ))}
           <Route path="/cart" element={<CartPage />} />
         </Route>
       </Routes>
