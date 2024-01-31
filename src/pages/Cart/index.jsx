@@ -48,7 +48,7 @@ const CartPage = () => {
   const { comment } = useSelector((state) => state.comment);
 
   const onSendData = useCallback(() => {
-    if (!phoneIsFalse) {
+    if (phoneIsFalse) {
       dispatch(setPhoneError(true));
       return;
     }
