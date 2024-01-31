@@ -42,7 +42,41 @@ const ModalItemModifier = ({ activeItemForCart, setActiveItemForCart }) => {
             <div className="modifier__button">
               {mod.selected ? (
                 <div onClick={() => handleRemoveModifier(mod.name, mod.price)}>
-                  -
+                  <svg
+                    width="25"
+                    height="25"
+                    viewBox="0 0 25 25"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle
+                      cx="12.5"
+                      cy="12.5"
+                      r="12.5"
+                      fill="url(#paint0_linear_1_54)"
+                    />
+                    <rect
+                      x="7"
+                      y="11"
+                      width="11"
+                      height="3"
+                      rx="1.5"
+                      fill="white"
+                    />
+                    <defs>
+                      <linearGradient
+                        id="paint0_linear_1_54"
+                        x1="20.4167"
+                        y1="2.5"
+                        x2="1.31461e-06"
+                        y2="23.3333"
+                        gradientUnits="userSpaceOnUse"
+                      >
+                        <stop stopColor="#FE5E00" />
+                        <stop offset="1" stopColor="#FC9255" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
                 </div>
               ) : (
                 <svg
