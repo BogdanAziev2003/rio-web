@@ -12,7 +12,8 @@ const AddressTrue = ({ address, setDeliveryPrice }) => {
   return (
     <div>
       <div className={styles.adress__text}>
-        <p>ваш адресс: {address}</p>
+        <p>ваш адресс: </p>
+        <p>{address}</p>
       </div>
       <div className={styles.adress__list}>
         <div className={styles.visibleFalse}>
@@ -33,7 +34,9 @@ const AddressTrue = ({ address, setDeliveryPrice }) => {
           onChange={() => {}}
         />
       </div>
-      <button onClick={handleResetAddress}>Изменить</button>
+      <button className={styles.adress__button} onClick={handleResetAddress}>
+        Изменить
+      </button>
     </div>
   );
 };

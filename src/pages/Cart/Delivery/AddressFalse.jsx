@@ -100,7 +100,9 @@ const AddressFalse = ({ setUserAddress, setUserCoordinates }) => {
         />
       </div>
 
-      <button onClick={getCoordinats}>Подтвердить</button>
+      <button className={styles.adress__button} onClick={getCoordinats}>
+        Подтвердить
+      </button>
     </div>
   );
 };
