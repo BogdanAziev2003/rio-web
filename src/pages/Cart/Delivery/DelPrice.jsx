@@ -49,26 +49,54 @@ const DelPrice = ({
     },
   ];
 
+  const selName = [
+    {
+      title: 'село Хумалаг',
+      price: 250,
+    },
+    {
+      title: 'село Новый Батако',
+      price: 200,
+    },
+    {
+      title: 'село Зильги',
+      price: 200,
+    },
+    {
+      title: 'село Фарн',
+      price: 200,
+    },
+    {
+      title: 'село Заманкул',
+      price: 500,
+    },
+    {
+      title: 'село Цалык',
+      price: 400,
+    },
+    {
+      title: 'село Коста',
+      price: 300,
+    },
+    {
+      title: 'село Дарг-Кох',
+      price: 300,
+    },
+  ];
+
   useEffect(() => {
-    console.log(userCoordinates);
     if (userAddress && !userCoordinates) {
-      if (userAddress.includes('село Хумалаг')) setDeliveryPrice(250);
-
-      if (
-        userAddress.includes('село Новый Батако') ||
-        userAddress.includes('село Зильги') ||
-        userAddress.includes('село Фарн')
-      )
-        setDeliveryPrice(200);
-
-      if (userAddress.includes('село Заманкул')) setDeliveryPrice(500);
-      if (userAddress.includes('село Цалык')) setDeliveryPrice(400);
+      selName.forEach((sel) => {
+        if (userAddress.includes(sel.title)) {
+          setDeliveryPrice(sel.price);
+        }
+      });
     } else if (userCoordinates && userAddress) {
-      if (userAddress) {
-        if (userAddress.includes('-я Заводская')) setDeliveryPrice(170);
-        if (userAddress.includes('Пионерский')) setDeliveryPrice(200);
+      if (userAddress.includes('-я Заводская')) {
+        setDeliveryPrice(170);
+        return;
       }
-      // По координатам
+
       const currentArea = areas.find((area) =>
         geolib.isPointInPolygon(userCoordinates, area.coordinates)
       );
@@ -82,11 +110,7 @@ const DelPrice = ({
     }
   }, [userAddress, userCoordinates]);
 
-  return (
-    <div>
-      {deliveryPrice} ₽ {curentArea ? curentArea.title : 'Не район РИО'}
-    </div>
-  );
+  return <div>{deliveryPrice} ₽ </div>;
 };
 
 export default DelPrice;

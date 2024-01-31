@@ -46,7 +46,7 @@ const Addres = () => {
     fetch(url, options)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result)
+        console.log(result);
         if (result.suggestions[0]?.data.street_with_type === 'тер Аэропорт') {
           setDeliveryPrice(180);
           return;
@@ -87,10 +87,6 @@ const Addres = () => {
       .catch((error) => console.log('error', error));
   };
 
-  // useEffect(() => {
-  //   console.log(userAddress);
-  // }, [userAddress]);
-
   return (
     <div className="input-wrapper">
       <div className={styles.adress}>
@@ -103,7 +99,6 @@ const Addres = () => {
               className={styles.input}
               id="js-Field2"
               placeholder="Город"
-              defaultValue={'г Беслан'}
             />
           </div>
           <div className={styles.adress__input}>
