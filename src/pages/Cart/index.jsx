@@ -32,6 +32,10 @@ const CartPage = () => {
     return { itemsInCart: itemsCount };
   });
 
+  useEffect(() => {
+    console.log(itemsInCart);
+  }, [itemsInCart]);
+
   // Telegram Send Data logic
   const { tg } = useTelegram();
   const { address } = useSelector((state) => state.delmethod);
@@ -50,12 +54,12 @@ const CartPage = () => {
       payMethod,
       comment,
       itemsInCart: itemsInCart.map((item) => {
-        const newItem = { title: item.title, price: item.price };
+        const newItem = { name: item.name, price: item.price, count };
         if (item.modifiers.length) {
           newItem.modifiers = item.modifiers
             .filter((modifier) => modifier.selected)
             .map((modifier) => ({
-              title: modifier.title,
+              name: modifier.name,
               price: modifier.price,
             }));
         } else {
