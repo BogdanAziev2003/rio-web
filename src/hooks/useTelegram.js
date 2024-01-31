@@ -16,6 +16,10 @@ export function useTelegram() {
   // tg.setBackgroundColor('#f9f9f9');
   // tg.enableClosingConfirmation();
 
+  useEffect(() => {
+    totalPriceButton();
+  }, [pathName]);
+
   const totalPriceButton = () => {
     if (pathName !== '/cart' && totalPrice !== 0) {
       tg.MainButton.show();
