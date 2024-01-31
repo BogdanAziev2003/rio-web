@@ -42,11 +42,6 @@ const CartPage = () => {
   const { payMethod } = useSelector((state) => state.paymethod);
   const { comment } = useSelector((state) => state.comment);
 
-  useEffect(() => {
-    console.log('Address: ' + address);
-    console.log('delPrice: ' + delPrice);
-  });
-
   const onSendData = useCallback(() => {
     const data = {
       totalPrice: totalPrice + delPrice,

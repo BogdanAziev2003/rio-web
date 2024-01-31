@@ -1,9 +1,9 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './Cart.module.scss';
 import image from '../../image/burger.jpg';
-import { useDispatch, useSelector } from 'react-redux';
 import { addItem, removeItem } from '../../redux/itemsSlice';
 
 const ItemsInCart = ({ itemsInCart }) => {

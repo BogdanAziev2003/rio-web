@@ -8,7 +8,7 @@ export function useTelegram() {
   tg.MainButton.color = '#fe5e00';
   tg.setHeaderColor('#f9f9f9');
   tg.setBackgroundColor('#f9f9f9');
-  tg.enableClosingConfirmation(); // диалоговое окно при закрытии
+  tg.enableClosingConfirmation();
 
   const totalPriceButton = () => {
     if (window.location.pathname !== '/cart' && totalPrice !== 0) {
