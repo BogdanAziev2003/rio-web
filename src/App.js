@@ -12,7 +12,7 @@ import { useTelegram } from 'hooks/useTelegram';
 import CategoryPage from 'pages/CartgoryPage';
 
 function App() {
-  const { totalPrice, isLoading } = useSelector((state) => state.items);
+  const { totalPrice } = useSelector((state) => state.items);
   // useTelegram setings //
   const { totalPriceButton, tg } = useTelegram();
   useEffect(() => {
