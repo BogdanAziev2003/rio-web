@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Cart.module.scss';
 import { useDispatch } from 'react-redux';
-import { setComment } from '../../redux/comment';
+import { setComment } from '../../redux/commentSlice';
 
 const Comment = () => {
   const dispatch = useDispatch();

@@ -8,9 +8,9 @@ import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import items from './redux/itemsSlice';
 import phone from './redux/phoneSlice';
-import paymethod from './redux/paymentMethod';
+import paymethod from './redux/paymentSlice';
 import delmethod from './redux/deliverySlice';
-import comment from './redux/comment';
+import comment from './redux/commentSlice';
 
 const store = configureStore({
   reducer: {

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Cart.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPayMethod } from '../../redux/paymentMethod';
+import { setPayMethod } from '../../redux/paymentSlice';
 
 const PaymentMethod = () => {
   const dispatch = useDispatch();
