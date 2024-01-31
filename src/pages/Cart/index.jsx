@@ -130,10 +130,10 @@ const CartPage = () => {
       <PaymentMethod />
 
       {/* Способ получения */}
-      <DeliveryMethod />
+      {/* <DeliveryMethod /> */}
 
       {/* Адресс  */}
-      {delMethod === 'delivery' && <Addres delMethod={delMethod} />}
+      {/* {delMethod === 'delivery' && <Addres delMethod={delMethod} />} */}
 
       {/* Комментарий */}
       <Comment />

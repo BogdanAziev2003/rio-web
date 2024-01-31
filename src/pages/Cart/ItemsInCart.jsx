@@ -4,7 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './Cart.module.scss';
 import image from '../../image/burger.jpg';
-import { addItem, removeItem } from '../../redux/itemsSlice';
+import {
+  addItem,
+  removeItem,
+  removeItemsByCompound,
+} from '../../redux/itemsSlice';
 
 const ItemsInCart = ({ itemsInCart }) => {
   const dispatch = useDispatch();
@@ -18,6 +22,10 @@ const ItemsInCart = ({ itemsInCart }) => {
   };
   const handleRemoveItem = (item) => {
     dispatch(removeItem(item));
+  };
+
+  const handleRemoveItemsByCompound = (item) => {
+    dispatch(removeItemsByCompound(item));
   };
 
   return (
@@ -97,7 +105,12 @@ const ItemsInCart = ({ itemsInCart }) => {
               </div>
             </div>
 
-            <div className={styles.item__delete}>
+            <div
+              className={styles.item__delete}
+              onClick={() => {
+                handleRemoveItemsByCompound(item);
+              }}
+            >
               <svg
                 width="8"
                 height="8"
