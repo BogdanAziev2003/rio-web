@@ -10,6 +10,10 @@
   src: url(./fonts/gothampro_medium.ttf);
 }
 
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 ::-webkit-scrollbar {
   display: none;
 }
