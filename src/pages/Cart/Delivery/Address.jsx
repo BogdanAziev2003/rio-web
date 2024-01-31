@@ -90,7 +90,9 @@ const Addres = () => {
           Получить координаты
         </button>
 
-        {userAddress && <DelPrice userCoordinates={userCoordinates} />}
+        {userAddress && userCoordinates && (
+          <DelPrice userCoordinates={userCoordinates} />
+        )}
       </div>
     </div>
   );
