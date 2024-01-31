@@ -64,7 +64,6 @@ const CartPage = () => {
             .filter((modifier) => modifier.selected)
             .map((modifier) => ({
               name: modifier.name,
-              price: modifier.price,
             }));
         } else {
           newItem.modifiers = false;
@@ -74,7 +73,6 @@ const CartPage = () => {
             .filter((size) => size.selected)
             .map((size) => ({
               title: size.title,
-              price: size.price,
             }));
         } else {
           newItem.sizes = false;
