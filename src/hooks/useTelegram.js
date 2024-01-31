@@ -20,7 +20,8 @@ export function useTelegram() {
     if (pathName !== '/cart' && totalPrice !== 0) {
       tg.MainButton.show();
       tg.MainButton.setText(`Мой заказ: ${pathName} ₽`);
-    } else if (pathName === '/cart' && totalPrice !== 0) {
+    }
+    if (pathName === '/cart' && totalPrice !== 0) {
       tg.MainButton.setText(`Заказать: ${pathName} ₽`);
     } else if (totalPrice === 0) {
       tg.MainButton.hide();
