@@ -59,7 +59,7 @@ const CartPage = () => {
           price: item.price,
           count: item.count,
         };
-        if (item.modifiers.length) {
+        if (item.modifiers) {
           newItem.modifiers = item.modifiers
             .filter((modifier) => modifier.selected)
             .map((modifier) => ({
