@@ -25,14 +25,10 @@ const MainPage = ({ items }) => {
     <Skeleton className={stylesForSkeleton.skeleton} key={index} />
   ));
 
-  useEffect(() => {
-    console.log(isLoading);
-  }, [isLoading]);
-
   return (
     <div className={styles.main}>
       {isLoading ? (
-        skeletons
+        <div className={stylesForSkeleton.wrapper}>{skeletons}</div>
       ) : (
         <>
           {categories.map((category) => (

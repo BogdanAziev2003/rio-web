@@ -77,6 +77,14 @@
   }
 }
 
+.wrapper {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 50px;
+}
+
 .skeleton {
   width: 50%;
+  margin-bottom: 10px;
 }
