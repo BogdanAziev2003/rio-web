@@ -65,7 +65,11 @@ const CartPage = () => {
             .map((modifier) => ({
               name: modifier.name,
             }));
-        } else if (item.modifiers.length === 1 && item.modifiers[0]) {
+        } else if (
+          // если одна добавка и
+          item.modifiers.length === 1 &&
+          item.modifier[0].selected
+        ) {
           newItem = item.modifiers[0].name;
         } else {
           delete item.modifiers;
