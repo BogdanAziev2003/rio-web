@@ -20,7 +20,11 @@ const MainPage = ({ items }) => {
     <div className={styles.main}>
       {categories.map((category) => (
         <div key={category.id} className={styles.main__category}>
-          <div className={styles.main__title}>
+          <div
+            className={`${styles.main__title} ${
+              category.id !== 0 && styles.marg_bot
+            } `}
+          >
             <p>{category.title}</p>
           </div>
           <div className={styles.main__list}>
