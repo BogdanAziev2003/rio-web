@@ -4,7 +4,7 @@ const errorsSlice = createSlice({
   name: 'errors',
   initialState: {
     itemsIsFalse: null,
-    phoneIsFalse: false,
+    phoneIsFalse: null,
     addressIsFalse: null,
   },
   reducers: {

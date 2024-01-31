@@ -15,6 +15,8 @@ const Phone = () => {
     setPhoneValue(event.target.value);
   };
 
+  useEffect(() => {}, [phoneIsFalse]);
+
   useEffect(() => {
     if (phoneValue.length === 18) {
       dispatch(setPhone(phoneValue));

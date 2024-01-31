@@ -35,7 +35,7 @@ const CartPage = () => {
 
   // errors logic
   const dispatch = useDispatch();
-  const { itemsIsFalse, phoneIsFalse } = useSelector((state) => state.errors);
+  const { phoneIsFalse } = useSelector((state) => state.errors);
 
   // Telegram Send Data logic
   const { tg } = useTelegram();
@@ -48,6 +48,11 @@ const CartPage = () => {
   const { comment } = useSelector((state) => state.comment);
 
   const onSendData = useCallback(() => {
+    if (!phoneIsFalse) {
+      dispatch(setPhoneError(true));
+      return;
+    }
+
     const data = {
       totalPrice: totalPrice + delPrice,
       delPrice,
@@ -93,13 +98,10 @@ const CartPage = () => {
   }, [totalPrice, address, phone, delMethod, payMethod, comment, itemsInCart]);
 
   useEffect(() => {
-    if (!phoneIsFalse) {
-      dispatch(setPhoneError(true));
-      tg.onEvent('mainButtonClicked', onSendData);
-      return () => {
-        tg.offEvent('mainButtonClicked', onSendData);
-      };
-    }
+    tg.onEvent('mainButtonClicked', onSendData);
+    return () => {
+      tg.offEvent('mainButtonClicked', onSendData);
+    };
   }, [onSendData, tg]);
 
   return (
