@@ -12,7 +12,7 @@ const Addres = () => {
   const [deliveryPrice, setDeliveryPrice] = useState(0);
 
   const url =
-    'http://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address';
+    'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address';
   const token = '13d34ee3058d1955e3370bccac7c074a44c49019';
   let query = '';
 
