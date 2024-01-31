@@ -60,14 +60,15 @@ const CartPage = () => {
           count: item.count,
         };
 
-        if (item.sizes.length) {
+        if (item.sizes.length > 1) {
           newItem.sizes = item.sizes
             .filter((size) => size.selected)
             .map((size) => ({
               title: size.title,
             }));
+        } else {
+          newItem.sizes = item.sizes[0].title;
         }
-
         return newItem;
       }),
     };
