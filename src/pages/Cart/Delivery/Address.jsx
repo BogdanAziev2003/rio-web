@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../Cart.module.scss';
 import DelPrice from './DelPrice';
+import { useDispatch } from 'react-redux';
+import { setAddress } from '../../../redux/deliverySlice';
 
 const Addres = () => {
+  const dispatch = useDispatch();
   const [userAddress, setUserAddress] = useState('');
   const [userCoordinates, setUserCoordinates] = useState({});
 
@@ -44,6 +47,7 @@ const Addres = () => {
         setUserAddress(
           `${result.suggestions[0].data.city}, ${result.suggestions[0].data.street}, ${result.suggestions[0].data.house}`
         );
+        dispatch(setAddress(userAddress));
         setUserCoordinates({
           latitude: result.suggestions[0].data.geo_lat,
           longitude: result.suggestions[0].data.geo_lon,

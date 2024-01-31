@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import styles from './Cart.module.scss';
 import { useSelector } from 'react-redux';
 
@@ -9,16 +9,87 @@ import Addres from './Delivery/Address';
 import Comment from './Comment';
 import ClearCart from './ClearCart';
 import ItemsInCart from './ItemsInCart';
+import { useTelegram } from 'hooks/useTelegram';
 
 const CartPage = () => {
+  const { itemsInCart } = useSelector((state) => {
+    const itemsCount = state.items.itemsInCart.reduce((acc, item) => {
+      const existingItem = acc.find(
+        (i) =>
+          i.id === item.id &&
+          i.price === item.price &&
+          JSON.stringify(i.modifiers) === JSON.stringify(item.modifiers) &&
+          JSON.stringify(i.sizes) === JSON.stringify(item.sizes)
+      );
+      if (existingItem) {
+        existingItem.count += 1;
+      } else {
+        acc.push({ ...item, count: 1 });
+      }
+      return acc;
+    }, []);
+
+    return { itemsInCart: itemsCount };
+  });
+
+  // Telegram Send Data logic
+  const { tg } = useTelegram();
+  const { address } = useSelector((state) => state.delmethod);
+  const { phone } = useSelector((state) => state.phone);
   const { totalPrice } = useSelector((state) => state.items);
   const { delMethod } = useSelector((state) => state.delmethod);
+  const { payMethod } = useSelector((state) => state.paymethod);
+  const { comment } = useSelector((state) => state.comment);
+
+  const onSendData = useCallback(() => {
+    const data = {
+      totalPrice,
+      address,
+      phone,
+      delMethod,
+      payMethod,
+      comment,
+      itemsInCart: itemsInCart.map((item) => {
+        const newItem = { title: item.title, price: item.price };
+        if (item.modifiers.length > 1) {
+          newItem.modifiers = item.modifiers
+            .filter((modifier) => modifier.selected)
+            .map((modifier) => ({
+              title: modifier.title,
+              price: modifier.price,
+            }));
+        } else {
+          newItem.modifiers = [];
+        }
+        if (item.sizes.length > 1) {
+          newItem.sizes = item.sizes
+            .filter((size) => size.selected)
+            .map((size) => ({
+              title: size.title,
+              price: size.price,
+            }));
+        } else {
+          newItem.modifiers = [];
+        }
+        return newItem;
+      }),
+    };
+    tg.sendData(JSON.stringify(data));
+  }, [totalPrice, address, phone, delMethod, payMethod, comment, itemsInCart]);
+
+  useEffect(() => {
+    tg.onEvent('mainButtonClicked', onSendData);
+    return () => {
+      tg.offEvent('mainButtonClicked', onSendData);
+    };
+  }, [onSendData, tg]);
+
   return (
     <div className={styles.wrapper}>
       <ClearCart />
 
       {/* items в корзине */}
-      <ItemsInCart />
+      <ItemsInCart itemsInCart={itemsInCart} />
 
       <div className={styles.bill}>
         <div className={styles.bill__text}>
