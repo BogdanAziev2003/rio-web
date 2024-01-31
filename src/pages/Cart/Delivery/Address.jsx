@@ -7,7 +7,9 @@ import { setAddress } from '../../../redux/deliverySlice';
 const Addres = () => {
   const dispatch = useDispatch();
   const [userAddress, setUserAddress] = useState('');
-  const [userCoordinates, setUserCoordinates] = useState({});
+  const [userCoordinates, setUserCoordinates] = useState(false);
+
+  const [deliveryPrice, setDeliveryPrice] = useState(0);
 
   const url =
     'http://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address';
@@ -44,23 +46,55 @@ const Addres = () => {
     fetch(url, options)
       .then((response) => response.json())
       .then((result) => {
-        setUserAddress(
-          `${result.suggestions[0].data.city}, ${result.suggestions[0].data.street}, ${result.suggestions[0].data.house}`
-        );
-        dispatch(setAddress(userAddress));
-        setUserCoordinates({
-          latitude: result.suggestions[0].data.geo_lat,
-          longitude: result.suggestions[0].data.geo_lon,
-        });
+        if (result.suggestions[0]?.data.street_with_type === 'тер Аэропорт') {
+          setDeliveryPrice(180);
+          return;
+        }
+
+        const { settlement_with_type } = result.suggestions[0]?.data;
+        const { city_with_type } = result.suggestions[0]?.data;
+        const { street, house } = result.suggestions[0]?.data;
+
+        if (settlement_with_type && !city_with_type) {
+          let address = settlement_with_type;
+          if (street !== null) {
+            address += `, ${street} `;
+          }
+          if (house !== null) {
+            address += `${house}`;
+          }
+          setUserAddress(address);
+          setUserCoordinates(false);
+        }
+
+        if (city_with_type && !settlement_with_type) {
+          let address = city_with_type;
+
+          if (street !== null) {
+            address += `, ${street} `;
+          }
+          if (house !== null) {
+            address += `${house}`;
+          }
+          setUserAddress(address);
+          setUserCoordinates({
+            latitude: result.suggestions[0].data.geo_lat,
+            longitude: result.suggestions[0].data.geo_lon,
+          });
+        }
       })
       .catch((error) => console.log('error', error));
   };
+
+  // useEffect(() => {
+  //   console.log(userAddress);
+  // }, [userAddress]);
 
   return (
     <div className="input-wrapper">
       <div className={styles.adress}>
         <div className={styles.adress__text}>
-          <p>Выберите город и улицу</p>
+          <p>Введите ваш адресс</p>
         </div>
         <div className={styles.adress__list}>
           <div className={styles.adress__input}>
@@ -68,6 +102,7 @@ const Addres = () => {
               className={styles.input}
               id="js-Field2"
               placeholder="Город"
+              defaultValue={'г Беслан'}
             />
           </div>
           <div className={styles.adress__input}>
@@ -87,11 +122,16 @@ const Addres = () => {
         </div>
 
         <button onClick={getCoordinats} className="get-coordinates">
-          Получить координаты
+          Подтвердить
         </button>
 
-        {userAddress && userCoordinates && (
-          <DelPrice userCoordinates={userCoordinates} />
+        {userAddress && (
+          <DelPrice
+            userAddress={userAddress}
+            userCoordinates={userCoordinates}
+            deliveryPrice={deliveryPrice}
+            setDeliveryPrice={setDeliveryPrice}
+          />
         )}
       </div>
     </div>
