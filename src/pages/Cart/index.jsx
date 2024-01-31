@@ -66,8 +66,8 @@ const CartPage = () => {
               name: modifier.name,
             }));
         } else if (
-          // если одна добавка и
           item.modifiers.length === 1 &&
+          item.modifiers[0] &&
           item.modifier[0].selected
         ) {
           newItem = item.modifiers[0].name;
