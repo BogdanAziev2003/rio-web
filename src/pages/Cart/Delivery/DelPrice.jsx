@@ -12,7 +12,7 @@ const DelPrice = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setAddress(setDelPrice(deliveryPrice)));
+    dispatch(setDelPrice(deliveryPrice));
   }, [deliveryPrice]);
 
   const areas = [

@@ -46,7 +46,6 @@ const Addres = () => {
     fetch(url, options)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
         if (result.suggestions[0]?.data.street_with_type === 'тер Аэропорт') {
           setDeliveryPrice(180);
           return;
