@@ -18,8 +18,8 @@ const Addres = () => {
 
   const optionsAuto = {
     fields: [
-      { id: 'js-Field1', levels: ['Region', 'District'] },
-      { id: 'js-Field2', levels: ['City', 'Place'] },
+      { id: 'js-Field1', levels: ['Region'] },
+      { id: 'js-Field2', levels: ['District', 'City', 'Place'] },
       { id: 'js-Field3', levels: ['Site', 'Street', 'House'] },
     ],
   };
@@ -46,6 +46,7 @@ const Addres = () => {
     fetch(url, options)
       .then((response) => response.json())
       .then((result) => {
+        console.log(result)
         if (result.suggestions[0]?.data.street_with_type === 'тер Аэропорт') {
           setDeliveryPrice(180);
           return;
@@ -116,7 +117,7 @@ const Addres = () => {
             className={styles.visibleFalse}
             id="js-Field1"
             placeholder="Регион, райнон"
-            value="Респ Северная Осетия - Алания, р-н Правобережный"
+            value="Респ Северная Осетия - Алания"
             onChange={() => {}}
           />
         </div>
