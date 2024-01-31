@@ -20,6 +20,8 @@ const Phone = () => {
       dispatch(setPhone(phoneValue));
       dispatch(setPhoneError(false));
       phoneInputRef.current.blur();
+    } else {
+      dispatch(setPhoneError(true));
     }
 
     if (phoneInputRef.current) {
