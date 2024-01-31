@@ -32,10 +32,6 @@ const CartPage = () => {
     return { itemsInCart: itemsCount };
   });
 
-  useEffect(() => {
-    console.log(itemsInCart);
-  }, [itemsInCart]);
-
   // Telegram Send Data logic
   const { tg } = useTelegram();
   const { address } = useSelector((state) => state.delmethod);
