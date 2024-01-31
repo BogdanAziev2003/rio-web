@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setAddress, setDelPrice } from '../../../redux/deliverySlice';
 const geolib = require('geolib');
 
 const DelPrice = ({
@@ -7,7 +9,11 @@ const DelPrice = ({
   deliveryPrice,
   setDeliveryPrice,
 }) => {
-  const [curentArea, setCurentArea] = useState(null);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setAddress(setDelPrice(deliveryPrice)));
+  }, [deliveryPrice]);
 
   const areas = [
     {
@@ -101,12 +107,11 @@ const DelPrice = ({
         geolib.isPointInPolygon(userCoordinates, area.coordinates)
       );
       if (currentArea) {
-        setCurentArea(currentArea);
         setDeliveryPrice(currentArea.price);
       } else {
-        setCurentArea(null);
         setDeliveryPrice(150);
       }
+      dispatch(setAddress(userAddress));
     }
   }, [userAddress, userCoordinates]);
 

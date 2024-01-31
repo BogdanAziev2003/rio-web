@@ -34,16 +34,19 @@ const CartPage = () => {
 
   // Telegram Send Data logic
   const { tg } = useTelegram();
-  const { address } = useSelector((state) => state.delmethod);
+  const { address, delMethod, delPrice } = useSelector(
+    (state) => state.delmethod
+  );
   const { phone } = useSelector((state) => state.phone);
   const { totalPrice } = useSelector((state) => state.items);
-  const { delMethod } = useSelector((state) => state.delmethod);
   const { payMethod } = useSelector((state) => state.paymethod);
   const { comment } = useSelector((state) => state.comment);
 
   const onSendData = useCallback(() => {
     const data = {
-      totalPrice,
+      totalPrice: totalPrice + delPrice,
+      delPrice,
+      cartPrice: totalPrice,
       address,
       phone,
       delMethod,

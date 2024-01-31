@@ -5,6 +5,7 @@ const deliverySlice = createSlice({
   initialState: {
     delMethod: 'delivery',
     address: '',
+    delPrice: 0,
   },
   reducers: {
     setDeliveryMethod(state, { payload }) {
@@ -13,9 +14,13 @@ const deliverySlice = createSlice({
     setAddress(state, { payload }) {
       state.address = payload;
     },
+    setDelPrice(state, { payload }) {
+      state.delPrice = payload;
+    },
   },
 });
 
-export const { setDeliveryMethod, setAddress } = deliverySlice.actions;
+export const { setDeliveryMethod, setAddress, setDelPrice } =
+  deliverySlice.actions;
 
 export default deliverySlice.reducer;
