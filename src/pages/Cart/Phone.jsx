@@ -1,13 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './Cart.module.scss';
 import IMask from 'imask';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setPhone } from '../../redux/phoneSlice';
+import { setPhoneError } from '../../redux/errorsSlice';
 
 const Phone = () => {
   const dispatch = useDispatch();
   const [phoneValue, setPhoneValue] = useState('');
   const phoneInputRef = useRef(null);
+  const { phoneIsFalse } = useSelector((state) => state.errors);
 
   const handlerPhoneChange = (event) => {
     setPhoneValue(event.target.value);
@@ -16,6 +18,7 @@ const Phone = () => {
   useEffect(() => {
     if (phoneValue.length === 18) {
       dispatch(setPhone(phoneValue));
+      dispatch(setPhoneError(false));
       phoneInputRef.current.blur();
     }
 
@@ -65,6 +68,9 @@ const Phone = () => {
               </svg>
             </div>
           </div>
+          {phoneIsFalse && (
+            <div className={styles.cart__error}>Введите номер телефона</div>
+          )}
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import styles from './Cart.module.scss';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Phone from './Phone';
 import PaymentMethod from './PaymentMethod';
@@ -10,6 +10,7 @@ import Comment from './Comment';
 import ClearCart from './ClearCart';
 import ItemsInCart from './ItemsInCart';
 import { useTelegram } from 'hooks/useTelegram';
+import { setPhoneError } from '../../redux/errorsSlice';
 
 const CartPage = () => {
   const { itemsInCart } = useSelector((state) => {
@@ -31,6 +32,10 @@ const CartPage = () => {
 
     return { itemsInCart: itemsCount };
   });
+
+  // errors logic
+  const dispatch = useDispatch();
+  const { itemsIsFalse, phoneIsFalse } = useSelector((state) => state.errors);
 
   // Telegram Send Data logic
   const { tg } = useTelegram();
@@ -83,14 +88,18 @@ const CartPage = () => {
         return newItem;
       }),
     };
+
     tg.sendData(JSON.stringify(data));
   }, [totalPrice, address, phone, delMethod, payMethod, comment, itemsInCart]);
 
   useEffect(() => {
-    tg.onEvent('mainButtonClicked', onSendData);
-    return () => {
-      tg.offEvent('mainButtonClicked', onSendData);
-    };
+    if (!phoneIsFalse) {
+      dispatch(setPhoneError(true));
+      tg.onEvent('mainButtonClicked', onSendData);
+      return () => {
+        tg.offEvent('mainButtonClicked', onSendData);
+      };
+    }
   }, [onSendData, tg]);
 
   return (

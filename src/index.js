@@ -11,7 +11,7 @@ import phone from './redux/phoneSlice';
 import paymethod from './redux/paymentSlice';
 import delmethod from './redux/deliverySlice';
 import comment from './redux/commentSlice';
-import error from './redux/errorsSlice';
+import errors from './redux/errorsSlice';
 
 const store = configureStore({
   reducer: {
@@ -20,7 +20,7 @@ const store = configureStore({
     paymethod,
     delmethod,
     comment,
-    error,
+    errors,
   },
 });
 

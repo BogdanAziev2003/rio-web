@@ -3,9 +3,9 @@ import { createSlice } from '@reduxjs/toolkit';
 const errorsSlice = createSlice({
   name: 'errors',
   initialState: {
-    itemsIsFalse: true,
-    phoneIsFalse: true,
-    addressIsFalse: true,
+    itemsIsFalse: null,
+    phoneIsFalse: false,
+    addressIsFalse: null,
   },
   reducers: {
     setItemsError(state, { payload }) {
