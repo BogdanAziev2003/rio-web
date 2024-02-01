@@ -68,8 +68,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<MainPage items={items} />} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<MainPage items={items} />} />
           {categoryesData.map((cat) => (
             <Route
               key={cat.category}
