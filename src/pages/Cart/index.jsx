@@ -53,12 +53,11 @@ const CartPage = () => {
       return;
     }
 
-    if (
-      delMethod === 'delivery' &&
-      (addressIsFalse === null || phoneIsFalse === true)
-    ) {
-      dispatch(setPhoneError(true));
-      return;
+    if (delMethod === 'delivery') {
+      if (addressIsFalse === null || addressIsFalse === true) {
+        dispatch(setPhoneError(true));
+        return;
+      }
     }
 
     const data = {
