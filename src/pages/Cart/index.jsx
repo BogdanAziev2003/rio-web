@@ -7,10 +7,10 @@ import PaymentMethod from './PaymentMethod';
 import DeliveryMethod from './DeliveryMethod';
 import Addres from './Delivery/Address';
 import Comment from './Comment';
-import ClearCart from './ClearCart';
 import ItemsInCart from './ItemsInCart';
 import { useTelegram } from 'hooks/useTelegram';
 import { setPhoneError, setAddressError } from '../../redux/errorsSlice';
+import EmptyCart from './EmptyCart';
 
 const CartPage = () => {
   const { itemsInCart } = useSelector((state) => {
@@ -120,18 +120,12 @@ const CartPage = () => {
 
   return (
     <div className={styles.wrapper}>
-      <ClearCart />
-
       {/* items в корзине */}
-      <ItemsInCart itemsInCart={itemsInCart} />
-
-      <div className={styles.bill}>
-        <div className={styles.bill__text}>
-          <p>
-            Корзина: <span>{totalPrice}</span> ₽
-          </p>
-        </div>
-      </div>
+      {itemsInCart.length > 0 ? (
+        <ItemsInCart itemsInCart={itemsInCart} totalPrice={totalPrice} />
+      ) : (
+        <EmptyCart />
+      )}
 
       <div className={styles.order__text}>
         <p>Оформление заказа</p>

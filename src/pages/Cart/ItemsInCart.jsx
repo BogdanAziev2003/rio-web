@@ -9,8 +9,9 @@ import {
   removeItem,
   removeItemsByCompound,
 } from '../../redux/itemsSlice';
+import ClearCart from './ClearCart';
 
-const ItemsInCart = ({ itemsInCart }) => {
+const ItemsInCart = ({ itemsInCart, totalPrice }) => {
   const dispatch = useDispatch();
 
   const handleAddItem = (item) => {
@@ -30,6 +31,7 @@ const ItemsInCart = ({ itemsInCart }) => {
 
   return (
     <div className={styles.cart}>
+      <ClearCart />
       <div className={styles.cart__inner}>
         {itemsInCart?.map((item, idx) => (
           <div key={idx} className={styles.item}>
@@ -126,6 +128,13 @@ const ItemsInCart = ({ itemsInCart }) => {
             </div>
           </div>
         ))}
+      </div>
+      <div className={styles.bill}>
+        <div className={styles.bill__text}>
+          <p>
+            Корзина: <span>{totalPrice}</span> ₽
+          </p>
+        </div>
       </div>
     </div>
   );
