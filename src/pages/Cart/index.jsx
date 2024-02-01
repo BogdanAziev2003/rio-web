@@ -10,7 +10,7 @@ import Comment from './Comment';
 import ClearCart from './ClearCart';
 import ItemsInCart from './ItemsInCart';
 import { useTelegram } from 'hooks/useTelegram';
-import { setPhoneError } from '../../redux/errorsSlice';
+import { setPhoneError, setAddressError } from '../../redux/errorsSlice';
 
 const CartPage = () => {
   const { itemsInCart } = useSelector((state) => {
@@ -55,7 +55,7 @@ const CartPage = () => {
 
     if (delMethod === 'delivery') {
       if (addressIsFalse === null || addressIsFalse === true) {
-        dispatch(setPhoneError(true));
+        dispatch(setAddressError(true));
         return;
       }
     }
