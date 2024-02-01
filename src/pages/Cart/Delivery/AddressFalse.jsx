@@ -21,15 +21,18 @@ const AddressFalse = ({
   window.AhunterSuggest.Address.Discrete(optionsAuto);
 
   const getCoordinats = async () => {
+    let inputs = document.querySelectorAll('.input-wrapper input');
+    let city = inputs[0].value;
+    let streetAndHouse = inputs[1].value;
+    if (!city || !streetAndHouse) {
+      dispatch(setAddressError(true));
+      return;
+    }
     const url =
       'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address';
     const token = '13d34ee3058d1955e3370bccac7c074a44c49019';
     let query = '';
-    let inputs = document.querySelectorAll('.input-wrapper input');
-    let address = '';
-    inputs.forEach((input) => {
-      address += input.value + ' ';
-    });
+    let address = `${city} ${streetAndHouse}`;
     query = address;
     var options = {
       method: 'POST',
@@ -51,7 +54,7 @@ const AddressFalse = ({
         if (settlement_with_type && !city_with_type) {
           let address = settlement_with_type;
           if (street !== null) {
-            address += `, ${street} `;
+            address += `, ${street}`;
           }
           if (house !== null) {
             address += `${house}`;
@@ -65,7 +68,7 @@ const AddressFalse = ({
           let address = city_with_type;
 
           if (street !== null) {
-            address += `, ${street} `;
+            address += `, ${street}`;
           }
           if (house !== null) {
             address += `${house}`;
@@ -115,7 +118,7 @@ const AddressFalse = ({
         Подтвердить
       </button>
 
-      {addressIsFalse && (
+      {addressIsFalse && !addressNotFound && (
         <div className={styles.cart__error}>Введите ваш адресс</div>
       )}
       {addressNotFound && (
