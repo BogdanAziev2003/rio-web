@@ -13,7 +13,6 @@ import CategoryPage from 'pages/CartgoryPage';
 
 function App() {
   const { totalPrice } = useSelector((state) => state.items);
-  // useTelegram setings //
   const { totalPriceButton, tg } = useTelegram();
   useEffect(() => {
     tg.ready();

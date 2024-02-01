@@ -1,5 +1,5 @@
 // import Footer from 'components/Footer';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useTelegram } from 'hooks/useTelegram';
@@ -9,6 +9,10 @@ const Layout = () => {
   const { totalPrice } = useSelector((state) => state.items);
   const navigate = useNavigate();
   const { totalPriceButton, tg } = useTelegram();
+
+  useEffect(() => {
+    navigate('/');
+  }, []);
 
   const mainButtonClick = () => {
     if (tg.MainButton.text === `Мой заказ: ${totalPrice} ₽`) navigate('/cart');
