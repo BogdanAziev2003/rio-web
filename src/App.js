@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
@@ -13,6 +13,7 @@ import CategoryPage from 'pages/CartgoryPage';
 
 function App() {
   const { totalPrice } = useSelector((state) => state.items);
+  // useTelegram setings //
   const { totalPriceButton, tg } = useTelegram();
   useEffect(() => {
     tg.ready();
@@ -32,10 +33,10 @@ function App() {
   });
 
   const dispatch = useDispatch();
-  let { items } = useSelector((state) => state.items);
   // useEffect(() => {
   //   dispatch(getItems());
   // }, [dispatch]);
+  let { items } = useSelector((state) => state.items);
 
   items = items.map((item) => {
     let minPrice = item.sizes[0].price;
@@ -67,8 +68,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<MainPage items={items} />} />
+        <Route element={<Layout />}>
+          <Route path="/" element={<Navigate to="/main" replace />} />
+          <Route path="/main" element={<MainPage items={items} />} />
           {categoryesData.map((cat) => (
             <Route
               key={cat.category}
