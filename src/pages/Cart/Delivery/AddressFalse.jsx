@@ -81,6 +81,11 @@ const AddressFalse = ({
       .catch(() => setAddressNotFound(true));
   };
 
+  const haldleInputOnChange = () => {
+    dispatch(setAddressError(false));
+    setAddressNotFound(false);
+  };
+
   return (
     <div>
       <div className={styles.adress__text}>
@@ -102,7 +107,7 @@ const AddressFalse = ({
           id="js-Field1"
           placeholder="Регион, райнон"
           value="Респ Северная Осетия - Алания"
-          onChange={() => {}}
+          onChange={haldleInputOnChange}
         />
       </div>
 
