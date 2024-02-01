@@ -48,16 +48,23 @@ const CartPage = () => {
   const { comment } = useSelector((state) => state.comment);
 
   const onSendData = useCallback(() => {
-    if (phoneIsFalse === null || phoneIsFalse === true) {
-      dispatch(setPhoneError(true));
-      return;
-    }
-
-    if (delMethod === 'delivery') {
-      if (addressIsFalse === null || addressIsFalse === true) {
-        dispatch(setAddressError(true));
-        return;
+    // Errors
+    if (
+      phoneIsFalse === null ||
+      phoneIsFalse === true ||
+      (delMethod === 'delivery' &&
+        (addressIsFalse === null || addressIsFalse === true))
+    ) {
+      if (phoneIsFalse === null || phoneIsFalse === true) {
+        dispatch(setPhoneError(true));
       }
+      if (
+        delMethod === 'delivery' &&
+        (addressIsFalse === null || addressIsFalse === true)
+      ) {
+        dispatch(setAddressError(true));
+      }
+      return;
     }
 
     const data = {
