@@ -7,9 +7,14 @@ import { setPhoneError } from '../../redux/errorsSlice';
 
 const Phone = () => {
   const dispatch = useDispatch();
-  const [phoneValue, setPhoneValue] = useState('');
+  const { phone } = useSelector((state) => state.phone);
+  const [phoneValue, setPhoneValue] = useState(phone);
   const phoneInputRef = useRef(null);
   const { phoneIsFalse } = useSelector((state) => state.errors);
+
+  useEffect(() => {
+    console.log(phone);
+  }, [phone]);
 
   const handlerPhoneChange = (event) => {
     setPhoneValue(event.target.value);
