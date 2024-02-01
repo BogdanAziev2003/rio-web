@@ -35,7 +35,7 @@ const CartPage = () => {
 
   // errors logic
   const dispatch = useDispatch();
-  const { phoneIsFalse } = useSelector((state) => state.errors);
+  const { phoneIsFalse, addressIsFalse } = useSelector((state) => state.errors);
 
   // Telegram Send Data logic
   const { tg } = useTelegram();
@@ -49,6 +49,14 @@ const CartPage = () => {
 
   const onSendData = useCallback(() => {
     if (phoneIsFalse === null || phoneIsFalse === true) {
+      dispatch(setPhoneError(true));
+      return;
+    }
+
+    if (
+      delMethod === 'delivery' &&
+      (addressIsFalse === null || phoneIsFalse === true)
+    ) {
       dispatch(setPhoneError(true));
       return;
     }
@@ -130,10 +138,10 @@ const CartPage = () => {
       <PaymentMethod />
 
       {/* Способ получения */}
-      {/* <DeliveryMethod /> */}
+      <DeliveryMethod />
 
       {/* Адресс  */}
-      {/* {delMethod === 'delivery' && <Addres delMethod={delMethod} />} */}
+      {delMethod === 'delivery' && <Addres delMethod={delMethod} />}
 
       {/* Комментарий */}
       <Comment />

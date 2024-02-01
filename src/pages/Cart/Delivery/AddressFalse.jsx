@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../Cart.module.scss';
+import { useDispatch } from 'react-redux';
+import { setAddressError } from '../../../redux/errorsSlice';
 
-const AddressFalse = ({ setUserAddress, setUserCoordinates }) => {
+const AddressFalse = ({
+  setUserAddress,
+  setUserCoordinates,
+  addressIsFalse,
+}) => {
+  const dispatch = useDispatch();
+  const [addressNotFound, setAddressNotFound] = useState(false);
+
   const optionsAuto = {
     fields: [
       { id: 'js-Field1', levels: ['Region'] },
@@ -47,9 +56,9 @@ const AddressFalse = ({ setUserAddress, setUserCoordinates }) => {
           if (house !== null) {
             address += `${house}`;
           }
-          console.log(address);
           setUserAddress(address);
           setUserCoordinates(false);
+          dispatch(setAddressError(false));
         }
 
         if (city_with_type && !settlement_with_type) {
@@ -66,13 +75,10 @@ const AddressFalse = ({ setUserAddress, setUserCoordinates }) => {
             latitude: result.suggestions[0].data.geo_lat,
             longitude: result.suggestions[0].data.geo_lon,
           });
+          dispatch(setAddressError(false));
         }
       })
-      .catch(() =>
-        console.log(
-          'Тут моя ошибка что адресс веден неправильно (в базе нет его)'
-        )
-      );
+      .catch(() => setAddressNotFound(true));
   };
 
   return (
@@ -100,9 +106,16 @@ const AddressFalse = ({ setUserAddress, setUserCoordinates }) => {
         />
       </div>
 
-      <button className={styles.adress__button} onClick={getCoordinats}>
+      <button className={`${styles.adress__button}`} onClick={getCoordinats}>
         Подтвердить
       </button>
+
+      {addressIsFalse && (
+        <div className={styles.cart__error}>Введите ваш адресс</div>
+      )}
+      {addressNotFound && (
+        <div className={styles.cart__error}>Введите коректный адресс</div>
+      )}
     </div>
   );
 };

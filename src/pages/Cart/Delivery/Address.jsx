@@ -7,6 +7,7 @@ import AddressFalse from './AddressFalse';
 
 const Addres = () => {
   const { address, delPrice } = useSelector((state) => state.delmethod);
+  const { addressIsFalse } = useSelector((state) => state.errors);
   const [userAddress, setUserAddress] = useState('');
   const [userCoordinates, setUserCoordinates] = useState(false);
   const [deliveryPrice, setDeliveryPrice] = useState(0);
@@ -20,6 +21,7 @@ const Addres = () => {
           <AddressFalse
             setUserAddress={setUserAddress}
             setUserCoordinates={setUserCoordinates}
+            addressIsFalse={addressIsFalse}
           />
         )}
 

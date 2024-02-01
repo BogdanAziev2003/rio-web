@@ -2,11 +2,13 @@ import React from 'react';
 import styles from '../Cart.module.scss';
 import { setResetAddress } from '../../../redux/deliverySlice';
 import { useDispatch } from 'react-redux';
+import { setAddressError } from '../../../redux/errorsSlice';
 
-const AddressTrue = ({ address, setDeliveryPrice }) => {
+const AddressTrue = ({ address }) => {
   const dispatch = useDispatch();
   const handleResetAddress = () => {
     dispatch(setResetAddress());
+    dispatch(setAddressError(null));
   };
 
   return (

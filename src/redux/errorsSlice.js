@@ -3,24 +3,19 @@ import { createSlice } from '@reduxjs/toolkit';
 const errorsSlice = createSlice({
   name: 'errors',
   initialState: {
-    itemsIsFalse: null,
     phoneIsFalse: null,
     addressIsFalse: null,
   },
   reducers: {
-    setItemsError(state, { payload }) {
-      state.itemsIsFalse = payload;
-    },
     setPhoneError(state, { payload }) {
       state.phoneIsFalse = payload;
     },
     setAddressError(state, { payload }) {
-      state.phoneIsFalse = payload;
+      state.addressIsFalse = payload;
     },
   },
 });
 
-export const { setItemsError, setPhoneError, setAddressError } =
-  errorsSlice.actions;
+export const { setPhoneError, setAddressError } = errorsSlice.actions;
 
 export default errorsSlice.reducer;
