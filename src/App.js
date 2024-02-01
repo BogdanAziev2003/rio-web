@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
@@ -69,8 +69,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/" element={<Navigate to="/main" replace />} />
-          <Route path="/main" element={<MainPage items={items} />} />
+          <Route path="/" element={<MainPage items={items} />} />
           {categoryesData.map((cat) => (
             <Route
               key={cat.category}
