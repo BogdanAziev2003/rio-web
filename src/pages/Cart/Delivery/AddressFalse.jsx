@@ -91,6 +91,10 @@ const AddressFalse = ({
     setAddressNotFound(false);
   };
 
+  const handleClickInput = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <div>
       <div className={styles.adress__text}>
@@ -98,13 +102,21 @@ const AddressFalse = ({
       </div>
       <div className={styles.adress__list}>
         <div className={styles.adress__input}>
-          <input className={styles.input} id="js-Field2" placeholder="Город" />
+          <input
+            className={styles.input}
+            id="js-Field2"
+            placeholder="Город"
+            readonly
+            onClick={handleClickInput}
+          />
         </div>
         <div className={styles.adress__input}>
           <input
             className={styles.input}
             id="js-Field3"
             placeholder="Улица, дом"
+            readonly
+            onClick={handleClickInput}
           />
         </div>
         <input
