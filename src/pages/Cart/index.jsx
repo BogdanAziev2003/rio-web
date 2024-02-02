@@ -122,7 +122,7 @@ const CartPage = ({ cartImage }) => {
     <div className={styles.wrapper}>
       {/* items в корзине */}
       {totalPrice === 0 ? (
-        <EmptyCart cartImage={cartImage} />
+        <EmptyCart />
       ) : (
         <ItemsInCart itemsInCart={itemsInCart} totalPrice={totalPrice} />
       )}

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
 // import { getItems } from './redux/itemsSlice';
-import cartImage from './image/empty-cart.png';
 
 import Layout from 'components/Layout';
 import CartPage from 'pages/Cart';
@@ -82,7 +81,7 @@ function App() {
               }
             />
           ))}
-          <Route path="/cart" element={<CartPage cartImage={cartImage} />} />
+          <Route path="/cart" element={<CartPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
