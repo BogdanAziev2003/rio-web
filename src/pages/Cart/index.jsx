@@ -12,7 +12,7 @@ import { useTelegram } from 'hooks/useTelegram';
 import { setPhoneError, setAddressError } from '../../redux/errorsSlice';
 import EmptyCart from './EmptyCart';
 
-const CartPage = () => {
+const CartPage = ({ cartImage }) => {
   const { itemsInCart } = useSelector((state) => {
     const itemsCount = state.items.itemsInCart.reduce((acc, item) => {
       const existingItem = acc.find(
@@ -122,7 +122,7 @@ const CartPage = () => {
     <div className={styles.wrapper}>
       {/* items в корзине */}
       {totalPrice === 0 ? (
-        <EmptyCart />
+        <EmptyCart cartImage={cartImage} />
       ) : (
         <ItemsInCart itemsInCart={itemsInCart} totalPrice={totalPrice} />
       )}
