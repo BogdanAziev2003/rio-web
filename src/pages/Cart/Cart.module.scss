@@ -208,6 +208,16 @@
   }
 
   &__button {
+    margin-top: 10px;
+    padding: 8px;
+    background-color: #fe5e00;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+  }
+
+  .inactiveButton {
+    opacity: 0.7;
   }
 
   &__input {

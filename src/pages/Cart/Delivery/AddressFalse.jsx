@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../Cart.module.scss';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setAddressError } from '../../../redux/errorsSlice';
 
 const AddressFalse = ({
@@ -9,6 +9,7 @@ const AddressFalse = ({
   addressIsFalse,
 }) => {
   const dispatch = useDispatch();
+  const { totalPrice } = useSelector((state) => state.items);
   const [addressNotFound, setAddressNotFound] = useState(false);
 
   const optionsAuto = {
@@ -71,9 +72,10 @@ const AddressFalse = ({
             address += `, ${street}`;
           }
           if (house !== null) {
-            address += `${house}`;
+            address += ` ${house}`;
           }
           setUserAddress(address);
+          debugger;
           setUserCoordinates({
             latitude: result.suggestions[0].data.geo_lat,
             longitude: result.suggestions[0].data.geo_lon,
@@ -114,7 +116,13 @@ const AddressFalse = ({
         />
       </div>
 
-      <button className={`${styles.adress__button}`} onClick={getCoordinats}>
+      <button
+        className={`${styles.adress__button} ${
+          totalPrice === 0 ? styles.inactiveButton : ''
+        }`}
+        onClick={getCoordinats}
+        disabled={totalPrice === 0}
+      >
         Подтвердить
       </button>
 

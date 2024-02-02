@@ -14,10 +14,13 @@ const AddressTrue = ({ address }) => {
   return (
     <div>
       <div className={styles.adress__text}>
-        <p>ваш адресс: </p>
-        <p>{address}</p>
+        <p>Адресс: </p>
       </div>
+
       <div className={styles.adress__list}>
+        <div className={styles.adress__user_adress}>
+          <p>{address}</p>
+        </div>
         <div className={styles.visibleFalse}>
           <input className={styles.input} id="js-Field2" placeholder="Город" />
         </div>
