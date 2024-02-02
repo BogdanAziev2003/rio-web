@@ -86,7 +86,7 @@ const AddressFalse = ({
       .catch(() => setAddressNotFound(true));
   };
 
-  const haldleInputOnChange = () => {
+  const haldleInputOnClick = () => {
     dispatch(setAddressError(false));
     setAddressNotFound(false);
   };
@@ -102,7 +102,7 @@ const AddressFalse = ({
             className={styles.input}
             id="js-Field2"
             placeholder="Город"
-            onChange={haldleInputOnChange}
+            onClick={haldleInputOnClick}
           />
         </div>
         <div className={styles.adress__input}>
@@ -110,7 +110,7 @@ const AddressFalse = ({
             className={styles.input}
             id="js-Field3"
             placeholder="Улица, дом"
-            onChange={haldleInputOnChange}
+            onClick={haldleInputOnClick}
           />
         </div>
         <input
