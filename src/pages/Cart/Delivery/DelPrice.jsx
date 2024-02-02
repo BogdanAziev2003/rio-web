@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import styles from '../Cart.module.scss';
 import { useDispatch } from 'react-redux';
 import { setAddress, setDelPrice } from '../../../redux/deliverySlice';
 const geolib = require('geolib');
@@ -116,7 +117,11 @@ const DelPrice = ({
     }
   }, [userAddress, userCoordinates]);
 
-  return <div>{delPrice !== 0 && <>{delPrice} ₽</>}</div>;
+  return (
+    <div className={styles.price__block}>
+      {delPrice !== 0 && <>+{delPrice} ₽</>}
+    </div>
+  );
 };
 
 export default DelPrice;

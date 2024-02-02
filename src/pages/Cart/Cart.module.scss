@@ -205,10 +205,21 @@
     display: flex;
     gap: 5px;
     margin-top: 8px;
+    margin-bottom: 8px;
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+
+    .price__block {
+      color: #fe5e00;
+      font-size: 14px;
+    }
   }
 
   &__button {
-    margin-top: 10px;
+    margin-right: 10px;
     padding: 8px;
     background-color: #fe5e00;
     color: #fff;

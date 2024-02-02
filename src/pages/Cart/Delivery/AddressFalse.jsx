@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../Cart.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { setAddressError } from '../../../redux/errorsSlice';
 
 const AddressFalse = ({
   setUserAddress,
@@ -19,7 +18,7 @@ const AddressFalse = ({
       { id: 'js-Field3', levels: ['Site', 'Street', 'House'] },
     ],
   };
-  window.AhunterSuggest.Address.Discrete(optionsAuto);
+  // window.AhunterSuggest.Address.Discrete(optionsAuto);
 
   const getCoordinats = async () => {
     let inputs = document.querySelectorAll('.input-wrapper input');
@@ -75,7 +74,6 @@ const AddressFalse = ({
             address += ` ${house}`;
           }
           setUserAddress(address);
-          debugger;
           setUserCoordinates({
             latitude: result.suggestions[0].data.geo_lat,
             longitude: result.suggestions[0].data.geo_lon,
