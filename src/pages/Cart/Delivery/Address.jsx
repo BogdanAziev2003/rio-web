@@ -29,19 +29,14 @@ const Addres = () => {
     let inputs = document.querySelectorAll('.input-wrapper input');
     let city = inputs[0].value;
     let streetAndHouse = inputs[1].value;
-    if (!city) {
+    if (!city || !streetAndHouse) {
       dispatch(setAddressError(true));
       dispatch(setDelPrice(0));
       setDeliveryPrice(0);
-      setAddressNotFound('Введите ваш город');
-      return;
-    } else if (!streetAndHouse) {
-      dispatch(setAddressError(true));
-      dispatch(setDelPrice(0));
-      setDeliveryPrice(0);
-      setAddressNotFound('Введите улицу и дом');
+      setAddressNotFound(!city ? 'Введите ваш город' : 'Введите улицу и дом');
       return;
     }
+
     const url =
       'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address';
     const token = '13d34ee3058d1955e3370bccac7c074a44c49019';
@@ -150,9 +145,9 @@ const Addres = () => {
             Подтвердить
           </button>
 
-          {/* {addressIsFalse && !addressNotFound && (
+          {addressIsFalse && !addressNotFound && (
             <div className={styles.cart__error}>Введите ваш адресс</div>
-          )} */}
+          )}
           {addressNotFound && (
             <div className={styles.cart__error}>{addressNotFound}</div>
           )}
