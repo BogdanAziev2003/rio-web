@@ -87,7 +87,7 @@ const AddressFalse = ({
   };
 
   const haldleInputOnClick = () => {
-    dispatch(setAddressError(false));
+    dispatch(setAddressError(null));
     setAddressNotFound(false);
   };
 
