@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
-// import { getItems } from './redux/itemsSlice';
+import { getItems } from './redux/itemsSlice';
 
 import Layout from 'components/Layout';
 import CartPage from 'pages/Cart';
@@ -33,9 +33,9 @@ function App() {
   });
 
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(getItems());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(getItems());
+  }, [dispatch]);
   let { items } = useSelector((state) => state.items);
 
   items = items.map((item) => {
