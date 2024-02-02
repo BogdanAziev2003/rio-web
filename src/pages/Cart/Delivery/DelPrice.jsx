@@ -10,6 +10,7 @@ const DelPrice = ({
   deliveryPrice,
   setDeliveryPrice,
   delPrice,
+  setDeliveryPriceNotFound,
 }) => {
   const dispatch = useDispatch();
 
@@ -100,7 +101,11 @@ const DelPrice = ({
           setDeliveryPrice(sel.price);
         }
       });
-    } else if (userCoordinates && userAddress) {
+    } else if (
+      userCoordinates &&
+      userAddress &&
+      userAddress.includes('Беслан')
+    ) {
       if (userAddress.includes('-я Заводская')) {
         setDeliveryPrice(170);
         return;
@@ -114,6 +119,10 @@ const DelPrice = ({
       } else {
         setDeliveryPrice(150);
       }
+      setDeliveryPriceNotFound(false);
+    } else {
+      setDeliveryPriceNotFound('Не беслан');
+      setDeliveryPrice(0);
     }
   }, [userAddress, userCoordinates]);
 

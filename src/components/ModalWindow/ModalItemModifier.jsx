@@ -6,7 +6,6 @@ const ModalItemModifier = ({ activeItemForCart, setActiveItemForCart }) => {
     const updatedModifiers = activeItemForCart.modifiers.map((mod) =>
       mod.name === name ? { ...mod, selected: true } : mod
     );
-
     setActiveItemForCart({
       ...activeItemForCart,
       modifiers: updatedModifiers,

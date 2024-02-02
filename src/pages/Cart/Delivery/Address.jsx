@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../Cart.module.scss';
-import DelPrice from './DelPrice';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAddressError } from '../../../redux/errorsSlice';
+import { setDelPrice } from '../../../redux/deliverySlice';
+import DelPrice from './DelPrice';
 
 const Addres = () => {
   const dispatch = useDispatch();
   const { totalPrice } = useSelector((state) => state.items);
   const { addressIsFalse } = useSelector((state) => state.errors);
+  const { delPrice, address } = useSelector((state) => state.delmethod);
   const [addressNotFound, setAddressNotFound] = useState(false);
-  const { delPrice } = useSelector((state) => state.delmethod);
   const [userAddress, setUserAddress] = useState('');
   const [userCoordinates, setUserCoordinates] = useState(false);
   const [deliveryPrice, setDeliveryPrice] = useState(0);
+  const [deliveryPriceNotFound, setDeliveryPriceNotFound] = useState(false);
 
   const optionsAuto = {
     fields: [
@@ -29,11 +31,13 @@ const Addres = () => {
     let streetAndHouse = inputs[1].value;
     if (!city) {
       dispatch(setAddressError(true));
+      dispatch(setDelPrice(0));
       setDeliveryPrice(0);
       setAddressNotFound('Введите ваш город');
       return;
     } else if (!streetAndHouse) {
       dispatch(setAddressError(true));
+      dispatch(setDelPrice(0));
       setDeliveryPrice(0);
       setAddressNotFound('Введите улицу и дом');
       return;
@@ -92,7 +96,8 @@ const Addres = () => {
       })
       .catch(() => {
         dispatch(setAddressError(true));
-        dispatch(setDeliveryPrice(0));
+        setDeliveryPrice(0);
+        setDeliveryPriceNotFound(false);
         setAddressNotFound('Введите коректный адресс');
       });
   };
@@ -113,7 +118,7 @@ const Addres = () => {
             <input
               className={styles.input}
               id="js-Field2"
-              placeholder="Город"
+              placeholder="Беслан"
               onClick={haldleInputOnClick}
             />
           </div>
@@ -121,7 +126,7 @@ const Addres = () => {
             <input
               className={styles.input}
               id="js-Field3"
-              placeholder="Улица, дом"
+              placeholder="Суворова 12"
               onClick={haldleInputOnClick}
             />
           </div>
@@ -151,6 +156,11 @@ const Addres = () => {
           {addressNotFound && (
             <div className={styles.cart__error}>{addressNotFound}</div>
           )}
+          {deliveryPriceNotFound && (
+            <div className={styles.cart__delprice_notFound}>
+              Мы свяжемся с вами для уточнения стоимости доставки.
+            </div>
+          )}
 
           {userAddress && (
             <DelPrice
@@ -159,6 +169,7 @@ const Addres = () => {
               deliveryPrice={deliveryPrice}
               delPrice={delPrice}
               setDeliveryPrice={setDeliveryPrice}
+              setDeliveryPriceNotFound={setDeliveryPriceNotFound}
             />
           )}
         </div>
