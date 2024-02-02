@@ -78,7 +78,7 @@ const Addres = () => {
         if (city_with_type) {
           let address = city_with_type;
 
-          if (street !== null && house !== null) {
+          if (street && house) {
             address += `, ${street} ${house}`;
             setUserAddress(address);
             setUserCoordinates({

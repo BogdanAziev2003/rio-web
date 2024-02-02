@@ -99,6 +99,9 @@ const DelPrice = ({
       selName.forEach((sel) => {
         if (userAddress.includes(sel.title)) {
           setDeliveryPrice(sel.price);
+          setDeliveryPriceNotFound(false);
+        } else {
+          setDeliveryPriceNotFound('Не беслан');
         }
       });
     } else if (
