@@ -61,6 +61,14 @@
     border-radius: 5px;
     color: #fe5e00;
 
+    &__minus {
+      padding: 0 5px 5px 5px;
+    }
+
+    &__plus {
+      padding: 0 5px;
+    }
+
     svg {
       cursor: pointer;
     }
