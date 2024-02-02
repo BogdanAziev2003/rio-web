@@ -24,6 +24,7 @@ const Item = ({ ...item }) => {
   // Modal Window Set Up
   const [open, setOpen] = useState(false);
   const handleModalOpen = () => {
+    console.log(item);
     setActiveItemForCart(item);
     if (
       activeItemForCart.modifiers.length === 1 &&

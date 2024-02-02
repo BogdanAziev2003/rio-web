@@ -23,16 +23,15 @@ const Navbar = ({ pathname }) => {
       <div className={styles.nav__inner}>
         <div className={styles.nav__list}>
           {navItems.map((item) => (
-            <div
-              key={item.path}
-              className={`${styles.nav__el} ${
-                pathname === item.path ? styles.nav__el_active : ''
-              }`}
-            >
-              <p>
-                <Link to={item.path}>{item.title}</Link>
-              </p>
-            </div>
+            <Link key={item.path} to={item.path}>
+              <div
+                className={`${styles.nav__el} ${
+                  pathname === item.path ? styles.nav__el_active : ''
+                }`}
+              >
+                <p>{item.title}</p>
+              </div>
+            </Link>
           ))}
         </div>
       </div>

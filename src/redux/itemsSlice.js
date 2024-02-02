@@ -680,8 +680,6 @@ const itemsSlice = createSlice({
         }
         return true;
       });
-
-      console.log(state.itemsInCart);
     },
   },
   extraReducers: (builder) => {

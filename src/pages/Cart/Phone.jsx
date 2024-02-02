@@ -12,10 +12,6 @@ const Phone = () => {
   const phoneInputRef = useRef(null);
   const { phoneIsFalse } = useSelector((state) => state.errors);
 
-  useEffect(() => {
-    console.log(phone);
-  }, [phone]);
-
   const handlerPhoneChange = (event) => {
     setPhoneValue(event.target.value);
   };
