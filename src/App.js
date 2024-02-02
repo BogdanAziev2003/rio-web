@@ -6,7 +6,6 @@ import { getItems } from './redux/itemsSlice';
 
 import Layout from 'components/Layout';
 import CartPage from 'pages/Cart';
-
 import MainPage from 'pages/MainPage';
 import { useTelegram } from 'hooks/useTelegram';
 import CategoryPage from 'pages/CartgoryPage';

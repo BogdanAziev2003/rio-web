@@ -47,8 +47,8 @@ const ModalWindow = ({
           <div className={styles.modal__info}>
             <div className={styles.modal__name}>
               <p>
-                {activeItemForCart.name}
-                <span> {activeItemForCart.price} ₽</span>
+                {item.name}
+                <span> {item.price} ₽</span>
               </p>
             </div>
             <div className={styles.modal__amount}>

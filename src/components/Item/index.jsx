@@ -11,6 +11,9 @@ import ButtonInCart from './Components/ButtonInCart';
 const Item = ({ ...item }) => {
   const dispatch = useDispatch();
   const { itemsInCart } = useSelector((state) => state.items);
+  useEffect(() => {
+    console.log(itemsInCart);
+  }, [itemsInCart]);
   const inCart = itemsInCart.find((itemInCart) => itemInCart.id === item.id);
 
   const [countForCart, setCountForCart] = useState(1);
@@ -24,12 +27,7 @@ const Item = ({ ...item }) => {
   // Modal Window Set Up
   const [open, setOpen] = useState(false);
   const handleModalOpen = () => {
-    console.log(item);
-    setActiveItemForCart(item);
-    if (
-      activeItemForCart.modifiers.length === 1 &&
-      activeItemForCart.sizes.length === 1
-    ) {
+    if (item.modifiers.length === 1 && item.sizes.length === 1) {
       setOpen(false);
       addItemInCart();
       return;
@@ -38,14 +36,11 @@ const Item = ({ ...item }) => {
   };
 
   const addItemInCart = () => {
-    if (
-      activeItemForCart.modifiers.length === 1 &&
-      activeItemForCart.sizes.length === 1
-    ) {
+    if (item.modifiers.length === 1 && item.sizes.length === 1) {
       setOpen(false);
       const newItem = {
         idInCart: uuidv4(),
-        ...activeItemForCart,
+        ...item,
       };
       dispatch(addItem(newItem));
       return;
@@ -53,7 +48,7 @@ const Item = ({ ...item }) => {
     for (let i = 0; i < countForCart; i++) {
       const newItem = {
         idInCart: uuidv4(),
-        ...activeItemForCart,
+        ...item,
       };
       dispatch(addItem(newItem));
     }
@@ -89,7 +84,10 @@ const Item = ({ ...item }) => {
             item={item}
           />
         ) : (
-          <div className={styles.item__button} onClick={handleModalOpen}>
+          <div
+            className={styles.item__button}
+            onClick={() => handleModalOpen(item)}
+          >
             <p>Добавить</p>
           </div>
         )}

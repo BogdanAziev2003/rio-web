@@ -15,8 +15,9 @@ const MainPage = ({ items }) => {
     { id: 5, title: 'Фирменные' },
     { id: 6, title: 'Снэки' },
     { id: 7, title: 'Соусы' },
-    { id: 8, title: 'Кофе' },
-    { id: 9, title: 'Чаи' },
+    { id: 8, title: 'Добавки' },
+    { id: 9, title: 'Кофе' },
+    { id: 10, title: 'Чаи' },
   ];
 
   // Skeleton logic
