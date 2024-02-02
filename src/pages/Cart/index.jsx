@@ -121,10 +121,10 @@ const CartPage = () => {
   return (
     <div className={styles.wrapper}>
       {/* items в корзине */}
-      {itemsInCart.length > 0 ? (
-        <ItemsInCart itemsInCart={itemsInCart} totalPrice={totalPrice} />
-      ) : (
+      {totalPrice === 0 ? (
         <EmptyCart />
+      ) : (
+        <ItemsInCart itemsInCart={itemsInCart} totalPrice={totalPrice} />
       )}
 
       <div className={styles.order__text}>
