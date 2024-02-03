@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setAddressError } from '../../../redux/errorsSlice';
 import { setDelPrice } from '../../../redux/deliverySlice';
 import DelPrice from './DelPrice';
+import { deliveryPriceAdd } from '../../../redux/itemsSlice';
 
 const Addres = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,10 @@ const Addres = () => {
   const [userCoordinates, setUserCoordinates] = useState(false);
   const [deliveryPrice, setDeliveryPrice] = useState(0);
   const [deliveryPriceNotFound, setDeliveryPriceNotFound] = useState(false);
+
+  useEffect(() => {
+    dispatch(deliveryPriceAdd(delPrice));
+  }, [delPrice]);
 
   const optionsAuto = {
     fields: [

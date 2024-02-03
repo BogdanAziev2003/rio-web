@@ -6,6 +6,7 @@ const initialState = {
   itemsInCart: [],
   totalPrice: 0,
   isLoading: false,
+  delPrice: 0,
 };
 
 export const getItems = createAsyncThunk('items/getItems', async () => {
@@ -58,6 +59,15 @@ const itemsSlice = createSlice({
         return true;
       });
     },
+    deliveryPriceAdd(state, { payload }) {
+      if (state.delPrice) {
+        state.totalPrice = state.totalPrice - state.delPrice + payload;
+        state.delPrice = payload;
+      } else {
+        state.totalPrice += payload;
+        state.delPrice = payload;
+      }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getItems.pending, (state) => {
@@ -81,6 +91,7 @@ export const {
   removeModifier,
   clearCart,
   removeItemsByCompound,
+  deliveryPriceAdd,
 } = itemsSlice.actions;
 
 export default itemsSlice.reducer;
