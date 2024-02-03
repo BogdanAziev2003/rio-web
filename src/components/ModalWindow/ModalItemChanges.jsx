@@ -1,27 +1,83 @@
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import styles from './ModalWindow.module.scss';
 
 const ModalItemChanges = ({ updateItemForCart, setUpdateItemForCart }) => {
+  const milks = updateItemForCart.changes[0].items;
+  const [isOpenMilk, setIsOpenMilk] = useState(false);
+  const [selectedMilk, setSelectedMilk] = useState('');
+
+  const handleMilkSelection = (milkName) => {
+    const updateMiks = updateItemForCart.changes[0].items.map((milk) =>
+      milk.name === milkName
+        ? { ...milk, selected: true }
+        : { ...milk, selected: undefined }
+    );
+
+    const updatedChanges = [
+      {
+        ...updateItemForCart.changes[0],
+        items: updateMiks,
+      },
+      ...updateItemForCart.changes.slice(1),
+    ];
+
+    setUpdateItemForCart({
+      ...updateItemForCart,
+      changes: updatedChanges,
+    });
+    setSelectedMilk(milkName);
+  };
+
+  const handleToggleDropdown = () => {
+    setIsOpenMilk(!isOpenMilk);
+  };
+
   return (
-    <div>
-      <FormControl sx={{ m: 1, minWidth: 80 }}>
-        <InputLabel id="demo-simple-select-autowidth-label">Age</InputLabel>
-        <Select
-          labelId="demo-simple-select-autowidth-label"
-          id="demo-simple-select-autowidth"
-          value={age}
-          onChange={handleChange}
-          autoWidth
-          label="Age"
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Twenty</MenuItem>
-          <MenuItem value={21}>Twenty one</MenuItem>
-          <MenuItem value={22}>Twenty one and a half</MenuItem>
-        </Select>
-      </FormControl>
+    <div className={styles.modal__changes}>
+      <div className={styles.changes__title}>
+        {updateItemForCart.changes[0].name}
+      </div>
+      <div className={styles.changes__block} onClick={handleToggleDropdown}>
+        <div className={styles.name}>
+          {selectedMilk
+            ? selectedMilk
+            : updateItemForCart.changes[0].items[0].name}
+        </div>
+
+        {isOpenMilk && (
+          <div className={styles.dropdown__menu}>
+            {milks.map((milk, idx) => (
+              <div
+                key={idx}
+                className={styles.dropdown__item}
+                onClick={() => handleMilkSelection(milk.name)}
+              >
+                {milk.name}
+              </div>
+            ))}
+          </div>
+        )}
+
+        <div className={styles.img}>
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              opacity="0.4"
+              d="M18.3335 9.99996C18.3335 14.5958 14.5951 18.3333 10.0001 18.3333C5.40514 18.3333 1.66681 14.5958 1.66681 9.99996C1.66681 5.40496 5.40514 1.66663 10.0001 1.66663C14.5951 1.66663 18.3335 5.40496 18.3335 9.99996Z"
+              fill="#FE5E00"
+            />
+            <path
+              d="M13.5174 8.79794C13.5174 8.95711 13.4565 9.11711 13.3349 9.23878L10.4432 12.1446C10.3257 12.2621 10.1665 12.3279 9.99988 12.3279C9.83404 12.3279 9.67488 12.2621 9.55738 12.1446L6.66404 9.23878C6.42071 8.99461 6.42071 8.59961 6.66571 8.35544C6.91071 8.11211 7.30654 8.11294 7.54988 8.35711L9.99988 10.8179L12.4499 8.35711C12.6932 8.11294 13.0882 8.11211 13.3332 8.35544C13.4565 8.47711 13.5174 8.63794 13.5174 8.79794Z"
+              fill="#FE5E00"
+            />
+          </svg>
+        </div>
+      </div>
     </div>
   );
 };

@@ -9,18 +9,21 @@ import { addItem, removeItem } from '../../redux/itemsSlice';
 import ButtonInCart from './Components/ButtonInCart';
 
 const Item = ({ ...item }) => {
-  console.log(item);
   const dispatch = useDispatch();
   const { itemsInCart } = useSelector((state) => state.items);
+
   const inCart = itemsInCart.find((itemInCart) => itemInCart.id === item.id);
   const [updateItemForCart, setUpdateItemForCart] = useState(item);
-
   const [countForCart, setCountForCart] = useState(1);
 
   // activeItemLogic
   const itemList = itemsInCart.filter(
     (itemInCart) => itemInCart.id === item.id
   );
+
+  useEffect(() => {
+    console.log(updateItemForCart);
+  }, [updateItemForCart]);
 
   // Modal Window Set Up
   const [open, setOpen] = useState(false);
