@@ -1,22 +1,46 @@
 import React, { useEffect, useState } from 'react';
 import styles from './ModalWindow.module.scss';
 
-const ModalItemChanges = ({ updateItemForCart, setUpdateItemForCart }) => {
-  const milks = updateItemForCart.changes[0].items;
-  const [isOpenMilk, setIsOpenMilk] = useState(false);
-  const [selectedMilk, setSelectedMilk] = useState('');
+const ModalItemChanges = ({
+  updateItemForCart,
+  setUpdateItemForCart,
+  changeItems,
+  changeName,
+}) => {
+  // чтобы молоко было полюбому выбрано
+  useEffect(() => {
+    if (changeName === 'Выберите молоко') {
+      const updateChange = changeItems.map((ch, index) =>
+        index === 0 ? { ...ch, selected: true } : ch
+      );
+      const updatedChanges = [
+        {
+          ...updateItemForCart.changes[0],
+          items: updateChange,
+        },
+        ...updateItemForCart.changes.slice(1),
+      ];
+      setUpdateItemForCart({
+        ...updateItemForCart,
+        changes: updatedChanges,
+      });
+    }
+  }, []);
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState('');
 
   const handleMilkSelection = (milkName) => {
-    const updateMiks = updateItemForCart.changes[0].items.map((milk) =>
-      milk.name === milkName
-        ? { ...milk, selected: true }
-        : { ...milk, selected: undefined }
+    const updateChange = changeItems.map((change) =>
+      change.name === milkName
+        ? { ...change, selected: true }
+        : { ...change, selected: undefined }
     );
 
     const updatedChanges = [
       {
         ...updateItemForCart.changes[0],
-        items: updateMiks,
+        items: updateChange,
       },
       ...updateItemForCart.changes.slice(1),
     ];
@@ -25,28 +49,22 @@ const ModalItemChanges = ({ updateItemForCart, setUpdateItemForCart }) => {
       ...updateItemForCart,
       changes: updatedChanges,
     });
-    setSelectedMilk(milkName);
+    setSelected(milkName);
   };
 
   const handleToggleDropdown = () => {
-    setIsOpenMilk(!isOpenMilk);
+    setIsOpen(!isOpen);
   };
 
   return (
     <div className={styles.modal__changes}>
-      <div className={styles.changes__title}>
-        {updateItemForCart.changes[0].name}
-      </div>
+      <div className={styles.changes__title}>{changeName}</div>
       <div className={styles.changes__block} onClick={handleToggleDropdown}>
-        <div className={styles.name}>
-          {selectedMilk
-            ? selectedMilk
-            : updateItemForCart.changes[0].items[0].name}
-        </div>
+        <div className={styles.name}>{selected ? selected : 'Выбрать'}</div>
 
-        {isOpenMilk && (
+        {isOpen && (
           <div className={styles.dropdown__menu}>
-            {milks.map((milk, idx) => (
+            {changeItems.map((milk, idx) => (
               <div
                 key={idx}
                 className={styles.dropdown__item}

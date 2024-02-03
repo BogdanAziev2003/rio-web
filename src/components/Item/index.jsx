@@ -21,10 +21,6 @@ const Item = ({ ...item }) => {
     (itemInCart) => itemInCart.id === item.id
   );
 
-  useEffect(() => {
-    console.log(updateItemForCart);
-  }, [updateItemForCart]);
-
   // Modal Window Set Up
   const [open, setOpen] = useState(false);
   const handleModalOpen = (itemToCart) => {
@@ -48,6 +44,7 @@ const Item = ({ ...item }) => {
       return;
     }
     for (let i = 0; i < countForCart; i++) {
+      console.log(updateItemForCart);
       const newItem = {
         idInCart: uuidv4(),
         ...updateItemForCart,

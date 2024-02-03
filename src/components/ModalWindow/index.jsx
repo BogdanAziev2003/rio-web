@@ -104,21 +104,23 @@ const ModalWindow = ({
             setUpdateItemForCart={setUpdateItemForCart}
           />
 
-          {item.changes[0].name ? (
-            <ModalItemChanges
-              updateItemForCart={updateItemForCart}
-              setUpdateItemForCart={setUpdateItemForCart}
-            />
-          ) : (
-            <>
-              {item.modifiers.length > 1 && (
+          {item.changes[0].name
+            ? item.changes.map((change, idx) => (
+                <div key={idx}>
+                  <ModalItemChanges
+                    changeItems={change.items}
+                    changeName={change.name}
+                    updateItemForCart={updateItemForCart}
+                    setUpdateItemForCart={setUpdateItemForCart}
+                  />
+                </div>
+              ))
+            : item.modifiers.length > 1 && (
                 <ModalItemModifier
                   updateItemForCart={updateItemForCart}
                   setUpdateItemForCart={setUpdateItemForCart}
                 />
               )}
-            </>
-          )}
 
           <div className={styles.modal__button} onClick={handleModalAddItems}>
             <p>Добавить в корзину</p>
