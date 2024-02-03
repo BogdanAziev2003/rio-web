@@ -33,9 +33,7 @@ const ModalItemChanges = ({
 
   const handleMilkSelection = (changeName) => {
     const updateChange = changeItems.map((change) =>
-      change.name === changeName
-        ? { ...change, selected: true }
-        : { ...change, selected: undefined }
+      change.name === changeName ? { ...change, selected: true } : { ...change }
     );
 
     const updatedChanges = [...updateItemForCart.changes];

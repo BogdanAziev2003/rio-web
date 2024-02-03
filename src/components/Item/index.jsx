@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ModalWindow from 'components/ModalWindow';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -11,6 +11,10 @@ import ButtonInCart from './Components/ButtonInCart';
 const Item = ({ ...item }) => {
   const dispatch = useDispatch();
   const { itemsInCart } = useSelector((state) => state.items);
+
+  // useEffect(() => {
+  //   console.log(itemsInCart);
+  // }, [itemsInCart]);
 
   const inCart = itemsInCart.find((itemInCart) => itemInCart.id === item.id);
   const [updateItemForCart, setUpdateItemForCart] = useState(item);
