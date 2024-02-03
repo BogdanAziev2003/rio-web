@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './ModalWindow.module.scss';
 
 const ModalItemSize = ({ item, updateItemForCart, setUpdateItemForCart }) => {
   const sizes = item.sizes;
   const currentSizes = [];
+
+  const [isFirstOpen, setIsFirstOpen] = useState(true);
 
   useEffect(() => {
     if (sizes.length > 0 && !sizes[0].selected) {
@@ -15,7 +17,8 @@ const ModalItemSize = ({ item, updateItemForCart, setUpdateItemForCart }) => {
         sizes: updatedSizes,
       });
     }
-  }, []);
+    setIsFirstOpen(false);
+  }, [isFirstOpen]);
 
   const handleChooseSize = (idx) => {
     const updateSizes = updateItemForCart.sizes.map((size) =>
@@ -33,7 +36,7 @@ const ModalItemSize = ({ item, updateItemForCart, setUpdateItemForCart }) => {
 
   const modPrice = updateItemForCart?.modifiers.reduce((total, mod) => {
     if (mod?.selected) {
-      total += mod.price;
+      total += mod?.price;
     }
     return total;
   }, 0);

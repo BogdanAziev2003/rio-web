@@ -43,8 +43,8 @@ const Item = ({ ...item }) => {
       dispatch(addItem(newItem));
       return;
     }
+
     for (let i = 0; i < countForCart; i++) {
-      console.log(updateItemForCart);
       const newItem = {
         idInCart: uuidv4(),
         ...updateItemForCart,
