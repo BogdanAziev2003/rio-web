@@ -18,15 +18,15 @@ function App() {
   }, []);
   const { totalPrice } = useSelector((state) => state.items);
 
-  // useEffect(() => {
-  //   totalPriceButton();
-  // }, [totalPrice, window.location.pathname]);
+  useEffect(() => {
+    totalPriceButton();
+  }, [totalPrice, window.location.pathname]);
 
-  // useEffect(() => {
-  //   Telegram.WebApp.onEvent('mainButtonClicked', () => {
-  //     ('/cart');
-  //   });
-  // });
+  useEffect(() => {
+    Telegram.WebApp.onEvent('mainButtonClicked', () => {
+      ('/cart');
+    });
+  });
 
   const dispatch = useDispatch();
   useEffect(() => {
