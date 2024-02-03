@@ -49,7 +49,7 @@ const ItemsInCart = ({ itemsInCart, totalPrice }) => {
                       (size, idx) =>
                         size.selected && <span key={idx}>{size.title}</span>
                     )}
-                    {item.modifiers.map((mod, idx) => (
+                    {item?.modifiers?.map((mod, idx) => (
                       <span key={idx} className={styles.description__mod}>
                         {mod?.selected && idx === 0 && (
                           <>
@@ -64,13 +64,14 @@ const ItemsInCart = ({ itemsInCart, totalPrice }) => {
                         )}
                       </span>
                     ))}
-                    {item?.changes.map((ch, idx) =>
-                      ch.items.map((item) => {
-                        if (item.selected) {
+
+                    {item?.changes?.map((ch, idx) =>
+                      ch?.items?.map((item) => {
+                        if (item?.selected) {
                           return (
                             <span key={idx}>
-                              {item.name}
                               <br />
+                              {item?.name}
                             </span>
                           );
                         }

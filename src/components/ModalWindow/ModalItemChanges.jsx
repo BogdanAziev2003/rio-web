@@ -12,7 +12,7 @@ const ModalItemChanges = ({
   useEffect(() => {
     if (changeName === 'Выберите молоко') {
       const updateChange = changeItems.map((ch, index) =>
-        index === 0 ? { ...ch, selected: true } : ch
+        index === 3 ? { ...ch, selected: true } : ch
       );
       const updatedChanges = [
         {
