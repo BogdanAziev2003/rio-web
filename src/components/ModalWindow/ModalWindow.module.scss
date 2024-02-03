@@ -199,13 +199,14 @@
         align-items: center;
         justify-content: space-between;
         display: block;
-        height: 36px;
+        height: 135px;
         z-index: 1;
         background-color: #f9f9f9;
         position: absolute;
         width: 100%;
         top: 100%;
         left: 0;
+        overflow: auto;
       }
 
       .dropdown__item {
