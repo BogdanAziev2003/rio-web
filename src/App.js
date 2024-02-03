@@ -16,10 +16,6 @@ function App() {
   const { totalPriceButton, tg } = useTelegram();
   useEffect(() => {
     tg.ready();
-    tg.expand();
-    tg.viewportChanged = {
-      isStateStable: true,
-    };
   }, []);
   useEffect(() => {
     totalPriceButton();

@@ -43,7 +43,7 @@ const ModalWindow = ({
             onClick={handleClose}
           />
           <div className={styles.modal__image}>
-            {/* <img src={itemImage} alt="" /> */}
+            <img src={itemImage} alt="" />
           </div>
           <div className={styles.modal__info}>
             <div className={styles.modal__name}>
