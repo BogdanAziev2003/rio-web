@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import styles from './ModalWindow.module.scss';
 
-const ModalItemSize = ({ activeItemForCart, setActiveItemForCart }) => {
-  const sizes = activeItemForCart.sizes;
+const ModalItemSize = ({ item, updateItemForCart, setUpdateItemForCart }) => {
+  const sizes = item.sizes;
   const currentSizes = [];
 
   useEffect(() => {
@@ -10,28 +10,28 @@ const ModalItemSize = ({ activeItemForCart, setActiveItemForCart }) => {
       const updatedSizes = sizes.map((size, index) =>
         index === 0 ? { ...size, selected: true } : size
       );
-      setActiveItemForCart({
-        ...activeItemForCart,
+      setUpdateItemForCart({
+        ...updateItemForCart,
         sizes: updatedSizes,
       });
     }
   }, []);
 
   const handleChooseSize = (idx) => {
-    const updateSizes = activeItemForCart.sizes.map((size) =>
+    const updateSizes = updateItemForCart.sizes.map((size) =>
       size.title === sizes[idx].title
         ? { ...size, selected: true }
         : { ...size, selected: undefined }
     );
 
-    setActiveItemForCart({
-      ...activeItemForCart,
+    setUpdateItemForCart({
+      ...updateItemForCart,
       sizes: updateSizes,
-      price: activeItemForCart.sizes[idx].price + modPrice,
+      price: updateItemForCart.sizes[idx].price + modPrice,
     });
   };
 
-  const modPrice = activeItemForCart?.modifiers.reduce((total, mod) => {
+  const modPrice = updateItemForCart?.modifiers.reduce((total, mod) => {
     if (mod?.selected) {
       total += mod.price;
     }
@@ -43,9 +43,9 @@ const ModalItemSize = ({ activeItemForCart, setActiveItemForCart }) => {
       <div
         onClick={() => handleChooseSize(i - 1)}
         className={`${
-          activeItemForCart &&
-          activeItemForCart.price ===
-            activeItemForCart.sizes[i - 1].price + modPrice &&
+          updateItemForCart &&
+          updateItemForCart.price ===
+            updateItemForCart.sizes[i - 1].price + modPrice &&
           styles.size__active
         } ${styles.size}`}
         key={i}

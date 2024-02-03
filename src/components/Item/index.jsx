@@ -9,15 +9,13 @@ import { addItem, removeItem } from '../../redux/itemsSlice';
 import ButtonInCart from './Components/ButtonInCart';
 
 const Item = ({ ...item }) => {
+  console.log(item);
   const dispatch = useDispatch();
   const { itemsInCart } = useSelector((state) => state.items);
-  useEffect(() => {
-    console.log(itemsInCart);
-  }, [itemsInCart]);
   const inCart = itemsInCart.find((itemInCart) => itemInCart.id === item.id);
+  const [updateItemForCart, setUpdateItemForCart] = useState(item);
 
   const [countForCart, setCountForCart] = useState(1);
-  const [activeItemForCart, setActiveItemForCart] = useState(item);
 
   // activeItemLogic
   const itemList = itemsInCart.filter(
@@ -26,21 +24,22 @@ const Item = ({ ...item }) => {
 
   // Modal Window Set Up
   const [open, setOpen] = useState(false);
-  const handleModalOpen = () => {
-    if (item.modifiers.length === 1 && item.sizes.length === 1) {
+  const handleModalOpen = (itemToCart) => {
+    setUpdateItemForCart(itemToCart);
+    if (itemToCart.modifiers.length === 1 && itemToCart.sizes.length === 1) {
       setOpen(false);
-      addItemInCart();
+      addItemInCart(itemToCart);
       return;
     }
     setOpen(true);
   };
 
-  const addItemInCart = () => {
-    if (item.modifiers.length === 1 && item.sizes.length === 1) {
+  const addItemInCart = (itemToCart) => {
+    if (itemToCart.modifiers.length === 1 && itemToCart.sizes.length === 1) {
       setOpen(false);
       const newItem = {
         idInCart: uuidv4(),
-        ...item,
+        ...itemToCart,
       };
       dispatch(addItem(newItem));
       return;
@@ -48,7 +47,7 @@ const Item = ({ ...item }) => {
     for (let i = 0; i < countForCart; i++) {
       const newItem = {
         idInCart: uuidv4(),
-        ...item,
+        ...updateItemForCart,
       };
       dispatch(addItem(newItem));
     }
@@ -101,8 +100,8 @@ const Item = ({ ...item }) => {
           item={item}
           countForCart={countForCart}
           setCountForCart={setCountForCart}
-          activeItemForCart={activeItemForCart}
-          setActiveItemForCart={setActiveItemForCart}
+          updateItemForCart={updateItemForCart}
+          setUpdateItemForCart={setUpdateItemForCart}
         />
       )}
     </div>

@@ -26,7 +26,7 @@ const ButtonInCart = ({
         <p>{itemList.length}</p>
       </div>
       <svg
-        onClick={handleModalOpen}
+        onClick={() => handleModalOpen(item)}
         width="17"
         height="16"
         viewBox="0 0 17 16"

@@ -1,27 +1,27 @@
 import React from 'react';
 import styles from './ModalWindow.module.scss';
 
-const ModalItemModifier = ({ activeItemForCart, setActiveItemForCart }) => {
+const ModalItemModifier = ({ updateItemForCart, setUpdateItemForCart }) => {
   const handleAddModifier = (name, modPrice) => {
-    const updatedModifiers = activeItemForCart.modifiers.map((mod) =>
+    const updatedModifiers = updateItemForCart.modifiers.map((mod) =>
       mod.name === name ? { ...mod, selected: true } : mod
     );
-    setActiveItemForCart({
-      ...activeItemForCart,
+    setUpdateItemForCart({
+      ...updateItemForCart,
       modifiers: updatedModifiers,
-      price: activeItemForCart.price + modPrice,
+      price: updateItemForCart.price + modPrice,
     });
   };
 
   const handleRemoveModifier = (name, modPrice) => {
-    const updatedModifiers = activeItemForCart.modifiers.map((mod) =>
+    const updatedModifiers = updateItemForCart.modifiers.map((mod) =>
       mod.name === name ? { ...mod, selected: undefined } : mod
     );
 
-    setActiveItemForCart({
-      ...activeItemForCart,
+    setUpdateItemForCart({
+      ...updateItemForCart,
       modifiers: updatedModifiers,
-      price: activeItemForCart.price - modPrice,
+      price: updateItemForCart.price - modPrice,
     });
   };
 
@@ -31,7 +31,7 @@ const ModalItemModifier = ({ activeItemForCart, setActiveItemForCart }) => {
         <p>Добавить дополнительно</p>
       </div>
       <div className={styles.modifier__list}>
-        {activeItemForCart?.modifiers.map((mod, idx) => (
+        {updateItemForCart?.modifiers.map((mod, idx) => (
           <div key={idx} className={styles.modifier}>
             <div className={styles.modifier__title}>
               <p>

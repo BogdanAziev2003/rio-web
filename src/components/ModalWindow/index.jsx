@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Modal } from '@mui/material';
 import { IoMdCloseCircle } from 'react-icons/io';
 
@@ -6,6 +6,7 @@ import itemImage from '../../image/burger.jpg';
 import styles from './ModalWindow.module.scss';
 import ModalItemSize from './ModalItemSize';
 import ModalItemModifier from './ModalItemModifier';
+import ModalItemChanges from './ModalItemChanges';
 
 const ModalWindow = ({
   open,
@@ -14,8 +15,8 @@ const ModalWindow = ({
   item,
   countForCart,
   setCountForCart,
-  activeItemForCart,
-  setActiveItemForCart,
+  updateItemForCart,
+  setUpdateItemForCart,
 }) => {
   const handleClose = () => {
     setCountForCart(1);
@@ -24,7 +25,7 @@ const ModalWindow = ({
 
   const handleModalAddItems = () => {
     setOpen(false);
-    addItemInCart();
+    addItemInCart(item);
     setCountForCart(1);
   };
 
@@ -47,8 +48,8 @@ const ModalWindow = ({
           <div className={styles.modal__info}>
             <div className={styles.modal__name}>
               <p>
-                {item.name}
-                <span> {item.price} ₽</span>
+                {updateItemForCart.name}
+                <span> {updateItemForCart.price} ₽</span>
               </p>
             </div>
             <div className={styles.modal__amount}>
@@ -98,15 +99,25 @@ const ModalWindow = ({
           </div>
 
           <ModalItemSize
-            activeItemForCart={activeItemForCart}
-            setActiveItemForCart={setActiveItemForCart}
+            item={item}
+            updateItemForCart={updateItemForCart}
+            setUpdateItemForCart={setUpdateItemForCart}
           />
 
-          {item.modifiers.length > 1 && (
-            <ModalItemModifier
-              activeItemForCart={activeItemForCart}
-              setActiveItemForCart={setActiveItemForCart}
+          {item.changes[0].name ? (
+            <ModalItemChanges
+              updateItemForCart={updateItemForCart}
+              setUpdateItemForCart={setUpdateItemForCart}
             />
+          ) : (
+            <>
+              {item.modifiers.length > 1 && (
+                <ModalItemModifier
+                  updateItemForCart={updateItemForCart}
+                  setUpdateItemForCart={setUpdateItemForCart}
+                />
+              )}
+            </>
           )}
 
           <div className={styles.modal__button} onClick={handleModalAddItems}>
