@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import styles from '../Cart.module.scss';
 import { useDispatch } from 'react-redux';
 import { setAddress, setDelPrice } from '../../../redux/deliverySlice';
+import { plusDelPrice } from '../../../redux/itemsSlice';
 const geolib = require('geolib');
 
 const DelPrice = ({
@@ -17,6 +18,7 @@ const DelPrice = ({
   useEffect(() => {
     dispatch(setDelPrice(deliveryPrice));
     dispatch(setAddress(userAddress));
+    dispatch(plusDelPrice(deliveryPrice));
   }, [deliveryPrice, userAddress]);
 
   const areas = [

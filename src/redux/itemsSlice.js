@@ -59,14 +59,17 @@ const itemsSlice = createSlice({
         return true;
       });
     },
-    deliveryPriceAdd(state, { payload }) {
-      if (state.delPrice) {
-        state.totalPrice = state.totalPrice - state.delPrice + payload;
-        state.delPrice = payload;
-      } else {
+    plusDelPrice(state, { payload }) {
+      if (state.delPrice === 0) {
         state.totalPrice += payload;
-        state.delPrice = payload;
+      } else {
+        state.totalPrice = state.totalPrice - state.delPrice + payload;
       }
+      state.delPrice = payload;
+    },
+    delPriceInStoreNull(state) {
+      state.totalPrice -= state.delPrice;
+      state.delPrice = 0;
     },
   },
   extraReducers: (builder) => {
@@ -91,7 +94,8 @@ export const {
   removeModifier,
   clearCart,
   removeItemsByCompound,
-  deliveryPriceAdd,
+  plusDelPrice,
+  delPriceInStoreNull,
 } = itemsSlice.actions;
 
 export default itemsSlice.reducer;

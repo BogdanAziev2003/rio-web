@@ -2,6 +2,8 @@ import React from 'react';
 import styles from './Cart.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDeliveryMethod } from '../../redux/deliverySlice';
+import { setDelPrice } from '../../redux/deliverySlice';
+import { delPriceInStoreNull } from '../../redux/itemsSlice';
 
 const DeliveryMethod = () => {
   const dispatch = useDispatch();
@@ -9,6 +11,10 @@ const DeliveryMethod = () => {
 
   const handleSetDelivery = (type) => {
     dispatch(setDeliveryMethod(type));
+    if (type === 'pickup') {
+      dispatch(delPriceInStoreNull());
+      dispatch(setDelPrice(0));
+    }
   };
 
   return (
