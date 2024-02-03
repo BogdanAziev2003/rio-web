@@ -64,7 +64,7 @@ const Item = ({ ...item }) => {
   return (
     <div className={styles.item}>
       <div className={styles.item__image}>
-        <img src={itemImage} alt="" />
+        {/* <img src={itemImage} alt="" /> */}
       </div>
       <div className={styles.item__wrapper}>
         <div className={styles.item__info}>
