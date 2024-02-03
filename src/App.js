@@ -11,21 +11,22 @@ import { useTelegram } from 'hooks/useTelegram';
 import CategoryPage from 'pages/CartgoryPage';
 
 function App() {
-  const { totalPrice } = useSelector((state) => state.items);
   // useTelegram setings //
   const { totalPriceButton, tg } = useTelegram();
   useEffect(() => {
     tg.ready();
   }, []);
-  useEffect(() => {
-    totalPriceButton();
-  }, [totalPrice, window.location.pathname]);
+  const { totalPrice } = useSelector((state) => state.items);
 
-  useEffect(() => {
-    Telegram.WebApp.onEvent('mainButtonClicked', () => {
-      ('/cart');
-    });
-  });
+  // useEffect(() => {
+  //   totalPriceButton();
+  // }, [totalPrice, window.location.pathname]);
+
+  // useEffect(() => {
+  //   Telegram.WebApp.onEvent('mainButtonClicked', () => {
+  //     ('/cart');
+  //   });
+  // });
 
   const dispatch = useDispatch();
   useEffect(() => {
