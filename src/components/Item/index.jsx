@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ModalWindow from 'components/ModalWindow';
 import { v4 as uuidv4 } from 'uuid';
 
 import styles from './Item.module.scss';
-import itemImage from '../../image/burger.jpg';
+import itemImage from '../../image/burger_1.jpg';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem, removeItem } from '../../redux/itemsSlice';
 import ButtonInCart from './Components/ButtonInCart';
