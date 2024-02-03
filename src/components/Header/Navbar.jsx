@@ -16,6 +16,7 @@ const Navbar = ({ pathname }) => {
     { path: '/modifiers', title: 'Добавки' },
     { path: '/coffee', title: 'Кофе' },
     { path: '/tea', title: 'Чаи' },
+    { path: '/drinks', title: 'Напитки' },
   ];
 
   return (

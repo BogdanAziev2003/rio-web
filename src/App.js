@@ -62,6 +62,7 @@ function App() {
     { path: '/modifiers', category: 8 },
     { path: '/coffee', category: 9 },
     { path: '/tea', category: 10 },
+    { path: '/drinks', category: 11 },
   ];
 
   return (
