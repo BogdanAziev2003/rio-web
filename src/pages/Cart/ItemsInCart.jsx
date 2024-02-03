@@ -64,6 +64,18 @@ const ItemsInCart = ({ itemsInCart, totalPrice }) => {
                         )}
                       </span>
                     ))}
+                    {item?.changes.map((ch, idx) =>
+                      ch.items.map((item) => {
+                        if (item.selected) {
+                          return (
+                            <span key={idx}>
+                              {item.name}
+                              <br />
+                            </span>
+                          );
+                        }
+                      })
+                    )}
                   </p>
                 </div>
                 <div className={styles.item__price}>

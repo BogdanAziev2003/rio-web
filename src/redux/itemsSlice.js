@@ -49,7 +49,8 @@ const itemsSlice = createSlice({
           i.id === item.id &&
           i.price === item.price &&
           JSON.stringify(i.modifiers) === JSON.stringify(item.modifiers) &&
-          JSON.stringify(i.sizes) === JSON.stringify(item.sizes)
+          JSON.stringify(i.sizes) === JSON.stringify(item.sizes) &&
+          JSON.stringify(i?.changes) === JSON.stringify(item?.changes)
         ) {
           state.totalPrice -= i.price;
           return false;
