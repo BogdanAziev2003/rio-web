@@ -6,6 +6,7 @@ const ModalItemChanges = ({
   setUpdateItemForCart,
   changeItems,
   changeName,
+  id,
 }) => {
   // чтобы молоко было полюбому выбрано
   useEffect(() => {
@@ -30,26 +31,24 @@ const ModalItemChanges = ({
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState('');
 
-  const handleMilkSelection = (milkName) => {
+  const handleMilkSelection = (changeName) => {
     const updateChange = changeItems.map((change) =>
-      change.name === milkName
+      change.name === changeName
         ? { ...change, selected: true }
         : { ...change, selected: undefined }
     );
 
-    const updatedChanges = [
-      {
-        ...updateItemForCart.changes[0],
-        items: updateChange,
-      },
-      ...updateItemForCart.changes.slice(1),
-    ];
+    const updatedChanges = [...updateItemForCart.changes];
+    updatedChanges[id] = {
+      ...updateItemForCart.changes[id],
+      items: updateChange,
+    };
 
     setUpdateItemForCart({
       ...updateItemForCart,
       changes: updatedChanges,
     });
-    setSelected(milkName);
+    setSelected(changeName);
   };
 
   const handleToggleDropdown = () => {
@@ -64,13 +63,13 @@ const ModalItemChanges = ({
 
         {isOpen && (
           <div className={styles.dropdown__menu}>
-            {changeItems.map((milk, idx) => (
+            {changeItems.map((change, idx) => (
               <div
                 key={idx}
                 className={styles.dropdown__item}
-                onClick={() => handleMilkSelection(milk.name)}
+                onClick={() => handleMilkSelection(change.name)}
               >
-                {milk.name}
+                {change.name}
               </div>
             ))}
           </div>
