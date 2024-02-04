@@ -5,7 +5,7 @@ import styles from './Cart.module.scss';
 const EmptyCart = () => {
   return (
     <div className={styles.empty}>
-      <img src={cartImage} alt="empty-cart" className={styles.empty__image} />
+      <img src={cartImage} alt="empty-cart" width="200px" />
     </div>
   );
 };
