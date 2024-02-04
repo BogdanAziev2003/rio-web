@@ -12,9 +12,9 @@ const Item = ({ ...item }) => {
   const dispatch = useDispatch();
   const { itemsInCart } = useSelector((state) => state.items);
 
-  useEffect(() => {
-    console.log(itemsInCart);
-  }, [itemsInCart]);
+  // useEffect(() => {
+  //   console.log(itemsInCart);
+  // }, [itemsInCart]);
 
   const inCart = itemsInCart.find((itemInCart) => itemInCart.id === item.id);
   const [updateItemForCart, setUpdateItemForCart] = useState(item);

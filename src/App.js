@@ -1,32 +1,30 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-
+import { useTelegram } from 'hooks/useTelegram';
 import { getItems } from './redux/itemsSlice';
-
 import Layout from 'components/Layout';
 import CartPage from 'pages/Cart';
 import MainPage from 'pages/MainPage';
-import { useTelegram } from 'hooks/useTelegram';
 import CategoryPage from 'pages/CartgoryPage';
 
 function App() {
   // useTelegram setings //
-  const { totalPriceButton, tg } = useTelegram();
   useEffect(() => {
-    tg.ready();
+    window.Telegram.WebApp.ready();
   }, []);
+  const { totalPriceButton, tg } = useTelegram();
   const { totalPrice } = useSelector((state) => state.items);
 
   useEffect(() => {
     totalPriceButton();
   }, [totalPrice, window.location.pathname]);
 
-  useEffect(() => {
-    Telegram.WebApp.onEvent('mainButtonClicked', () => {
-      ('/cart');
-    });
-  });
+  // useEffect(() => {
+  //   tg.onEvent('mainButtonClicked', () => {
+  //     ('/cart');
+  //   });
+  // });
 
   const dispatch = useDispatch();
   useEffect(() => {
