@@ -31,9 +31,27 @@ const ModalItemChanges = ({
 
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState('');
+  const sizes = updateItemForCart.sizes;
+  const [activeChange, setActiveChange] = useState({});
+  const [aa, setAa] = useState(false);
+
+  useEffect(() => {
+    if (activeChange && aa) {
+      const { price } = updateItemForCart.sizes.find((size) => size.selected);
+      setUpdateItemForCart({
+        ...updateItemForCart,
+        price:
+          activeChange.name === 'Без сиропа'
+            ? price
+            : updateItemForCart.price + activeChange.price >=
+              price + activeChange.price
+            ? price + activeChange.price
+            : price,
+      });
+    }
+  }, [sizes]);
 
   const handleMilkSelection = (changeName) => {
-    const { price } = updateItemForCart.sizes.find((size) => size.selected);
     const updateChange = changeItems.map((change) =>
       change.name === changeName
         ? { ...change, selected: true }
@@ -47,12 +65,14 @@ const ModalItemChanges = ({
     };
 
     const updateItem = updateChange.find((ch) => ch.selected === true);
+    const { price } = updateItemForCart.sizes.find((size) => size.selected);
     if (updateItem.name.includes('молоко')) {
       setUpdateItemForCart({
         ...updateItemForCart,
         changes: updatedChanges,
       });
     } else {
+      setActiveChange(updateItem);
       setUpdateItemForCart({
         ...updateItemForCart,
         changes: updatedChanges,
@@ -66,6 +86,7 @@ const ModalItemChanges = ({
       });
     }
     setSelected(changeName);
+    setAa(true);
   };
 
   const handleToggleDropdown = () => {
