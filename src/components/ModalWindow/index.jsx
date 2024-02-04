@@ -28,6 +28,7 @@ const ModalWindow = ({
     addItemInCart(item);
     setCountForCart(1);
   };
+  const [isOpenDropdown, setIsOpenDropdown] = useState(false);
 
   return (
     <Modal open={open} onClose={handleClose}>
@@ -113,6 +114,8 @@ const ModalWindow = ({
                     changeName={change.name}
                     updateItemForCart={updateItemForCart}
                     setUpdateItemForCart={setUpdateItemForCart}
+                    isOpenDropdown={isOpenDropdown}
+                    setIsOpenDropdown={setIsOpenDropdown}
                   />
                 </div>
               ))

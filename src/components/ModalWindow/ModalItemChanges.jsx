@@ -7,7 +7,8 @@ const ModalItemChanges = ({
   changeItems,
   changeName,
   id,
-  item,
+  isOpenDropdown,
+  setIsOpenDropdown,
 }) => {
   // чтобы молоко было полюбому выбрано
   useEffect(() => {
@@ -33,10 +34,10 @@ const ModalItemChanges = ({
   const [selected, setSelected] = useState('');
   const sizes = updateItemForCart.sizes;
   const [activeChange, setActiveChange] = useState({});
-  const [aa, setAa] = useState(false);
+  const [firstOpen, setFirstOpen] = useState(false);
 
   useEffect(() => {
-    if (activeChange && aa) {
+    if (activeChange && firstOpen) {
       const { price } = updateItemForCart.sizes.find((size) => size.selected);
       setUpdateItemForCart({
         ...updateItemForCart,
@@ -51,7 +52,7 @@ const ModalItemChanges = ({
     }
   }, [sizes]);
 
-  const handleMilkSelection = (changeName) => {
+  const handleActiveChange = (changeName) => {
     const updateChange = changeItems.map((change) =>
       change.name === changeName
         ? { ...change, selected: true }
@@ -86,10 +87,11 @@ const ModalItemChanges = ({
       });
     }
     setSelected(changeName);
-    setAa(true);
+    setFirstOpen(true);
   };
 
   const handleToggleDropdown = () => {
+    setIsOpenDropdown(changeName);
     setIsOpen(!isOpen);
   };
 
@@ -99,13 +101,13 @@ const ModalItemChanges = ({
       <div className={styles.changes__block} onClick={handleToggleDropdown}>
         <div className={styles.name}>{selected ? selected : 'Выбрать'}</div>
 
-        {isOpen && (
+        {isOpen && isOpenDropdown === changeName && (
           <div className={styles.dropdown__menu}>
             {changeItems.map((change, idx) => (
               <div
                 key={idx}
                 className={styles.dropdown__item}
-                onClick={() => handleMilkSelection(change.name)}
+                onClick={() => handleActiveChange(change.name)}
               >
                 {change.name}
                 <div className={styles.dropdown__item__price}>
