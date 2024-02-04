@@ -108,6 +108,7 @@ const ModalWindow = ({
                 <div key={idx}>
                   <ModalItemChanges
                     id={idx}
+                    item={item}
                     changeItems={change.items}
                     changeName={change.name}
                     updateItemForCart={updateItemForCart}

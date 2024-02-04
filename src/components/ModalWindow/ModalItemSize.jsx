@@ -25,7 +25,7 @@ const ModalItemSize = ({ updateItemForCart, setUpdateItemForCart }) => {
     setUpdateItemForCart({
       ...updateItemForCart,
       sizes: updateSizes,
-      price: updatedSize.price + modPrice + (changePrice ? changePrice : 0),
+      price: updatedSize.price + modPrice,
     });
   };
 
@@ -34,17 +34,6 @@ const ModalItemSize = ({ updateItemForCart, setUpdateItemForCart }) => {
       total += mod?.price;
     }
     return total;
-  }, 0);
-
-  const changePrice = updateItemForCart?.changes?.reduce((total, chs) => {
-    const items = chs?.items;
-    const sum = items?.reduce((acc, item) => {
-      if (item.selected && item.price) {
-        return acc + item.price;
-      }
-      return acc;
-    }, 0);
-    return total + sum;
   }, 0);
 
   return (

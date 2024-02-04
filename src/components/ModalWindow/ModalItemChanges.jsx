@@ -7,6 +7,7 @@ const ModalItemChanges = ({
   changeItems,
   changeName,
   id,
+  item,
 }) => {
   // чтобы молоко было полюбому выбрано
   useEffect(() => {
@@ -30,9 +31,9 @@ const ModalItemChanges = ({
 
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState('');
-  const [isFirstUpdatePrice, setIsFirstUpdatePrice] = useState(true);
 
   const handleMilkSelection = (changeName) => {
+    const { price } = updateItemForCart.sizes.find((size) => size.selected);
     const updateChange = changeItems.map((change) =>
       change.name === changeName
         ? { ...change, selected: true }
@@ -45,28 +46,19 @@ const ModalItemChanges = ({
       items: updateChange,
     };
 
-    // const addChangePrice = updateChange.find(
-    //   (change) => change.selected === true && change.price !== 0
-    // );
-
-    const addChangePrice = updateChange.reduce((total, ch) => {
-      if (ch.selected === true) {
-        return ch.price;
-      }
-      return total;
-    }, 0);
-
+    const updateItem = updateChange.find((ch) => ch.selected === true);
     setUpdateItemForCart({
       ...updateItemForCart,
       changes: updatedChanges,
       price:
-        addChangePrice && isFirstUpdatePrice
-          ? updateItemForCart.price + addChangePrice
-          : updateItemForCart.price,
+        updateItem.name === 'Без сиропа'
+          ? price
+          : updateItemForCart.price + updateItem.price >=
+            price + updateItem.price
+          ? price + updateItem.price
+          : price,
     });
-    debugger;
     setSelected(changeName);
-    setIsFirstUpdatePrice(false);
   };
 
   const handleToggleDropdown = () => {
