@@ -12,9 +12,9 @@ const Item = ({ ...item }) => {
   const dispatch = useDispatch();
   const { itemsInCart } = useSelector((state) => state.items);
 
-  useEffect(() => {
-    console.log(itemsInCart);
-  }, [itemsInCart]);
+  // useEffect(() => {
+  //   console.log(itemsInCart);
+  // }, [itemsInCart]);
 
   const inCart = itemsInCart.find((itemInCart) => itemInCart.id === item.id);
   const [updateItemForCart, setUpdateItemForCart] = useState(item);
@@ -29,7 +29,11 @@ const Item = ({ ...item }) => {
   const [open, setOpen] = useState(false);
   const handleModalOpen = (itemToCart) => {
     setUpdateItemForCart(itemToCart);
-    if (itemToCart.modifiers.length === 1 && itemToCart.sizes.length === 1) {
+    if (
+      itemToCart.modifiers.length === 1 &&
+      itemToCart.sizes.length === 1 &&
+      !itemToCart.changes
+    ) {
       setOpen(false);
       addItemInCart(itemToCart);
       return;
@@ -38,7 +42,11 @@ const Item = ({ ...item }) => {
   };
 
   const addItemInCart = (itemToCart) => {
-    if (itemToCart.modifiers.length === 1 && itemToCart.sizes.length === 1) {
+    if (
+      itemToCart.modifiers.length === 1 &&
+      itemToCart.sizes.length === 1 &&
+      !itemToCart.changes
+    ) {
       setOpen(false);
       const newItem = {
         idInCart: uuidv4(),

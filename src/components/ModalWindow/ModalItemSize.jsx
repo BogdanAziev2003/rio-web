@@ -29,16 +29,16 @@ const ModalItemSize = ({ updateItemForCart, setUpdateItemForCart }) => {
     });
   };
 
-  const modPrice = updateItemForCart?.modifiers.reduce((total, mod) => {
+  const modPrice = updateItemForCart?.modifiers?.reduce((total, mod) => {
     if (mod?.selected) {
       total += mod?.price;
     }
     return total;
   }, 0);
 
-  const changePrice = updateItemForCart?.changes.reduce((total, chs) => {
-    const items = chs.items;
-    const sum = items.reduce((acc, item) => {
+  const changePrice = updateItemForCart?.changes?.reduce((total, chs) => {
+    const items = chs?.items;
+    const sum = items?.reduce((acc, item) => {
       if (item.selected && item.price) {
         return acc + item.price;
       }
