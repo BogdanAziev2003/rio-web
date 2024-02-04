@@ -12,7 +12,7 @@ import { useTelegram } from 'hooks/useTelegram';
 import { setPhoneError, setAddressError } from '../../redux/errorsSlice';
 import EmptyCart from './EmptyCart';
 
-const CartPage = ({ cartImage }) => {
+const CartPage = () => {
   const { itemsInCart } = useSelector((state) => {
     const itemsCount = state.items.itemsInCart.reduce((acc, item) => {
       const existingItem = acc.find(

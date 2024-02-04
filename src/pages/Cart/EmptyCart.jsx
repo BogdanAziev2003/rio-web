@@ -1,11 +1,12 @@
 import React from 'react';
-import cartImage from '../../image/empty-cart.png';
+import cartImage from '../../image/empty-cart.jpg';
+
 import styles from './Cart.module.scss';
 
 const EmptyCart = () => {
   return (
     <div className={styles.empty}>
-      <img src={cartImage} alt="empty-cart" loading="lazy" width="200px" />
+      <img src={cartImage} alt="empty-cart" width="200px" />
     </div>
   );
 };
