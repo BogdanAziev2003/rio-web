@@ -47,17 +47,24 @@ const ModalItemChanges = ({
     };
 
     const updateItem = updateChange.find((ch) => ch.selected === true);
-    setUpdateItemForCart({
-      ...updateItemForCart,
-      changes: updatedChanges,
-      price:
-        updateItem.name === 'Без сиропа'
-          ? price
-          : updateItemForCart.price + updateItem.price >=
-            price + updateItem.price
-          ? price + updateItem.price
-          : price,
-    });
+    if (updateItem.name.includes('молоко')) {
+      setUpdateItemForCart({
+        ...updateItemForCart,
+        changes: updatedChanges,
+      });
+    } else {
+      setUpdateItemForCart({
+        ...updateItemForCart,
+        changes: updatedChanges,
+        price:
+          updateItem.name === 'Без сиропа'
+            ? price
+            : updateItemForCart.price + updateItem.price >=
+              price + updateItem.price
+            ? price + updateItem.price
+            : price,
+      });
+    }
     setSelected(changeName);
   };
 
