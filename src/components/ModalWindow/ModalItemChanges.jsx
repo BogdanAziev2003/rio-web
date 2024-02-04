@@ -30,10 +30,13 @@ const ModalItemChanges = ({
 
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState('');
+  const [isFirstUpdatePrice, setIsFirstUpdatePrice] = useState(true);
 
   const handleMilkSelection = (changeName) => {
     const updateChange = changeItems.map((change) =>
-      change.name === changeName ? { ...change, selected: true } : { ...change }
+      change.name === changeName
+        ? { ...change, selected: true }
+        : { ...change, selected: false }
     );
 
     const updatedChanges = [...updateItemForCart.changes];
@@ -42,11 +45,28 @@ const ModalItemChanges = ({
       items: updateChange,
     };
 
+    // const addChangePrice = updateChange.find(
+    //   (change) => change.selected === true && change.price !== 0
+    // );
+
+    const addChangePrice = updateChange.reduce((total, ch) => {
+      if (ch.selected === true) {
+        return ch.price;
+      }
+      return total;
+    }, 0);
+
     setUpdateItemForCart({
       ...updateItemForCart,
       changes: updatedChanges,
+      price:
+        addChangePrice && isFirstUpdatePrice
+          ? updateItemForCart.price + addChangePrice
+          : updateItemForCart.price,
     });
+    debugger;
     setSelected(changeName);
+    setIsFirstUpdatePrice(false);
   };
 
   const handleToggleDropdown = () => {
@@ -68,6 +88,9 @@ const ModalItemChanges = ({
                 onClick={() => handleMilkSelection(change.name)}
               >
                 {change.name}
+                <div className={styles.dropdown__item__price}>
+                  {change.price !== 0 && <>+ {change.price} ₽</>}
+                </div>
               </div>
             ))}
           </div>

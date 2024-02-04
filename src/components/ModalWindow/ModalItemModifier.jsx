@@ -15,7 +15,7 @@ const ModalItemModifier = ({ updateItemForCart, setUpdateItemForCart }) => {
 
   const handleRemoveModifier = (name, modPrice) => {
     const updatedModifiers = updateItemForCart.modifiers.map((mod) =>
-      mod.name === name ? { ...mod, selected: undefined } : mod
+      mod.name === name ? { ...mod, selected: false } : mod
     );
 
     setUpdateItemForCart({

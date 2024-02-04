@@ -99,7 +99,6 @@ const ModalWindow = ({
           </div>
 
           <ModalItemSize
-            item={item}
             updateItemForCart={updateItemForCart}
             setUpdateItemForCart={setUpdateItemForCart}
           />

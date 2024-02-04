@@ -1,36 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import styles from './ModalWindow.module.scss';
 
-const ModalItemSize = ({ item, updateItemForCart, setUpdateItemForCart }) => {
-  const sizes = item.sizes;
-  const currentSizes = [];
-
-  const [isFirstOpen, setIsFirstOpen] = useState(true);
+const ModalItemSize = ({ updateItemForCart, setUpdateItemForCart }) => {
+  const [firstOpen, setFirstOpen] = useState(true);
+  const sizes = updateItemForCart.sizes;
 
   useEffect(() => {
-    if (sizes.length > 0 && !sizes[0].selected) {
-      const updatedSizes = sizes.map((size, index) =>
-        index === 0 ? { ...size, selected: true } : size
-      );
-      setUpdateItemForCart({
-        ...updateItemForCart,
-        sizes: updatedSizes,
-      });
-    }
-    setIsFirstOpen(false);
-  }, [isFirstOpen]);
+    const updatedSizes = sizes.map((size, index) =>
+      index === 0 ? { ...size, selected: true } : { ...size, selected: false }
+    );
+    setUpdateItemForCart({
+      ...updateItemForCart,
+      sizes: updatedSizes,
+    });
+    setFirstOpen(false);
+  }, [firstOpen]);
 
   const handleChooseSize = (idx) => {
-    const updateSizes = updateItemForCart.sizes.map((size) =>
-      size.title === sizes[idx].title
-        ? { ...size, selected: true }
-        : { ...size, selected: undefined }
+    const updateSizes = updateItemForCart.sizes.map((size, index) =>
+      index === idx ? { ...size, selected: true } : { ...size, selected: false }
     );
+    const updatedSize = updateSizes.find((size) => size.selected);
 
     setUpdateItemForCart({
       ...updateItemForCart,
       sizes: updateSizes,
-      price: updateItemForCart.sizes[idx].price + modPrice,
+      price: updatedSize.price + modPrice + changePrice,
     });
   };
 
@@ -41,24 +36,32 @@ const ModalItemSize = ({ item, updateItemForCart, setUpdateItemForCart }) => {
     return total;
   }, 0);
 
-  for (let i = 1; i <= sizes.length; i++) {
-    currentSizes.push(
-      <div
-        onClick={() => handleChooseSize(i - 1)}
-        className={`${
-          updateItemForCart &&
-          updateItemForCart.price ===
-            updateItemForCart.sizes[i - 1].price + modPrice &&
-          styles.size__active
-        } ${styles.size}`}
-        key={i}
-      >
-        <p>{sizes[i - 1].title}</p>
-      </div>
-    );
-  }
+  const changePrice = updateItemForCart?.changes.reduce((total, chs) => {
+    const items = chs.items;
+    const sum = items.reduce((acc, item) => {
+      if (item.selected && item.price) {
+        return acc + item.price;
+      }
+      return acc;
+    }, 0);
+    return total + sum;
+  }, 0);
 
-  return <div className={styles.modal__size}>{currentSizes}</div>;
+  return (
+    <div className={styles.modal__size}>
+      {sizes.map((size, index) => (
+        <div
+          key={index}
+          onClick={() => handleChooseSize(index)}
+          className={`${styles.size} ${
+            size.selected ? styles.size__active : ''
+          }`}
+        >
+          <p>{size.title}</p>
+        </div>
+      ))}
+    </div>
+  );
 };
 
 export default ModalItemSize;
