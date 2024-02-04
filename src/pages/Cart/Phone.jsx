@@ -45,7 +45,7 @@ const Phone = () => {
               name="phone"
               id="phone"
               className={styles.input}
-              placeholder="+7 (988) 833 33 33"
+              placeholder="+7 (988) 831 99 00"
               value={phoneValue}
               onChange={handlerPhoneChange}
               ref={phoneInputRef}
