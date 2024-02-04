@@ -12,9 +12,9 @@ const Item = ({ ...item }) => {
   const dispatch = useDispatch();
   const { itemsInCart } = useSelector((state) => state.items);
 
-  // useEffect(() => {
-  //   console.log(itemsInCart);
-  // }, [itemsInCart]);
+  useEffect(() => {
+    console.log(itemsInCart);
+  }, [itemsInCart]);
 
   const inCart = itemsInCart.find((itemInCart) => itemInCart.id === item.id);
   const [updateItemForCart, setUpdateItemForCart] = useState(item);
@@ -32,7 +32,7 @@ const Item = ({ ...item }) => {
     if (
       itemToCart.modifiers.length === 1 &&
       itemToCart.sizes.length === 1 &&
-      !itemToCart.changes
+      !item.changes[0].name
     ) {
       setOpen(false);
       addItemInCart(itemToCart);
@@ -45,7 +45,7 @@ const Item = ({ ...item }) => {
     if (
       itemToCart.modifiers.length === 1 &&
       itemToCart.sizes.length === 1 &&
-      !itemToCart.changes
+      !item.changes[0].name
     ) {
       setOpen(false);
       const newItem = {

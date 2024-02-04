@@ -25,7 +25,7 @@ const ModalItemSize = ({ updateItemForCart, setUpdateItemForCart }) => {
     setUpdateItemForCart({
       ...updateItemForCart,
       sizes: updateSizes,
-      price: updatedSize.price + modPrice + changePrice,
+      price: updatedSize.price + modPrice + (changePrice ? changePrice : 0),
     });
   };
 
