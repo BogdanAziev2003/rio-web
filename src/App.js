@@ -10,10 +10,10 @@ import CategoryPage from 'pages/CartgoryPage';
 
 function App() {
   // useTelegram setings //
-  useEffect(() => {
-    window.Telegram.WebApp.ready();
-  }, []);
   const { totalPriceButton, tg } = useTelegram();
+  useEffect(() => {
+    tg.ready();
+  }, []);
   const { totalPrice } = useSelector((state) => state.items);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getItems());
-  }, [dispatch]);
+  }, []);
   let { items } = useSelector((state) => state.items);
 
   items = items.map((item) => {

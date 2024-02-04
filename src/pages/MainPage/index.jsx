@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { Skeleton } from 'components/Layout/Skeleton';
 import styles from './MainPage.module.scss';
@@ -18,6 +18,7 @@ const MainPage = ({ items }) => {
     { id: 8, title: 'Добавки' },
     { id: 9, title: 'Кофе' },
     { id: 10, title: 'Чаи' },
+    { id: 11, title: 'Напитки' },
   ];
 
   // Skeleton logic
@@ -37,7 +38,7 @@ const MainPage = ({ items }) => {
               <div
                 className={`${styles.main__title} ${
                   category.id !== 0 && styles.marg_bot
-                } `}
+                }`}
               >
                 <p>{category.title}</p>
               </div>

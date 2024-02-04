@@ -35,7 +35,7 @@ const ModalItemModifier = ({ updateItemForCart, setUpdateItemForCart }) => {
           <div key={idx} className={styles.modifier}>
             <div className={styles.modifier__title}>
               <p>
-                {mod.name} {mod.price} ₽
+                {mod.name} <span className={styles.price}>+{mod.price} ₽</span>
               </p>
             </div>
             <div className="modifier__button">

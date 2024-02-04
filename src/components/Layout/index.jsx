@@ -7,7 +7,7 @@ import Header from 'components/Header';
 const Layout = () => {
   const { totalPrice } = useSelector((state) => state.items);
   const navigate = useNavigate();
-  const { totalPriceButton, tg } = useTelegram();
+  const { tg } = useTelegram();
 
   const mainButtonClick = () => {
     if (tg.MainButton.text === `Мой заказ: ${totalPrice} ₽`) navigate('/cart');
