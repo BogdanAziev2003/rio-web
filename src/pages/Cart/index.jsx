@@ -40,10 +40,8 @@ const CartPage = () => {
 
   // Telegram Send Data logic
   const { tg } = useTelegram();
-  const { address, delMethod, delPrice } = useSelector(
-    (state) => state.delmethod
-  );
-  const { totalPrice } = useSelector((state) => state.items);
+  const { address, delMethod } = useSelector((state) => state.delmethod);
+  const { totalPrice, delPrice } = useSelector((state) => state.items);
   const { phone } = useSelector((state) => state.phone);
   const { payMethod } = useSelector((state) => state.paymethod);
   const { comment } = useSelector((state) => state.comment);
@@ -69,7 +67,7 @@ const CartPage = () => {
     }
 
     const data = {
-      totalPrice: totalPrice + delPrice,
+      totalPrice: totalPrice,
       delPrice,
       cartPrice: totalPrice,
       address: address,

@@ -7,7 +7,7 @@ export function useTelegram() {
     setPathName(window.location.pathname);
   }, [window.location.pathname]);
 
-  const { totalPrice, delPrice } = useSelector((state) => state.items);
+  const { totalPrice } = useSelector((state) => state.items);
 
   const tg = window.Telegram.WebApp;
   tg.expand();
