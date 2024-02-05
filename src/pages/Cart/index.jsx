@@ -69,7 +69,7 @@ const CartPage = () => {
     const data = {
       totalPrice: totalPrice,
       delPrice,
-      cartPrice: totalPrice,
+      cartPrice: totalPrice - delPrice,
       address: address,
       phone,
       delMethod,
