@@ -22,21 +22,15 @@ export function useTelegram() {
   }, [pathName, totalPrice]);
 
   const totalPriceButton = () => {
-    if (
-      pathName !== '/cart' &&
-      totalPrice !== 0 &&
-      totalPrice + delPrice !== delPrice
-    ) {
-      tg.MainButton.show();
-      tg.MainButton.setText(`Мой заказ: ${totalPrice} ₽`);
-    }
-    if (
-      pathName === '/cart' &&
-      totalPrice !== 0 &&
-      totalPrice + delPrice !== delPrice
-    ) {
-      tg.MainButton.setText(`Заказать: ${totalPrice} ₽`);
-    } else if (totalPrice === 0) {
+    if (totalPrice !== 0) {
+      if (pathName !== '/cart') {
+        tg.MainButton.show();
+        tg.MainButton.setText(`Мой заказ: ${totalPrice} ₽`);
+      }
+      if (pathName === '/cart') {
+        tg.MainButton.setText(`Заказать: ${totalPrice} ₽`);
+      }
+    } else {
       tg.MainButton.hide();
     }
   };
