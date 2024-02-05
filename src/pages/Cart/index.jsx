@@ -82,7 +82,7 @@ const CartPage = () => {
           count: item.count,
         };
         if (item?.modifiers.length > 1) {
-          newItem?.modifiers = item?.modifiers
+          newItem.modifiers = item?.modifiers
             .filter((modifier) => modifier?.selected)
             .map((modifier) => ({
               name: modifier?.name,
@@ -103,7 +103,8 @@ const CartPage = () => {
               title: size.title,
             }));
         }
-        if (item.changes.length) {}
+        if (item.changes.length) {
+        }
         return newItem;
       }),
     };
