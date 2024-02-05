@@ -109,7 +109,7 @@ const CartPage = () => {
       }),
     };
 
-    if (comment === '') {
+    if (!comment) {
       delete data.comment;
     }
 
