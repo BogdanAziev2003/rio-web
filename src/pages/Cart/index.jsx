@@ -104,9 +104,9 @@ const CartPage = () => {
             }));
         }
         if (item?.changes[0].name) {
-          newItem.changes = item?.changes.flatMap((chs) =>
-            chs.filter((ch) => ch?.selected)
-          );
+          newItem.changes = item?.changes.map((chs) => {
+            chs.find((ch) => ch.selected);
+          });
         }
         return newItem;
       }),
