@@ -104,14 +104,11 @@ const CartPage = () => {
             }));
         }
         if (item?.changes[0].name) {
-          newItem.changes = item?.changes.map((chs) => {
-            chs.find((ch) => {
-              if (ch.selected) {
-                return ch.name;
-              }
-            });
+          newItem.changes = item.changes.flatMap((chs) => {
+            return chs.items.filter((ch) => ch.selected);
           });
         }
+
         return newItem;
       }),
     };
