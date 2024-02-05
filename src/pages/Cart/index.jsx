@@ -74,7 +74,7 @@ const CartPage = () => {
       phone,
       delMethod,
       payMethod,
-      comment: comment ? comment : delete { comment },
+      comment,
       itemsInCart: itemsInCart.map((item) => {
         const newItem = {
           name: item.name,
@@ -108,6 +108,10 @@ const CartPage = () => {
         return newItem;
       }),
     };
+
+    if (comment === '') {
+      delete data.comment;
+    }
 
     tg.sendData(JSON.stringify(data));
   }, [totalPrice, address, phone, delMethod, payMethod, comment, itemsInCart]);
