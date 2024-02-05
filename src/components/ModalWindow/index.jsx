@@ -127,7 +127,7 @@ const ModalWindow = ({
               )}
 
           <div className={styles.modal__button} onClick={handleModalAddItems}>
-            <p>Добавить в корзину</p>
+            <p>В корзину за {countForCart * updateItemForCart.price} ₽</p>
           </div>
         </div>
       </Box>

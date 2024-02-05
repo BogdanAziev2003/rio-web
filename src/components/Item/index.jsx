@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ModalWindow from 'components/ModalWindow';
 import { v4 as uuidv4 } from 'uuid';
-
 import styles from './Item.module.scss';
 import itemImage from '../../image/burger_1.jpg';
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,7 +24,6 @@ const Item = ({ ...item }) => {
     (itemInCart) => itemInCart.id === item.id
   );
 
-  // Modal Window Set Up
   const [open, setOpen] = useState(false);
   const handleModalOpen = (itemToCart) => {
     setUpdateItemForCart(itemToCart);
