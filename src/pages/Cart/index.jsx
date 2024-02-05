@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styles from './Cart.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -43,8 +43,8 @@ const CartPage = () => {
   const { address, delMethod, delPrice } = useSelector(
     (state) => state.delmethod
   );
-  const { phone } = useSelector((state) => state.phone);
   const { totalPrice } = useSelector((state) => state.items);
+  const { phone } = useSelector((state) => state.phone);
   const { payMethod } = useSelector((state) => state.paymethod);
   const { comment } = useSelector((state) => state.comment);
 
