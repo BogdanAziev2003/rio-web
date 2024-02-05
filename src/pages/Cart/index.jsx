@@ -103,7 +103,9 @@ const CartPage = () => {
               title: size.title,
             }));
         }
-
+        if (item?.changes[0].name) {
+          newItem.changes = item?.changes;
+        }
         return newItem;
       }),
     };
