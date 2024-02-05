@@ -7,7 +7,7 @@ export function useTelegram() {
     setPathName(window.location.pathname);
   }, [window.location.pathname]);
 
-  const { totalPrice } = useSelector((state) => state.items);
+  const { totalPrice, delPrice } = useSelector((state) => state.items);
 
   const tg = window.Telegram.WebApp;
   tg.expand();
@@ -22,11 +22,11 @@ export function useTelegram() {
   }, [pathName, totalPrice]);
 
   const totalPriceButton = () => {
-    if (pathName !== '/cart' && totalPrice !== 0) {
+    if (pathName !== '/cart' && totalPrice !== 0 && totalPrice !== delPrice) {
       tg.MainButton.show();
       tg.MainButton.setText(`Мой заказ: ${totalPrice} ₽`);
     }
-    if (pathName === '/cart' && totalPrice !== 0) {
+    if (pathName === '/cart' && totalPrice !== 0 && totalPrice !== delPrice) {
       tg.MainButton.setText(`Заказать: ${totalPrice} ₽`);
     } else if (totalPrice === 0) {
       tg.MainButton.hide();
