@@ -103,15 +103,14 @@ const CartPage = () => {
               title: size.title,
             }));
         }
-        if (item.changes.length) {
+        if (item?.changes?.length) {
+          newItem.changes = item?.changes.map((chs) => {
+            chs.find((ch) => ch?.selected);
+          });
         }
         return newItem;
       }),
     };
-
-    if (!comment) {
-      delete data.comment;
-    }
 
     tg.sendData(JSON.stringify(data));
   }, [totalPrice, address, phone, delMethod, payMethod, comment, itemsInCart]);
