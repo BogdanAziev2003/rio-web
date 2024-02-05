@@ -103,7 +103,7 @@ const CartPage = () => {
               title: size.title,
             }));
         }
-        if (item?.changes?.length) {
+        if (item.changes) {
           newItem.changes = item?.changes.flatMap((chs) =>
             chs.filter((ch) => ch?.selected)
           );
