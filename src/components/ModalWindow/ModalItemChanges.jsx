@@ -28,6 +28,7 @@ const ModalItemChanges = ({
         changes: updatedChanges,
       });
     }
+    setSelected(changeItems.find((ch) => ch.selected).name);
   }, []);
 
   const [isOpen, setIsOpen] = useState(false);
