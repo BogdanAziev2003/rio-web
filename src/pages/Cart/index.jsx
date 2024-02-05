@@ -68,8 +68,8 @@ const CartPage = () => {
 
     const data = {
       totalPrice: totalPrice,
-      delPrice,
       cartPrice: totalPrice - delPrice,
+      delPrice,
       address: address,
       phone,
       delMethod,
@@ -81,28 +81,29 @@ const CartPage = () => {
           price: item.price,
           count: item.count,
         };
-        if (item.modifiers.length > 1) {
-          newItem.modifiers = item.modifiers
-            .filter((modifier) => modifier.selected)
+        if (item?.modifiers.length > 1) {
+          newItem?.modifiers = item?.modifiers
+            .filter((modifier) => modifier?.selected)
             .map((modifier) => ({
-              name: modifier.name,
+              name: modifier?.name,
             }));
         } else if (
-          item.modifiers.length === 1 &&
-          item.modifiers[0] &&
-          item.modifier[0].selected
+          item?.modifiers.length === 1 &&
+          item?.modifiers[0] &&
+          item?.modifier[0].selected
         ) {
-          newItem = item.modifiers[0].name;
+          newItem = item?.modifiers[0].name;
         } else {
-          delete item.modifiers;
+          delete item?.modifiers;
         }
-        if (item.sizes.length) {
+        if (item?.sizes?.length) {
           newItem.sizes = item.sizes
             .filter((size) => size.selected)
             .map((size) => ({
               title: size.title,
             }));
         }
+        if (item.changes.length) {}
         return newItem;
       }),
     };
