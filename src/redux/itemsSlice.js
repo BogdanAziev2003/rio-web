@@ -68,8 +68,12 @@ const itemsSlice = createSlice({
       state.delPrice = payload;
     },
     delPriceInStoreNull(state) {
-      state.totalPrice -= state.delPrice;
-      state.delPrice = 0;
+      if (state.totalPrice + state.delPrice === state.delPrice) {
+        state.delPrice = 0;
+      } else {
+        state.totalPrice -= state.delPrice;
+        state.delPrice = 0;
+      }
     },
   },
   extraReducers: (builder) => {
