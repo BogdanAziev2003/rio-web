@@ -66,7 +66,11 @@ const CartPage = () => {
       return;
     }
 
-    const data = {
+    if (comment !== '') {
+      data.comment = comment;
+    }
+
+    data = {
       totalPrice: totalPrice,
       cartPrice: totalPrice - delPrice,
       delPrice,
@@ -74,7 +78,6 @@ const CartPage = () => {
       phone,
       delMethod,
       payMethod,
-      comment,
       itemsInCart: itemsInCart.map((item) => {
         const newItem = {
           name: item.name,
