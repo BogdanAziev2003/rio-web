@@ -45,36 +45,37 @@ const ItemsInCart = ({ itemsInCart, totalPrice }) => {
                 </div>
                 <div className={styles.item__description}>
                   <p>
-                    {item?.sizes.map(
-                      (size, idx) =>
-                        size.selected && <span key={idx}>{size.title}</span>
+                    {item?.sizes
+                      .filter((size) => size?.selected)
+                      .map((size, idx) => (
+                        <span key={idx}>{size?.title}</span>
+                      ))}
+                    {item?.modifiers?.filter((mod) => mod?.selected).length >
+                      0 && (
+                      <>
+                        <br />
+                        доп.{' '}
+                        {item?.modifiers
+                          .filter((mod) => mod?.selected)
+                          .map((mod, idx) => (
+                            <span key={idx} className={styles.mod__name}>
+                              {idx > 0 && ', '}
+                              {mod.name}
+                            </span>
+                          ))}
+                      </>
                     )}
-                    {item?.modifiers?.map((mod, idx) => (
-                      <span key={idx} className={styles.description__mod}>
-                        {mod?.selected && idx === 0 && (
-                          <>
-                            <br /> доп.
-                          </>
-                        )}
-                        {mod?.selected && idx === 1 && <>, </>}
-                        {mod?.selected && (
-                          <span className={styles.mod__name}>
-                            {' ' + mod.name}
-                          </span>
-                        )}
-                      </span>
-                    ))}
-
                     {item?.changes?.map((ch, idx) =>
-                      ch?.items?.map((item) => {
+                      ch?.items?.map((item, innerIdx) => {
                         if (item?.selected) {
                           return (
-                            <span key={idx}>
+                            <span key={`${idx}-${innerIdx}`}>
                               <br />
                               {item?.name}
                             </span>
                           );
                         }
+                        return null;
                       })
                     )}
                   </p>
