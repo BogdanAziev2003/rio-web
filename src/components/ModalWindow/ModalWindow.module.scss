@@ -44,10 +44,19 @@
     font-weight: 400;
     font-size: 18px;
 
-    span {
-      margin-left: 2px;
-      font-weight: 500;
-      color: #fe5e00;
+    .modal__info__item {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+
+      .modal__info__name {
+        margin-right: 7px;
+      }
+
+      .modal__info__price {
+        font-weight: 500;
+        color: #fe5e00;
+      }
     }
   }
 

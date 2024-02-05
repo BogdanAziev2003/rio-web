@@ -48,10 +48,14 @@ const ModalWindow = ({
           </div>
           <div className={styles.modal__info}>
             <div className={styles.modal__name}>
-              <p>
-                {updateItemForCart.name}
-                <span> {updateItemForCart.price} ₽</span>
-              </p>
+              <div className={styles.modal__info__item}>
+                <div className={styles.modal__info__name}>
+                  {updateItemForCart.name}
+                </div>
+                <div className={styles.modal__info__price}>
+                  {updateItemForCart.price} ₽
+                </div>
+              </div>
             </div>
             <div className={styles.modal__amount}>
               <div
