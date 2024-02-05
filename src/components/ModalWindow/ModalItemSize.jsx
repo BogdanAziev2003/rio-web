@@ -37,19 +37,23 @@ const ModalItemSize = ({ updateItemForCart, setUpdateItemForCart }) => {
   }, 0);
 
   return (
-    <div className={styles.modal__size}>
-      {sizes.map((size, index) => (
-        <div
-          key={index}
-          onClick={() => handleChooseSize(index)}
-          className={`${styles.size} ${
-            size.selected ? styles.size__active : ''
-          }`}
-        >
-          <p>{size.title}</p>
+    <>
+      {sizes.length !== 1 && (
+        <div className={styles.modal__size}>
+          {sizes.map((size, index) => (
+            <div
+              key={index}
+              onClick={() => handleChooseSize(index)}
+              className={`${styles.size} ${
+                size.selected ? styles.size__active : ''
+              }`}
+            >
+              <p>{size.title}</p>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
+      )}
+    </>
   );
 };
 
