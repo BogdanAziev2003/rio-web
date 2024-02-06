@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './ModalWindow.module.scss';
+import { Fade } from '@mui/material';
 
 const ModalItemChanges = ({
   updateItemForCart,
@@ -103,20 +104,22 @@ const ModalItemChanges = ({
         <div className={styles.name}>{selected}</div>
 
         {isOpen && isOpenDropdown === changeName && (
-          <div className={styles.dropdown__menu}>
-            {changeItems.map((change, idx) => (
-              <div
-                key={idx}
-                className={styles.dropdown__item}
-                onClick={() => handleActiveChange(change.name)}
-              >
-                {change.name}
-                <div className={styles.dropdown__item__price}>
-                  {change.price !== 0 && <>+ {change.price} ₽</>}
+          <Fade in={isOpen} timeout={{ enter: 300 }}>
+            <div className={styles.dropdown__menu}>
+              {changeItems.map((change, idx) => (
+                <div
+                  key={idx}
+                  className={styles.dropdown__item}
+                  onClick={() => handleActiveChange(change.name)}
+                >
+                  {change.name}
+                  <div className={styles.dropdown__item__price}>
+                    {change.price !== 0 && <>+ {change.price} ₽</>}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </Fade>
         )}
 
         <div className={styles.img}>
