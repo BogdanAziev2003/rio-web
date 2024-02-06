@@ -105,7 +105,7 @@ const CartPage = () => {
         }
         if (item?.changes[0].name) {
           newItem.changes = item.changes.map((chs) => {
-            chs.find((ch) => ch.selected);
+            return chs.find((ch) => ch.selected).name;
           });
         }
 
