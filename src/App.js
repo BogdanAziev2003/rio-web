@@ -13,6 +13,7 @@ function App() {
   const { totalPriceButton, tg } = useTelegram();
   useEffect(() => {
     tg.ready();
+    tg.expand();
   }, []);
   const { totalPrice } = useSelector((state) => state.items);
 

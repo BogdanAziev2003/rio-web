@@ -98,9 +98,9 @@ const ModalItemChanges = ({
 
   return (
     <div className={styles.modal__changes}>
-      <div className={styles.changes__title}>{changeName}</div>
+      <div className={styles.changes__title}>Выберите {changeName}</div>
       <div className={styles.changes__block} onClick={handleToggleDropdown}>
-        <div className={styles.name}>{selected ? selected : 'Выбрать'}</div>
+        <div className={styles.name}>{selected}</div>
 
         {isOpen && isOpenDropdown === changeName && (
           <div className={styles.dropdown__menu}>
