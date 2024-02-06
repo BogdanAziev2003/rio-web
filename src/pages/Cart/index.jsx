@@ -104,8 +104,8 @@ const CartPage = () => {
             }));
         }
         if (item?.changes[0].name) {
-          newItem.changes = item.changes.map((chs) => {
-            return chs.find((ch) => ch.selected).name;
+          newItem.changes = item.changes.flatMap((chs) => {
+            return chs.items.filter((ch) => ch.selected);
           });
         }
 
