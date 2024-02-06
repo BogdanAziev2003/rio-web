@@ -106,11 +106,10 @@ const CartPage = () => {
         if (item?.changes[0].name) {
           newItem.changes = item.changes
             .map((chs) => {
-              let nameChange = chs.name;
               return chs.items
                 .filter((ch) => ch.selected)
                 .map((ch) => {
-                  return { nameChange: `${ch.name}` };
+                  return `${chs.name}: ${ch.name}`;
                 });
             })
             .flat();
