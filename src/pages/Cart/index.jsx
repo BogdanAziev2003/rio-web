@@ -109,7 +109,9 @@ const CartPage = () => {
               return chs.items
                 .filter((ch) => ch.selected)
                 .map((ch) => {
-                  return `${chs.name}: ${ch.name}`;
+                  const capitalizedChsName =
+                    chs.name.charAt(0).toUpperCase() + chs.name.slice(1);
+                  return `${capitalizedChsName}: ${ch.name}`;
                 });
             })
             .flat();
