@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const deliverySlice = createSlice({
   name: 'deliveryMethod',
   initialState: {
-    delMethod: 'delivery',
+    delMethod: 'pickup',
     address: false,
     delPrice: 0,
   },
