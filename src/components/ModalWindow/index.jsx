@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Modal } from '@mui/material';
 import { IoMdCloseCircle } from 'react-icons/io';
-
-import itemImage from '../../image/burger.jpg';
 import styles from './ModalWindow.module.scss';
 import ModalItemSize from './ModalItemSize';
 import ModalItemModifier from './ModalItemModifier';
@@ -44,7 +42,7 @@ const ModalWindow = ({
             onClick={handleClose}
           />
           <div className={styles.modal__image}>
-            <img src={itemImage} alt="" />
+            <img src={item.image} alt="image" />
           </div>
           <div className={styles.modal__info}>
             <div className={styles.modal__name}>

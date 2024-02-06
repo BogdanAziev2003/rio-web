@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import ModalWindow from 'components/ModalWindow';
 import { v4 as uuidv4 } from 'uuid';
 import styles from './Item.module.scss';
-import itemImage from '../../image/burger_1.jpg';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem, removeItem } from '../../redux/itemsSlice';
 import ButtonInCart from './Components/ButtonInCart';
@@ -70,7 +69,7 @@ const Item = ({ ...item }) => {
   return (
     <div className={styles.item}>
       <div className={styles.item__image}>
-        <img src={itemImage} alt="" />
+        <img src={item.image} alt="" />
       </div>
       <div className={styles.item__wrapper}>
         <div className={styles.item__info}>

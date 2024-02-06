@@ -3,7 +3,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './Cart.module.scss';
-import image from '../../image/burger.jpg';
 import {
   addItem,
   removeItem,
@@ -36,7 +35,7 @@ const ItemsInCart = ({ itemsInCart, totalPrice }) => {
         {itemsInCart?.map((item, idx) => (
           <div key={idx} className={styles.item}>
             <div className={styles.item__image}>
-              <img src={image} alt="" />
+              <img src={item.image} alt="image" />
             </div>
             <div className={styles.item__wrapper}>
               <div className={styles.item__info}>

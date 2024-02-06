@@ -15,7 +15,6 @@ export function useTelegram() {
   tg.setHeaderColor('#f9f9f9');
   tg.setBackgroundColor('#f9f9f9');
   tg.enableClosingConfirmation();
-  console.log(tg);
 
   useEffect(() => {
     totalPriceButton();
