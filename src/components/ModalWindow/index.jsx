@@ -30,7 +30,7 @@ const ModalWindow = ({
 
   return (
     <Modal open={open} onClose={handleClose}>
-      <Fade in={open} timeout={{ enter: 600 }}>
+      <Fade in={open} timeout={{ enter: 500 }}>
         <Box
           sx={{
             outline: '0',
