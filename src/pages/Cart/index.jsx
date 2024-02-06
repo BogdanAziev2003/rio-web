@@ -109,7 +109,7 @@ const CartPage = () => {
               return chs.items
                 .filter((ch) => ch.selected)
                 .map((ch) => {
-                  return { name: ch.name };
+                  return { name: `${chs.name}: ${ch.name}` };
                 });
             })
             .flat();
