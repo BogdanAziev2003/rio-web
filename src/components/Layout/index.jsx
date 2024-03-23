@@ -16,10 +16,8 @@ const Layout = () => {
 
   return (
     <main>
-      <div className="wrapper">
-        <Header />
-        <Outlet />
-      </div>
+      <Header />
+      <Outlet />
     </main>
   );
 };
